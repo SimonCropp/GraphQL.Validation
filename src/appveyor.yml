@@ -1,0 +1,5 @@
+image: Visual Studio 2017
+build_script:
+- cmd: dotnet test src --configuration Release
+artifacts:
+- path: nugets\**\*.nupkg

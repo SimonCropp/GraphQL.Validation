@@ -1,0 +1,59 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 15.0.26430.12
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation", "GraphQL.FluentValidation\GraphQL.FluentValidation.csproj", "{8D87D482-BC30-49F6-946C-73DD62FC4EC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation.Tests", "GraphQL.FluentValidation.Tests\GraphQL.FluentValidation.Tests.csproj", "{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation.Sample", "GraphQL.FluentValidation.Sample\GraphQL.FluentValidation.Sample.csproj", "{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1E7C253-4815-48DA-8871-B0ADB1A46A7D}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.DataAnnotations", "GraphQL.DataAnnotations\GraphQL.DataAnnotations.csproj", "{70ECB218-2581-437E-A8D8-F9580641FB93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.DataAnnotations.Sample", "GraphQL.DataAnnotations.Sample\GraphQL.DataAnnotations.Sample.csproj", "{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.DataAnnotations.Tests", "GraphQL.DataAnnotations.Tests\GraphQL.DataAnnotations.Tests.csproj", "{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D87D482-BC30-49F6-946C-73DD62FC4EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D87D482-BC30-49F6-946C-73DD62FC4EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D87D482-BC30-49F6-946C-73DD62FC4EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D87D482-BC30-49F6-946C-73DD62FC4EC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70ECB218-2581-437E-A8D8-F9580641FB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70ECB218-2581-437E-A8D8-F9580641FB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70ECB218-2581-437E-A8D8-F9580641FB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70ECB218-2581-437E-A8D8-F9580641FB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2810F44A-7EA7-41FC-90E6-B95D30A66EFA}
+	EndGlobalSection
+EndGlobal

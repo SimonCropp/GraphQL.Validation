@@ -163,18 +163,7 @@ All string comparisons are, by default, done using no [StringComparison](https:/
 **Note that many [Database Providers](https://docs.microsoft.com/en-us/ef/core/providers/), including [SQL Server](https://docs.microsoft.com/en-us/ef/core/providers/sql-server/index), cannot correctly convert a case insensitive comparison to a server side query.** Hence this will result in the query being [resolved client side](https://docs.microsoft.com/en-us/ef/core/querying/client-eval#client-evaluation). If this is a concern it is recommended to [Disabling client evaluation](https://docs.microsoft.com/en-us/ef/core/querying/client-eval#disabling-client-evaluation).
 
 
-<!-- snippet: QueryClientEvaluationWarning -->
-```cs
-protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-{
-    optionsBuilder.ConfigureWarnings(
-        warnings =>
-        {
-            warnings.Throw(RelationalEventId.QueryClientEvaluationWarning);
-        });
-}
-```
-<!-- endsnippet -->
+snippet: QueryClientEvaluationWarning
 
 
 ##### Null
@@ -333,297 +322,20 @@ public class Startup
 See also [EntityFrameworkServiceCollectionExtensions](https://docs.microsoft.com/en-us/ef/core/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions)
 
 With the DataContext existing in the container, it can be resolved in the controller that handles the GraphQL query:
-<!-- snippet: GraphQlController -->
-```cs
-[Route("[controller]")]
-[ApiController]
-public class GraphQlController :
-    Controller
-{
-    IDocumentExecuter executer;
-    ISchema schema;
-
-    public GraphQlController(ISchema schema, IDocumentExecuter executer)
-    {
-        this.schema = schema;
-        this.executer = executer;
-    }
-
-    [HttpPost]
-    public Task<ExecutionResult> Post(
-        [BindRequired, FromBody] PostBody body,
-        [FromServices] MyDataContext dataContext,
-        CancellationToken cancellation)
-    {
-        return Execute(dataContext, body.Query, body.OperationName, body.Variables, cancellation);
-    }
-
-    public class PostBody
-    {
-        public string OperationName;
-        public string Query;
-        public JObject Variables;
-    }
-
-    [HttpGet]
-    public Task<ExecutionResult> Get(
-        [FromQuery] string query,
-        [FromQuery] string variables,
-        [FromQuery] string operationName,
-        [FromServices] MyDataContext dataContext,
-        CancellationToken cancellation)
-    {
-        var jObject = ParseVariables(variables);
-        return Execute(dataContext, query, operationName, jObject, cancellation);
-    }
-
-    async Task<ExecutionResult> Execute(
-        MyDataContext dataContext,
-        string query,
-        string operationName,
-        JObject variables,
-        CancellationToken cancellation)
-    {
-        var executionOptions = new ExecutionOptions
-        {
-            Schema = schema,
-            Query = query,
-            OperationName = operationName,
-            Inputs = variables?.ToInputs(),
-            UserContext = dataContext,
-            CancellationToken = cancellation,
-#if (DEBUG)
-            ExposeExceptions = true,
-            EnableMetrics = true,
-#endif
-        };
-
-        var result = await executer.ExecuteAsync(executionOptions)
-            .ConfigureAwait(false);
-
-        if (result.Errors?.Count > 0)
-        {
-            Response.StatusCode = (int) HttpStatusCode.BadRequest;
-        }
-
-        return result;
-    }
-
-    static JObject ParseVariables(string variables)
-    {
-        if (variables == null)
-        {
-            return null;
-        }
-
-        try
-        {
-            return JObject.Parse(variables);
-        }
-        catch (Exception exception)
-        {
-            throw new Exception("Could not parse variables.", exception);
-        }
-    }
-}
-```
-<!-- endsnippet -->
+snippet: GraphQlController
 
 Note that the instance of the DataContext is passed to the [GraphQL .net User Context](https://graphql-dotnet.github.io/docs/getting-started/user-context).
 
 The same instance of the DataContext can then be accessed in the `resolve` delegate by casting the `ResolveFieldContext.UserContext` to the DataContext type:
 
-<!-- snippet: QueryUsedInController -->
-```cs
-public class Query :
-    EfObjectGraphType
-{
-    public Query(IEfGraphQLService efGraphQlService) :
-        base(efGraphQlService)
-    {
-        AddQueryField<CompanyGraph, Company>(
-            name: "companies",
-            resolve: context =>
-            {
-                var dataContext = (MyDataContext) context.UserContext;
-                return dataContext.Companies;
-            });
-```
-<!-- endsnippet -->
+snippet: QueryUsedInController
 
 
 ### Testing the GraphQlController
 
 The `GraphQlController` can be tested using the [ASP.NET Integration tests](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests) via the [Microsoft.AspNetCore.Mvc.Testing NuGet package](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing).
 
-<!-- snippet: GraphQlControllerTests -->
-```cs
-public class GraphQlControllerTests
-{
-    static HttpClient client;
-
-    static GraphQlControllerTests()
-    {
-        var server = GetTestServer();
-        client = server.CreateClient();
-    }
-
-    [Fact]
-    public async Task Get()
-    {
-        var query = @"
-{
-  companies
-  {
-    id
-  }
-}";
-        var response = await ClientQueryExecutor.ExecuteGet(client, query);
-        response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.Contains(
-            "{\"companies\":[{\"id\":1},{\"id\":4},{\"id\":6},{\"id\":7}]}",
-            result);
-    }
-
-    [Fact]
-    public async Task Get_single()
-    {
-        var query = @"
-query ($id: String!)
-{
-  company(id:$id)
-  {
-    id
-  }
-}";
-        var variables = new
-        {
-            id = "1"
-        };
-
-        var response = await ClientQueryExecutor.ExecuteGet(client, query, variables);
-        response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.Contains(@"{""data"":{""company"":{""id"":1}}}", result);
-    }
-
-    [Fact]
-    public async Task Get_variable()
-    {
-        var query = @"
-query ($id: String!)
-{
-  companies(ids:[$id])
-  {
-    id
-  }
-}";
-        var variables = new
-        {
-            id = "1"
-        };
-
-        var response = await ClientQueryExecutor.ExecuteGet(client, query, variables);
-        response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.Contains("{\"companies\":[{\"id\":1}]}", result);
-    }
-
-    [Fact]
-    public async Task Get_companies_paging()
-    {
-        var after = 1;
-        var query = @"
-query {
-  companiesConnection(first:2, after:""" + after + @""") {
-    edges {
-      cursor
-      node {
-        id
-      }
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
-}";
-        var response = await ClientQueryExecutor.ExecuteGet(client, query);
-        response.EnsureSuccessStatusCode();
-        var result = JObject.Parse(await response.Content.ReadAsStringAsync());
-
-        var page = result.SelectToken("..data..companiesConnection..edges[0].cursor")
-            .Value<string>();
-        Assert.NotEqual(after.ToString(), page);
-    }
-
-    [Fact]
-    public async Task Get_null_query()
-    {
-        var response = await ClientQueryExecutor.ExecuteGet(client);
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.Contains("A query is required.", result);
-    }
-
-    [Fact]
-    public async Task Post()
-    {
-        var query = @"
-{
-  companies
-  {
-    id
-  }
-}";
-        var response = await ClientQueryExecutor.ExecutePost(client, query);
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.Contains(
-            "{\"companies\":[{\"id\":1},{\"id\":4},{\"id\":6},{\"id\":7}]}",
-            result);
-        response.EnsureSuccessStatusCode();
-    }
-
-    [Fact]
-    public async Task Post_variable()
-    {
-        var query = @"
-query ($id: String!)
-{
-  companies(ids:[$id])
-  {
-    id
-  }
-}";
-        var variables = new
-        {
-            id = "1"
-        };
-        var response = await ClientQueryExecutor.ExecutePost(client, query, variables);
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.Contains("{\"companies\":[{\"id\":1}]}", result);
-        response.EnsureSuccessStatusCode();
-    }
-
-    [Fact]
-    public async Task Post_null_query()
-    {
-        var response = await ClientQueryExecutor.ExecutePost(client);
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.Contains("A query is required.", result);
-    }
-
-    static TestServer GetTestServer()
-    {
-        var hostBuilder = new WebHostBuilder();
-        hostBuilder.UseStartup<Startup>();
-        return new TestServer(hostBuilder);
-    }
-}
-```
-<!-- endsnippet -->
+snippet: GraphQlControllerTests
 
 
 ## Defining Graphs
@@ -677,50 +389,12 @@ Queries in GraphQL.net are defined using the [Fields API](https://graphql-dotnet
 
 #### Root Query
 
-<!-- snippet: rootQuery -->
-```cs
-public class Query :
-    EfObjectGraphType
-{
-    public Query(IEfGraphQLService graphQlService) :
-        base(graphQlService)
-    {
-        AddQueryField<CompanyGraph, Company>(
-            name: "companies",
-            resolve: context =>
-            {
-                var dataContext = (DataContext) context.UserContext;
-                return dataContext.Companies;
-            });
-    }
-}
-```
-<!-- endsnippet -->
+snippet: rootQuery
 
 
 #### Typed Graph
 
-<!-- snippet: typedGraph -->
-```cs
-public class CompanyGraph :
-    EfObjectGraphType<Company>
-{
-    public CompanyGraph(IEfGraphQLService graphQlService) :
-        base(graphQlService)
-    {
-        Field(x => x.Id);
-        Field(x => x.Content);
-        AddNavigationField<EmployeeGraph, Employee>(
-            name: "employees",
-            resolve: context => context.Source.Employees);
-        AddNavigationConnectionField<EmployeeGraph, Employee>(
-            name: "employeesConnection",
-            resolve: context => context.Source.Employees,
-            includeNames: new[] {"Employees"});
-    }
-}
-```
-<!-- endsnippet -->
+snippet: typedGraph
 
 
 ### Connections
@@ -731,25 +405,7 @@ public class CompanyGraph :
 
 ##### Graph Type
 
-<!-- snippet: ConnectionRootQuery -->
-```cs
-public class Query :
-    EfObjectGraphType
-{
-    public Query(IEfGraphQLService graphQlService) :
-        base(graphQlService)
-    {
-        AddQueryConnectionField<CompanyGraph, Company>(
-            name: "companies",
-            resolve: context =>
-            {
-                var dataContext = (MyDataContext) context.UserContext;
-                return dataContext.Companies;
-            });
-    }
-}
-```
-<!-- endsnippet -->
+snippet: ConnectionRootQuery
 
 
 ##### Request
@@ -828,21 +484,7 @@ public class Query :
 
 #### Typed Graph
 
-<!-- snippet: ConnectionTypedGraph -->
-```cs
-public class CompanyGraph :
-    EfObjectGraphType<Company>
-{
-    public CompanyGraph(IEfGraphQLService graphQlService) :
-        base(graphQlService)
-    {
-        AddNavigationConnectionField<EmployeeGraph, Employee>(
-            name: "employees",
-            resolve: context => context.Source.Employees);
-    }
-}
-```
-<!-- endsnippet -->
+snippet: ConnectionTypedGraph
 
 
 ## Filters
@@ -884,30 +526,7 @@ The `GraphQlExtensions` class exposes some helper methods:
 
 Wraps the `DocumentExecuter.ExecuteAsync` to throw if there are any errors.
 
-<!-- snippet: ExecuteWithErrorCheck -->
-```cs
-public static async Task<ExecutionResult> ExecuteWithErrorCheck(this DocumentExecuter documentExecuter, ExecutionOptions executionOptions)
-{
-    Guard.AgainstNull(nameof(documentExecuter),documentExecuter);
-    Guard.AgainstNull(nameof(executionOptions),executionOptions);
-    var executionResult = await documentExecuter.ExecuteAsync(executionOptions)
-        .ConfigureAwait(false);
-
-    var errors = executionResult.Errors;
-    if (errors != null && errors.Count > 0)
-    {
-        if (errors.Count == 1)
-        {
-            throw errors.First();
-        }
-
-        throw new AggregateException(errors);
-    }
-
-    return executionResult;
-}
-```
-<!-- endsnippet -->
+snippet: ExecuteWithErrorCheck
 
 
 ## Icon
