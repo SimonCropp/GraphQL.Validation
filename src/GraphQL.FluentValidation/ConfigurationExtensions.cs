@@ -1,33 +1,38 @@
-﻿using FluentValidation;
-using NServiceBus.FluentValidation;
-
-namespace NServiceBus
+﻿namespace GraphQL
 {
     /// <summary>
     /// Extensions to control message validation with FluentValidation.
     /// </summary>
     public static class FluentValidationConfigurationExtensions
     {
-        public static FluentValidationConfig UseFluentValidation(
-            this EndpointConfiguration endpoint,
-            ValidatorLifecycle lifecycle = ValidatorLifecycle.Endpoint,
-            bool incoming = true,
-            bool outgoing = true)
+        public static void UseFluentValidation(this ExecutionOptions executionOptions)
         {
-            Guard.AgainstNull(endpoint, nameof(endpoint));
-            var recoverability = endpoint.Recoverability();
-            recoverability.AddUnrecoverableException<ValidationException>();
-            var config = new FluentValidationConfig(endpoint, lifecycle);
-            var pipeline = endpoint.Pipeline;
-            if (incoming)
+            Guard.AgainstNull(executionOptions, nameof(executionOptions));
+
+            executionOptions.FieldMiddleware.Use(next =>
             {
-                pipeline.Register(new IncomingValidationStep(config));
-            }
-            if (outgoing)
-            {
-                pipeline.Register(new OutgoingValidationStep(config));
-            }
-            return config;
+                return context => ValidationMiddleware.Resolve(context, next);
+            });
         }
     }
 }
+
+
+//class ValidationRule : GraphQL.Validation.IValidationRule
+//{
+//    public INodeVisitor Validate(ValidationContext context)
+//    {
+//        return new EnterLeaveListener(delegate(EnterLeaveListener _)
+//        {
+//            _.Match(delegate(Argument argument)
+//            {
+//                var value = argument.Value.Value;
+//                ArgumentValidator.Validate()
+//                if (ValidatorTypeCache.TryGetValidators(value.GetType(), out var validators))
+//                {
+
+//                }
+//            });
+//        });
+//    }
+//}

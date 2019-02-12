@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using FluentValidation;
 
-public class AsyncMessageValidator : AbstractValidator<MessageWithAsyncValidator>
+public class ArgumentWithAsyncValidator : AbstractValidator<ArgumentWithAsync>
 {
-    public AsyncMessageValidator()
+    public ArgumentWithAsyncValidator()
     {
         RuleFor(_ => _.Content)
             .MustAsync((s, token) => Task.FromResult(s != null));

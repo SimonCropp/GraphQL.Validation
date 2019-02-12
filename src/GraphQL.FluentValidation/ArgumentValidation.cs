@@ -1,33 +1,22 @@
-﻿#pragma warning disable AsyncFixer02
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
-using NServiceBus.Extensibility;
-using NServiceBus.ObjectBuilder;
+using GraphQL.FluentValidation;
 
-class MessageValidator
+static class ArgumentValidation
 {
-    IValidatorTypeCache validatorTypeCache;
-
-    public MessageValidator(IValidatorTypeCache validatorTypeCache)
+    public static async Task Validate(object instance, object userContext)
     {
-        this.validatorTypeCache = validatorTypeCache;
-    }
-
-    public async Task Validate(Type messageType, IBuilder contextBuilder, object instance, Dictionary<string, string> headers, ContextBag contextBag)
-    {
-        if (!validatorTypeCache.TryGetValidators(messageType, contextBuilder, out var buildAll))
+        if (!ValidatorTypeCache.TryGetValidators(instance.GetType(), out var buildAll))
         {
             return;
         }
 
         var results = new List<ValidationFailure>();
         var validationContext = new ValidationContext(instance);
-        validationContext.RootContextData.Add("Headers", headers);
-        validationContext.RootContextData.Add("ContextBag", contextBag);
+        validationContext.RootContextData.Add("UserContext", userContext);
         foreach (var validator in buildAll)
         {
             if (AsyncValidatorChecker.IsAsync(validator, validationContext))

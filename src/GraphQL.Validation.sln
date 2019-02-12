@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28531.58
 MinimumVisualStudioVersion = 15.0.26430.12
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation", "GraphQL.FluentValidation\GraphQL.FluentValidation.csproj", "{8D87D482-BC30-49F6-946C-73DD62FC4EC0}"
 EndProject
@@ -12,12 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.DataAnnotations", "GraphQL.DataAnnotations\GraphQL.DataAnnotations.csproj", "{70ECB218-2581-437E-A8D8-F9580641FB93}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.DataAnnotations.Sample", "GraphQL.DataAnnotations.Sample\GraphQL.DataAnnotations.Sample.csproj", "{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.DataAnnotations.Tests", "GraphQL.DataAnnotations.Tests\GraphQL.DataAnnotations.Tests.csproj", "{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,18 +31,6 @@ Global
 		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70ECB218-2581-437E-A8D8-F9580641FB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70ECB218-2581-437E-A8D8-F9580641FB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70ECB218-2581-437E-A8D8-F9580641FB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70ECB218-2581-437E-A8D8-F9580641FB93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F7DE9DC-5551-4869-B6E1-FE9DDA6D0775}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07389C10-2CF9-4F3C-ABB1-8EA2BCCDB028}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

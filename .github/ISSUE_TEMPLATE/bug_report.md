@@ -3,8 +3,6 @@ name: Bug fix
 about: Create a bug fix to help us improve
 ---
 
-This project is supported by the community via [Patreon sponsorship](https://www.patreon.com/join/simoncropp). If you are using this project to deliver business value or build commercial software it is expected that you will provide support.
-
 Note: New issues raised, where it is clear the submitter has not read the issue template, are likely to be closed with "please read the issue template". Please don't take offense at this. It is simply a time management decision. If someone raises an issue, and can't be bothered to spend the time to read the issue template, then the project maintainers should not be expected to spend the time to read the submitted issue. Often too much time is spent going back and forth in issue comments asking for information that is outlined in the issue template.
 
 #### Preamble
@@ -33,4 +31,4 @@ Ensure you have replicated the bug in a minimal solution with the fewest moving 
 
 #### Submit a PR that fixes the bug
 
-Submit a [Pull Request (PR)](https://help.github.com/articles/about-pull-requests/) that fixes the bug. Include in this PR a test that verifies the fix. If you were not able to fix the bug, a PR that illustrates your partial progress will suffice. If you prefer someone else fix this bug for you, please donate an appropriate amount via [Patreon](https://www.patreon.com/join/simoncropp).
+Submit a [Pull Request (PR)](https://help.github.com/articles/about-pull-requests/) that fixes the bug. Include in this PR a test that verifies the fix. If you were not able to fix the bug, a PR that illustrates your partial progress will suffice.
