@@ -4,7 +4,7 @@ Source File: \readme.source.md
 To change this file edit the source file and then re-run the generation using either the dotnet global tool (https://github.com/SimonCropp/MarkdownSnippets#githubmarkdownsnippets) or using the api (https://github.com/SimonCropp/MarkdownSnippets#running-as-a-unit-test).
 -->
 
-# <img src="https://raw.githubusercontent.com/SimonCropp/GraphQL.EntityFramework/master/src/icon.png" height="40px"> GraphQL.EntityFramework
+# <img src="https://raw.githubusercontent.com/SimonCropp/GraphQL.FluentValidation/master/src/icon.png" height="40px"> GraphQL.FluentValidation
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
@@ -21,7 +21,19 @@ https://nuget.org/packages/GraphQL.FluentValidation/
 
 ### Define validators
 
-Given the following input and graph:
+Given the following input:
+
+<!-- snippet: input -->
+```cs
+public class MyInput
+{
+    public string Content { get; set; }
+}
+```
+<sup>[snippet source](/src/Tests/Snippets/MyInput.cs#L2-L7)</sup>
+<!-- endsnippet -->
+
+And graph:
 
 <!-- snippet: graph -->
 ```cs
@@ -34,16 +46,6 @@ public class MyInputGraph : InputObjectGraphType
 }
 ```
 <sup>[snippet source](/src/Tests/Snippets/MyInputGraph.cs#L3-L11)</sup>
-<!-- endsnippet -->
-
-<!-- snippet: input -->
-```cs
-public class MyInput
-{
-    public string Content { get; set; }
-}
-```
-<sup>[snippet source](/src/Tests/Snippets/MyInput.cs#L2-L7)</sup>
 <!-- endsnippet -->
 
 A custom validator can be defined as follows:
@@ -100,6 +102,41 @@ using (var schema = new Schema())
 }
 ```
 <sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L10-L29)</sup>
+<!-- endsnippet -->
+
+
+### Validate when reading arguments
+
+When reading arguments use `GetValidatedArgument` instead of `GetArgument`:
+
+<!-- snippet: GetValidatedArgument -->
+```cs
+public class MyQuery :
+    ObjectGraphType
+{
+    public MyQuery()
+    {
+        Field<ResultGraph>(
+            "inputQuery",
+            arguments: new QueryArguments(
+                new QueryArgument<MyInputGraph>
+                {
+                    Name = "input"
+                }
+            ),
+            resolve: context =>
+            {
+                var input = context.GetValidatedArgument<MyInput>("input");
+                return new Result
+                {
+                    Data = input.Content
+                };
+            }
+        );
+    }
+}
+```
+<sup>[snippet source](/src/Tests/Snippets/Query.cs#L4-L31)</sup>
 <!-- endsnippet -->
 
 

@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/SimonCropp/GraphQL.EntityFramework/master/src/icon.png" height="40px"> GraphQL.EntityFramework
+# <img src="https://raw.githubusercontent.com/SimonCropp/GraphQL.FluentValidation/master/src/icon.png" height="40px"> GraphQL.FluentValidation
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
@@ -15,11 +15,13 @@ https://nuget.org/packages/GraphQL.FluentValidation/
 
 ### Define validators
 
-Given the following input and graph:
-
-snippet: graph
+Given the following input:
 
 snippet: input
+
+And graph:
+
+snippet: graph
 
 A custom validator can be defined as follows:
 
@@ -38,6 +40,13 @@ snippet: AddValidators
 Validation needs to be added to any instance of `ExecutionOptions`.
 
 snippet: UseFluentValidation
+
+
+### Validate when reading arguments
+
+When reading arguments use `GetValidatedArgument` instead of `GetArgument`:
+
+snippet: GetValidatedArgument
 
 
 ## Icon
