@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/SimonCropp/GraphQL.FluentValidation/master/src/icon.png" height="40px"> GraphQL.FluentValidation
+# <img src="https://raw.githubusercontent.com/SimonCropp/GraphQL.Validation/master/src/icon.png" height="40px"> GraphQL.FluentValidation
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
