@@ -15,14 +15,15 @@ static class ArgumentValidation
             return;
         }
 
-        var results = new List<ValidationFailure>();
         var validationContext = BuildValidationContext(instance, userContext);
 
         var tasks = buildAll.Select(x => x.ValidateAsync(validationContext));
         var validationResults = await Task.WhenAll(tasks)
             .ConfigureAwait(false);
 
-        results.AddRange(validationResults.SelectMany(x => x.Errors));
+        var results = validationResults
+            .SelectMany(result => result.Errors)
+            .ToList();
 
         ThrowIfResults(results);
     }
@@ -34,13 +35,10 @@ static class ArgumentValidation
             return;
         }
 
-        var results = new List<ValidationFailure>();
         var validationContext = BuildValidationContext(instance, userContext);
-        foreach (var validator in buildAll)
-        {
-            var result = validator.Validate(validationContext);
-            results.AddRange(result.Errors);
-        }
+        var results = buildAll
+            .SelectMany(validator => validator.Validate(validationContext).Errors)
+            .ToList();
 
         ThrowIfResults(results);
     }
