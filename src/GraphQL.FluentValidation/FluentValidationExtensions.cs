@@ -1,23 +1,18 @@
-﻿using FluentValidation;
-using FluentValidation.Validators;
-
-namespace GraphQL
+﻿namespace GraphQL
 {
     /// <summary>
     /// Extensions to FluentValidation.
     /// </summary>
-    public static class FluentValidationExtensions
+    public static partial class FluentValidationExtensions
     {
-        public static T UserContext<T>(this CustomContext customContext)
+        public static void UseFluentValidation(this ExecutionOptions executionOptions)
         {
-            Guard.AgainstNull(customContext, nameof(customContext));
-            return customContext.ParentContext.UserContext<T>();
-        }
+            Guard.AgainstNull(executionOptions, nameof(executionOptions));
 
-        public static T UserContext<T>(this ValidationContext validationContext)
-        {
-            Guard.AgainstNull(validationContext, nameof(validationContext));
-            return (T)validationContext.RootContextData["UserContext"];
+            executionOptions.FieldMiddleware.Use(next =>
+            {
+                return context => ValidationMiddleware.Resolve(context, next);
+            });
         }
     }
 }

@@ -1,0 +1,10 @@
+﻿{
+  "data": {
+    "inputQuery": null
+  },
+  "errors": [
+    {
+      "message": "'Content' must not be empty."
+    }
+  ]
+}

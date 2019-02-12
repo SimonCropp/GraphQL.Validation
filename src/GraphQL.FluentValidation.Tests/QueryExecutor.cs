@@ -3,7 +3,7 @@ using GraphQL;
 
 static class QueryExecutor
 {
-    public static async Task<object> ExecuteQuery(string queryString, Inputs inputs)
+    public static async Task<ExecutionResult> ExecuteQuery(string queryString, Inputs inputs)
     {
         queryString = queryString.Replace("'", "\"");
         using (var schema = new Schema())
@@ -19,8 +19,7 @@ static class QueryExecutor
             };
             executionOptions.UseFluentValidation();
 
-            var executionResult = await documentExecuter.ExecuteWithErrorCheck(executionOptions).ConfigureAwait(false);
-            return executionResult.Data;
+            return await documentExecuter.ExecuteAsync(executionOptions).ConfigureAwait(false);
         }
     }
 }

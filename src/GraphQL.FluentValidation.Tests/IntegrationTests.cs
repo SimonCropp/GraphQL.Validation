@@ -1,16 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GraphQL;
-using GraphQL.Types;
+﻿using System.Threading.Tasks;
+using GraphQL.FluentValidation;
 using ObjectApproval;
 using Xunit;
 
 public class IntegrationTests
 {
+    static IntegrationTests()
+    {
+        ValidatorTypeCache.AddValidatorsFromAssemblyContaining<IntegrationTests>();
+    }
+
     [Fact]
-    public async Task Foo()
+    public async Task AsyncValid()
+    {
+        var queryString = @"
+{
+  asyncQuery 
+    (
+      input: {
+        content: ""TheContent""
+      }
+    ) 
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null);
+        ObjectApprover.VerifyWithJson(result);
+    }
+
+    [Fact]
+    public async Task AsyncInvalid()
+    {
+        var queryString = @"
+{
+  asyncQuery 
+    (
+      input: {
+        content: """"
+      }
+    ) 
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null);
+        ObjectApprover.VerifyWithJson(result);
+    }
+
+    [Fact]
+    public async Task Valid()
     {
         var queryString = @"
 {
@@ -24,19 +63,26 @@ public class IntegrationTests
     data
   }
 }";
-        var result = await RunQuery(queryString, null);
+        var result = await QueryExecutor.ExecuteQuery(queryString, null);
         ObjectApprover.VerifyWithJson(result);
     }
 
-    static async Task<object> RunQuery(string queryString, Inputs inputs)
+    [Fact]
+    public async Task Invalid()
     {
-        return await QueryExecutor.ExecuteQuery(queryString, inputs);
-    }
-
-    static IEnumerable<Type> GetGraphQlTypes()
-    {
-        return typeof(IntegrationTests).Assembly
-            .GetTypes()
-            .Where(x => !x.IsAbstract && typeof(GraphType).IsAssignableFrom(x));
+        var queryString = @"
+{
+  inputQuery 
+    (
+      input: {
+        content: """"
+      }
+    ) 
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null);
+        ObjectApprover.VerifyWithJson(result);
     }
 }

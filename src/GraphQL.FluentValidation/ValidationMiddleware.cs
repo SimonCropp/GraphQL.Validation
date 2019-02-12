@@ -1,5 +1,6 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using FluentValidation;
+using GraphQL;
 using GraphQL.Instrumentation;
 using GraphQL.Types;
 
@@ -7,14 +8,18 @@ static class ValidationMiddleware
 {
     public static async Task<object> Resolve(ResolveFieldContext context, FieldMiddlewareDelegate next)
     {
-        if (context.Arguments != null)
+        try
         {
-            foreach (var argument in context.Arguments)
-            {
-                Debug.WriteLine(argument);
-            }
+            return await next(context).ConfigureAwait(false);
         }
-
-        return await next(context).ConfigureAwait(false);
+        catch (ValidationException validationException)
+        {
+            foreach (var error in validationException.Errors)
+            {
+                context.Errors.Add(new ExecutionError(error.ToString()));
+            }
+            
+            return ReturnTypeFinder.Find(context);
+        }
     }
 }

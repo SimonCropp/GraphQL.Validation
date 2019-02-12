@@ -6,8 +6,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation.Tests", "GraphQL.FluentValidation.Tests\GraphQL.FluentValidation.Tests.csproj", "{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation.Sample", "GraphQL.FluentValidation.Sample\GraphQL.FluentValidation.Sample.csproj", "{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1E7C253-4815-48DA-8871-B0ADB1A46A7D}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
@@ -27,10 +25,6 @@ Global
 		{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CB7E535-A40A-4557-BF0A-3302C12E7FC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

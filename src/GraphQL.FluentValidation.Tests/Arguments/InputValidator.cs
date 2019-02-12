@@ -7,7 +7,8 @@ public class InputValidator : AbstractValidator<Input>
 {
     public InputValidator()
     {
-        RuleFor(_ => _.Content).NotEmpty();
+        RuleFor(_ => _.Content)
+            .NotEmpty();
     }
 
     public override ValidationResult Validate(ValidationContext<Input> context)
