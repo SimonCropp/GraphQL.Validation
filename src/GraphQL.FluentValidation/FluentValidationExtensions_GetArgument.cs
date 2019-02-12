@@ -53,7 +53,5 @@ namespace GraphQL
             ArgumentValidation.Validate(argumentType, argument, context.UserContext);
             return argument;
         }
-
-
     }
 }
