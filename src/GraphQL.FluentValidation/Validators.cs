@@ -9,14 +9,14 @@ namespace GraphQL.FluentValidation
         {
             Guard.AgainstNull(builder, nameof(builder));
             builder
-                .Must(u =>
+                .Must(value =>
                 {
-                    if (u == null)
+                    if (value == null)
                     {
                         return true;
                     }
 
-                    return u.Any(char.IsWhiteSpace);
+                    return !string.IsNullOrWhiteSpace(value);
                 })
                 .WithMessage((type, member) => $"'{member}' must not be only whitespace.");
         }
