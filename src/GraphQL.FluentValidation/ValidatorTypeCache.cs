@@ -29,11 +29,13 @@ namespace GraphQL.FluentValidation
 
         public static void AddValidatorsFromAssemblyContaining(Type type)
         {
+            Guard.AgainstNull(type, nameof(type));
             AddValidatorsFromAssembly(type.GetTypeInfo().Assembly);
         }
 
         public static void AddValidatorsFromAssembly(Assembly assembly)
         {
+            Guard.AgainstNull(assembly, nameof(assembly));
             var assemblyName = assembly.GetName().Name;
 
             var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
