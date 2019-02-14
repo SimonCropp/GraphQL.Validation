@@ -6,6 +6,10 @@ using FluentValidation;
 
 namespace GraphQL.FluentValidation
 {
+    /// <summary>
+    /// Static cache for all <see cref="IValidator"/>.
+    /// Should only be configured once at startup time.
+    /// </summary>
     public static class ValidatorTypeCache
     {
         static Dictionary<Type, List<IValidator>> typeCache = new Dictionary<Type, List<IValidator>>();
@@ -22,17 +26,26 @@ namespace GraphQL.FluentValidation
             return false;
         }
 
+        /// <summary>
+        /// Add all <see cref="IValidator"/>s in the assembly that contains <typeparamref name="T"/>.
+        /// </summary>
         public static void AddValidatorsFromAssemblyContaining<T>()
         {
             AddValidatorsFromAssemblyContaining(typeof(T));
         }
 
+        /// <summary>
+        /// Add all <see cref="IValidator"/>s in the assembly that contains <paramref name="type"/>.
+        /// </summary>
         public static void AddValidatorsFromAssemblyContaining(Type type)
         {
             Guard.AgainstNull(type, nameof(type));
             AddValidatorsFromAssembly(type.GetTypeInfo().Assembly);
         }
 
+        /// <summary>
+        /// Add all <see cref="IValidator"/>s in <paramref name="assembly"/>.
+        /// </summary>
         public static void AddValidatorsFromAssembly(Assembly assembly)
         {
             Guard.AgainstNull(assembly, nameof(assembly));
