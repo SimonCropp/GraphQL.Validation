@@ -17,7 +17,7 @@ namespace GraphQL.FluentValidation
 
                     return !string.IsNullOrWhiteSpace(value);
                 })
-                .WithMessage((type, member) => $"'{member}' must not be only whitespace.");
+                .WithMessage("{PropertyName} must not be only whitespace.");
         }
     }
 }

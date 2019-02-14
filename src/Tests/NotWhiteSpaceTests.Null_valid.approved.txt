@@ -1,0 +1,6 @@
+﻿{
+  "IsValid": true,
+  "RuleSetsExecuted": [
+    "default"
+  ]
+}
