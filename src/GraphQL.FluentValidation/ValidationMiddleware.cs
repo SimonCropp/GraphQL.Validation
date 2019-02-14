@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using FluentValidation;
+using FluentValidation.Results;
 using GraphQL;
 using GraphQL.Instrumentation;
 using GraphQL.Types;
@@ -14,12 +16,14 @@ static class ValidationMiddleware
         }
         catch (ValidationException validationException)
         {
-            foreach (var error in validationException.Errors)
-            {
-                context.Errors.Add(new ExecutionError(error.ToString()));
-            }
-            
+            context.Errors.AddRange(validationException.Errors.Select(ToExecutionError));
+
             return ReturnTypeFinder.Find(context);
         }
+    }
+
+    static ExecutionError ToExecutionError(ValidationFailure failure)
+    {
+        return new ExecutionError($"{failure.PropertyName}: {failure.ErrorMessage}");
     }
 }
