@@ -4,10 +4,10 @@ namespace GraphQL.FluentValidation
 {
     public static class Validators
     {
-        public static void NotWhiteSpace<T>(this IRuleBuilderInitial<T, string> builder)
+        public static IRuleBuilderOptions<T, string> NotWhiteSpace<T>(this IRuleBuilderInitial<T, string> builder)
         {
             Guard.AgainstNull(builder, nameof(builder));
-            builder
+            return builder
                 .Must(value =>
                 {
                     if (value == null)
