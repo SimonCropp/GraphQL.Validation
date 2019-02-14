@@ -1,0 +1,17 @@
+﻿{
+  "Errors": [
+    {
+      "PropertyName": "Member",
+      "ErrorMessage": "Member must not be only whitespace.",
+      "AttemptedValue": " ",
+      "ErrorCode": "PredicateValidator",
+      "FormattedMessagePlaceholderValues": {
+        "PropertyName": "Member",
+        "PropertyValue": " "
+      }
+    }
+  ],
+  "RuleSetsExecuted": [
+    "default"
+  ]
+}
