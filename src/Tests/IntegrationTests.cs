@@ -15,12 +15,12 @@ public class IntegrationTests
     {
         var queryString = @"
 {
-  asyncQuery 
+  asyncQuery
     (
       input: {
         content: ""TheContent""
       }
-    ) 
+    )
   {
     data
   }
@@ -34,12 +34,12 @@ public class IntegrationTests
     {
         var queryString = @"
 {
-  asyncQuery 
+  asyncQuery
     (
       input: {
         content: """"
       }
-    ) 
+    )
   {
     data
   }
@@ -53,12 +53,12 @@ public class IntegrationTests
     {
         var queryString = @"
 {
-  inputQuery 
+  inputQuery
     (
       input: {
         content: ""TheContent""
       }
-    ) 
+    )
   {
     data
   }
@@ -72,12 +72,12 @@ public class IntegrationTests
     {
         var queryString = @"
 {
-  inputQuery 
+  inputQuery
     (
       input: {
         content: """"
       }
-    ) 
+    )
   {
     data
   }
