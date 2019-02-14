@@ -3,11 +3,11 @@
     {
       "PropertyName": "Member",
       "ErrorMessage": "Member must not be only whitespace.",
-      "AttemptedValue": "\r\n",
+      "AttemptedValue": "\r",
       "ErrorCode": "PredicateValidator",
       "FormattedMessagePlaceholderValues": {
         "PropertyName": "Member",
-        "PropertyValue": "\r\n"
+        "PropertyValue": "\r"
       }
     }
   ],

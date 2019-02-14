@@ -61,8 +61,7 @@ public class NotWhiteSpaceTests
     {
         var instance = new TheClass
         {
-            Member = @"
-"
+            Member = "\r"
         };
 
         Validate(instance);
