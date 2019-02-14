@@ -3,7 +3,7 @@
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
 
-## NuGet [![NuGet Status](http://img.shields.io/nuget/v/GraphQL.FluentValidation.svg?longCache=true&style=flat)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
+## NuGet [![NuGet Status](https://badgen.net/nuget/v/GraphQL.FluentValidation/pre)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
 
 https://nuget.org/packages/GraphQL.FluentValidation/
 
