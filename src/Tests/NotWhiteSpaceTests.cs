@@ -56,18 +56,6 @@ public class NotWhiteSpaceTests
         Validate(instance);
     }
 
-    [Fact]
-    public void Newline_invalid()
-    {
-        var instance = new TheClass
-        {
-            Member = @"
-"
-        };
-
-        Validate(instance);
-    }
-
     static void Validate(TheClass instance)
     {
         var validator = new TheValidator();
