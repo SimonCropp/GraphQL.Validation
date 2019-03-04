@@ -13,6 +13,20 @@ namespace GraphQL.FluentValidation
     public class ValidatorTypeCache
     {
         Dictionary<Type, List<IValidator>> typeCache = new Dictionary<Type, List<IValidator>>();
+        bool isFrozen;
+
+        internal void Freeze()
+        {
+            isFrozen = true;
+        }
+
+        void ThrowIfFrozen()
+        {
+            if (isFrozen)
+            {
+                throw new InvalidOperationException($"{nameof(ValidatorTypeCache)} cannot be changed once it has been used. Use a new instance instance instead.");
+            }
+        }
 
         internal bool TryGetValidators(Type argumentType, out IEnumerable<IValidator> validators)
         {
@@ -49,6 +63,7 @@ namespace GraphQL.FluentValidation
         public void AddValidatorsFromAssembly(Assembly assembly)
         {
             Guard.AgainstNull(assembly, nameof(assembly));
+            ThrowIfFrozen();
             var assemblyName = assembly.GetName().Name;
 
             var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
