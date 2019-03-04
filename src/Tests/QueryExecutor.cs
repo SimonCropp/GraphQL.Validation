@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using GraphQL;
+using GraphQL.FluentValidation;
 
 static class QueryExecutor
 {
-    public static async Task<ExecutionResult> ExecuteQuery(string queryString, Inputs inputs)
+    public static async Task<ExecutionResult> ExecuteQuery(string queryString, Inputs inputs, ValidatorTypeCache cache)
     {
         queryString = queryString.Replace("'", "\"");
         using (var schema = new Schema())
@@ -17,7 +18,7 @@ static class QueryExecutor
                 UserContext = new MyUserContext(),
                 Inputs = inputs
             };
-            executionOptions.UseFluentValidation();
+            executionOptions.UseFluentValidation(cache);
 
             return await documentExecuter.ExecuteAsync(executionOptions).ConfigureAwait(false);
         }

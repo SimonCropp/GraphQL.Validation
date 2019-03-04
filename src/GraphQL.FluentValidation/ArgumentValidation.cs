@@ -8,9 +8,9 @@ using GraphQL.FluentValidation;
 
 static class ArgumentValidation
 {
-    public static async Task ValidateAsync(Type type, object instance, object userContext)
+    public static async Task ValidateAsync( ValidatorTypeCache typeCache, Type type, object instance, object userContext)
     {
-        if (!ValidatorTypeCache.TryGetValidators(type, out var buildAll))
+        if (!typeCache.TryGetValidators(type, out var buildAll))
         {
             return;
         }
@@ -28,9 +28,9 @@ static class ArgumentValidation
         ThrowIfResults(results);
     }
 
-    public static void Validate(Type type, object instance, object userContext)
+    public static void Validate(ValidatorTypeCache typeCache,Type type, object instance, object userContext)
     {
-        if (!ValidatorTypeCache.TryGetValidators(type, out var buildAll))
+        if (!typeCache.TryGetValidators(type, out var buildAll))
         {
             return;
         }

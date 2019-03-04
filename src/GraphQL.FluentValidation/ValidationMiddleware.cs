@@ -1,15 +1,29 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
 using GraphQL;
+using GraphQL.FluentValidation;
 using GraphQL.Instrumentation;
 using GraphQL.Types;
 
-static class ValidationMiddleware
+class ValidationMiddleware
 {
-    public static async Task<object> Resolve(ResolveFieldContext context, FieldMiddlewareDelegate next)
+    ValidatorTypeCache cache;
+
+    public ValidationMiddleware(ValidatorTypeCache cache)
     {
+        this.cache = cache;
+    }
+
+    public async Task<object> Resolve(ResolveFieldContext context, FieldMiddlewareDelegate next)
+    {
+        if (context.Arguments == null)
+        {
+            context.Arguments  = new Dictionary<string, object>();
+        }
+        context.SetCache(cache);
         try
         {
             return await next(context).ConfigureAwait(false);
@@ -19,6 +33,10 @@ static class ValidationMiddleware
             context.Errors.AddRange(validationException.Errors.Select(ToExecutionError));
 
             return ReturnTypeFinder.Find(context);
+        }
+        finally
+        {
+            context.RemoveCache();
         }
     }
 

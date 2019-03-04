@@ -66,16 +66,21 @@ public class MyInputValidator :
 <!-- endsnippet -->
 
 
-### Add Validators
+### Setup Validators
 
 Validators need to be added to the `ValidatorTypeCache`. This should be done once at application startup.
 
-<!-- snippet: AddValidators -->
+<!-- snippet: StartConfig -->
 ```cs
-ValidatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
+var validatorTypeCache = new ValidatorTypeCache();
+validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
+var schema = new Schema();
+var executer = new DocumentExecuter();
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L34-L36)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L10-L17)</sup>
 <!-- endsnippet -->
+
+Generally ValidatorTypeCache is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
 
 ### Add to ExecutionOptions
@@ -84,24 +89,19 @@ Validation needs to be added to any instance of `ExecutionOptions`.
 
 <!-- snippet: UseFluentValidation -->
 ```cs
-using (var schema = new Schema())
+var options = new ExecutionOptions
 {
-    var executer = new DocumentExecuter();
+    Schema = schema,
+    Query = queryString,
+    UserContext = new MyUserContext(),
+    Inputs = inputs
+};
+options.UseFluentValidation(validatorTypeCache);
 
-    var options = new ExecutionOptions
-    {
-        Schema = schema,
-        Query = queryString,
-        UserContext = new MyUserContext(),
-        Inputs = inputs
-    };
-    options.UseFluentValidation();
-
-    var executionResult = await executer.ExecuteAsync(options)
-        .ConfigureAwait(false);
-}
+var executionResult = await executer.ExecuteAsync(options)
+    .ConfigureAwait(false);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L10-L29)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L22-L36)</sup>
 <!-- endsnippet -->
 
 

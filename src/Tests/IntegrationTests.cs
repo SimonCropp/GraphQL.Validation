@@ -5,9 +5,12 @@ using Xunit;
 
 public class IntegrationTests
 {
+    static ValidatorTypeCache typeCache;
+
     static IntegrationTests()
     {
-        ValidatorTypeCache.AddValidatorsFromAssemblyContaining<IntegrationTests>();
+        typeCache = new ValidatorTypeCache();
+        typeCache.AddValidatorsFromAssemblyContaining<IntegrationTests>();
     }
 
     [Fact]
@@ -25,7 +28,7 @@ public class IntegrationTests
     data
   }
 }";
-        var result = await QueryExecutor.ExecuteQuery(queryString, null);
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
         ObjectApprover.VerifyWithJson(result);
     }
 
@@ -44,7 +47,7 @@ public class IntegrationTests
     data
   }
 }";
-        var result = await QueryExecutor.ExecuteQuery(queryString, null);
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
         ObjectApprover.VerifyWithJson(result);
     }
 
@@ -63,7 +66,7 @@ public class IntegrationTests
     data
   }
 }";
-        var result = await QueryExecutor.ExecuteQuery(queryString, null);
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
         ObjectApprover.VerifyWithJson(result);
     }
 
@@ -82,7 +85,7 @@ public class IntegrationTests
     data
   }
 }";
-        var result = await QueryExecutor.ExecuteQuery(queryString, null);
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
         ObjectApprover.VerifyWithJson(result);
     }
 }

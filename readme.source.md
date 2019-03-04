@@ -28,11 +28,13 @@ A custom validator can be defined as follows:
 snippet: validator
 
 
-### Add Validators
+### Setup Validators
 
 Validators need to be added to the `ValidatorTypeCache`. This should be done once at application startup.
 
-snippet: AddValidators
+snippet: StartConfig
+
+Generally ValidatorTypeCache is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
 
 ### Add to ExecutionOptions

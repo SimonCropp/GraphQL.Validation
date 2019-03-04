@@ -5,34 +5,34 @@ using GraphQL.FluentValidation;
 
 class QueryExecution
 {
-    async Task ExecuteQuery(string queryString, Inputs inputs)
+    void ExecuteQuery(Assembly assemblyContainingValidators)
     {
-        #region UseFluentValidation
+        #region StartConfig
 
-        using (var schema = new Schema())
-        {
-            var executer = new DocumentExecuter();
-
-            var options = new ExecutionOptions
-            {
-                Schema = schema,
-                Query = queryString,
-                UserContext = new MyUserContext(),
-                Inputs = inputs
-            };
-            options.UseFluentValidation();
-
-            var executionResult = await executer.ExecuteAsync(options)
-                .ConfigureAwait(false);
-        }
+        var validatorTypeCache = new ValidatorTypeCache();
+        validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
+        var schema = new Schema();
+        var executer = new DocumentExecuter();
 
         #endregion
     }
 
-    void AddValidators(Assembly assemblyContainingValidators)
+    async Task ExecuteQuery(string queryString, Inputs inputs, Schema schema, ValidatorTypeCache validatorTypeCache, DocumentExecuter executer)
     {
-        #region AddValidators
-        ValidatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
+        #region UseFluentValidation
+
+        var options = new ExecutionOptions
+        {
+            Schema = schema,
+            Query = queryString,
+            UserContext = new MyUserContext(),
+            Inputs = inputs
+        };
+        options.UseFluentValidation(validatorTypeCache);
+
+        var executionResult = await executer.ExecuteAsync(options)
+            .ConfigureAwait(false);
+
         #endregion
     }
 }

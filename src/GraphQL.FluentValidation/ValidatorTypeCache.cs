@@ -10,11 +10,11 @@ namespace GraphQL.FluentValidation
     /// Static cache for all <see cref="IValidator"/>.
     /// Should only be configured once at startup time.
     /// </summary>
-    public static class ValidatorTypeCache
+    public class ValidatorTypeCache
     {
-        static Dictionary<Type, List<IValidator>> typeCache = new Dictionary<Type, List<IValidator>>();
+        Dictionary<Type, List<IValidator>> typeCache = new Dictionary<Type, List<IValidator>>();
 
-        internal static bool TryGetValidators(Type argumentType, out IEnumerable<IValidator> validators)
+        internal bool TryGetValidators(Type argumentType, out IEnumerable<IValidator> validators)
         {
             if (typeCache.TryGetValue(argumentType, out var validatorInfo))
             {
@@ -29,7 +29,7 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Add all <see cref="IValidator"/>s in the assembly that contains <typeparamref name="T"/>.
         /// </summary>
-        public static void AddValidatorsFromAssemblyContaining<T>()
+        public void AddValidatorsFromAssemblyContaining<T>()
         {
             AddValidatorsFromAssemblyContaining(typeof(T));
         }
@@ -37,7 +37,7 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Add all <see cref="IValidator"/>s in the assembly that contains <paramref name="type"/>.
         /// </summary>
-        public static void AddValidatorsFromAssemblyContaining(Type type)
+        public void AddValidatorsFromAssemblyContaining(Type type)
         {
             Guard.AgainstNull(type, nameof(type));
             AddValidatorsFromAssembly(type.GetTypeInfo().Assembly);
@@ -46,7 +46,7 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Add all <see cref="IValidator"/>s in <paramref name="assembly"/>.
         /// </summary>
-        public static void AddValidatorsFromAssembly(Assembly assembly)
+        public void AddValidatorsFromAssembly(Assembly assembly)
         {
             Guard.AgainstNull(assembly, nameof(assembly));
             var assemblyName = assembly.GetName().Name;
