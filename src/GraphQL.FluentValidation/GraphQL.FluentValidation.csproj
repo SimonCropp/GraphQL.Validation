@@ -12,7 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ConfigureAwait.Fody" Version="3.0.0" />
-    <PackageReference Include="Fody" Version="4.0.2" />
+    <PackageReference Include="ConfigureAwait.Fody" Version="3.0.0" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="4.0.2" PrivateAssets="All" />
   </ItemGroup>
 </Project>
