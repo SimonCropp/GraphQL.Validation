@@ -98,10 +98,9 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorTypeCache);
 
-var executionResult = await executer.ExecuteAsync(options)
-    .ConfigureAwait(false);
+var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L22-L36)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L22-L35)</sup>
 <!-- endsnippet -->
 
 

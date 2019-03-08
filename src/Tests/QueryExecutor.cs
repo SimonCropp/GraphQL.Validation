@@ -20,7 +20,7 @@ static class QueryExecutor
             };
             executionOptions.UseFluentValidation(cache);
 
-            return await documentExecuter.ExecuteAsync(executionOptions).ConfigureAwait(false);
+            return await documentExecuter.ExecuteAsync(executionOptions);
         }
     }
 }

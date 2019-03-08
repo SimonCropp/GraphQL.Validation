@@ -4,7 +4,7 @@ using GraphQL.FluentValidation;
 namespace GraphQL
 {
     /// <summary>
-    /// Extensions to FluentValidation.
+    /// Extensions to GraphQL to enable FluentValidation.
     /// </summary>
     public static partial class FluentValidationExtensions
     {

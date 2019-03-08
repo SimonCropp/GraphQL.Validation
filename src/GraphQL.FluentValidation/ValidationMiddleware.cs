@@ -26,7 +26,7 @@ class ValidationMiddleware
         context.SetCache(cache);
         try
         {
-            return await next(context).ConfigureAwait(false);
+            return await next(context);
         }
         catch (ValidationException validationException)
         {

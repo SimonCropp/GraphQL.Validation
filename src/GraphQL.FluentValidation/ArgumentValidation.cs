@@ -18,8 +18,7 @@ static class ArgumentValidation
         var validationContext = BuildValidationContext(instance, userContext);
 
         var tasks = buildAll.Select(x => x.ValidateAsync(validationContext));
-        var validationResults = await Task.WhenAll(tasks)
-            .ConfigureAwait(false);
+        var validationResults = await Task.WhenAll(tasks);
 
         var results = validationResults
             .SelectMany(result => result.Errors)

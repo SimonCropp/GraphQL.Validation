@@ -30,8 +30,7 @@ class QueryExecution
         };
         options.UseFluentValidation(validatorTypeCache);
 
-        var executionResult = await executer.ExecuteAsync(options)
-            .ConfigureAwait(false);
+        var executionResult = await executer.ExecuteAsync(options);
 
         #endregion
     }
