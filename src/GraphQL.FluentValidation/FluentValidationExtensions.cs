@@ -16,8 +16,9 @@ namespace GraphQL
             Guard.AgainstNull(executionOptions, nameof(executionOptions));
             Guard.AgainstNull(validatorTypeCache, nameof(validatorTypeCache));
 
-            var validationMiddleware = new ValidationMiddleware(validatorTypeCache);
             validatorTypeCache.Freeze();
+            executionOptions.SetCache(validatorTypeCache);
+            var validationMiddleware = new ValidationMiddleware();
             executionOptions.FieldMiddleware.Use(next => { return context => validationMiddleware.Resolve(context, next); });
         }
     }

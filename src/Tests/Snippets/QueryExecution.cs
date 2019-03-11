@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.FluentValidation;
@@ -25,7 +26,10 @@ class QueryExecution
         {
             Schema = schema,
             Query = queryString,
-            UserContext = new MyUserContext(),
+            UserContext = new Dictionary<string, object>
+            {
+                {"MyContext", new MyUserContext()}
+            },
             Inputs = inputs
         };
         options.UseFluentValidation(validatorTypeCache);

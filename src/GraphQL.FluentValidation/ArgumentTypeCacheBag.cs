@@ -6,33 +6,53 @@ using GraphQL.Types;
 
 static class ArgumentTypeCacheBag
 {
+    const string key = "GraphQL.FluentValidation.ValidatorTypeCache";
     public static ValidatorTypeCache GetCache(this ResolveFieldContext context)
     {
-        return GetCache(context.Arguments);
+        return GetCache(context.UserContext);
     }
 
-    public static void SetCache(this ResolveFieldContext context, ValidatorTypeCache cache)
+    public static void SetCache(this ExecutionOptions options, ValidatorTypeCache cache)
     {
-        context.Arguments.Add("GraphQL.FluentValidation.ValidatorTypeCache", cache);
-    }
+        if (options.UserContext == null)
+        {
+            options.UserContext = new Dictionary<string, object>
+            {
+                {key, cache}
+            };
+            return;
+        }
 
-    public static void RemoveCache(this ResolveFieldContext context)
-    {
-        context.Arguments.Remove("GraphQL.FluentValidation.ValidatorTypeCache");
+        UserContextAsDictionary(options.UserContext).Add(key, cache);
     }
-
     public static ValidatorTypeCache GetCache<T>(ResolveFieldContext<T> context)
     {
-        return GetCache(context.Arguments);
+        return GetCache(context.UserContext);
     }
 
-    static ValidatorTypeCache GetCache(Dictionary<string, object> arguments)
+    static ValidatorTypeCache GetCache(object userContext)
     {
-        if (arguments.TryGetValue("GraphQL.FluentValidation.ValidatorTypeCache", out var result))
+        var dictionary = UserContextAsDictionary(userContext);
+
+        if (dictionary.TryGetValue(key, out var result))
         {
             return (ValidatorTypeCache) result;
         }
 
-        throw new Exception($"Could not extract {nameof(ValidatorTypeCache)} from ResolveFieldContext.Arguments. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} has not been called on {nameof(ExecutionOptions)}.");
+        throw new Exception($"Could not extract {nameof(ValidatorTypeCache)} from ResolveFieldContext.UserContext. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
+    }
+
+    static IDictionary<string, object> UserContextAsDictionary(object userContext)
+    {
+        if (userContext is IDictionary<string, object> dictionary)
+        {
+            return dictionary;
+        }
+        throw NotDictionary();
+    }
+
+    static Exception NotDictionary()
+    {
+        return new Exception("Expected UserContext to be of type IDictionary<string, object>.");
     }
 }

@@ -15,7 +15,6 @@ static class QueryExecutor
             {
                 Schema = schema,
                 Query = queryString,
-                UserContext = new MyUserContext(),
                 Inputs = inputs
             };
             executionOptions.UseFluentValidation(cache);

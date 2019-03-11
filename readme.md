@@ -77,7 +77,7 @@ validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
 var schema = new Schema();
 var executer = new DocumentExecuter();
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L10-L17)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L11-L18)</sup>
 <!-- endsnippet -->
 
 Generally ValidatorTypeCache is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
@@ -93,14 +93,17 @@ var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
-    UserContext = new MyUserContext(),
+    UserContext = new Dictionary<string, object>
+    {
+        {"MyContext", new MyUserContext()}
+    },
     Inputs = inputs
 };
 options.UseFluentValidation(validatorTypeCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L22-L35)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L23-L39)</sup>
 <!-- endsnippet -->
 
 
