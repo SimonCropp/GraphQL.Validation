@@ -13,7 +13,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     <PackageReference Include="ObjectApproval" Version="3.1.1" />
     <PackageReference Include="ApprovalTests" Version="3.0.18" />
-    <PackageReference Include="MarkdownSnippets" Version="8.7.0" />
+    <PackageReference Include="MarkdownSnippets" Version="9.0.4" />
     <ProjectReference Include="..\GraphQL.FluentValidation\GraphQL.FluentValidation.csproj" />
   </ItemGroup>
 </Project>
