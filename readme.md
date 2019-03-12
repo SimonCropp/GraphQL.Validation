@@ -9,7 +9,7 @@ To change this file edit the source file and then re-run the generation using ei
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
 
-## NuGet [![NuGet Status](https://badgen.net/nuget/v/GraphQL.FluentValidation/pre)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
+## NuGet [![NuGet Status](https://badgen.net/nuget/v/GraphQL.FluentValidation/)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
 
 https://nuget.org/packages/GraphQL.FluentValidation/
 
@@ -93,18 +93,101 @@ var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
-    UserContext = new Dictionary<string, object>
-    {
-        {"MyContext", new MyUserContext()}
-    },
     Inputs = inputs
 };
 options.UseFluentValidation(validatorTypeCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L23-L39)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L23-L35)</sup>
 <!-- endsnippet -->
+
+
+### UserContext must be a dictionary
+
+This library needs to be able to pass the list of validators, in the form of `ValidatorTypeCache`, through the graphql context. The only way of achieving this is to use the `ExecutionOptions.UserContext`. To facilitate this, the type passed to `ExecutionOptions.UserContext` has to implement `IDictionary<string, object>`. There are two approaches to achieving this:
+
+
+#### 1. Have the user context class implement IDictionary
+
+Given a user context class of the following form:
+
+<!-- snippet: ContextImplementingDictionary -->
+```cs
+public class MyUserContext :
+    Dictionary<string, object>
+{
+    public string MyProperty { get; set; }
+}
+```
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L38-L46)</sup>
+<!-- endsnippet -->
+
+The `ExecutionOptions.UserContext` can then be set as follows:
+
+<!-- snippet: ExecuteQueryWithContextImplementingDictionary -->
+```cs
+var options = new ExecutionOptions
+{
+    Schema = schema,
+    Query = queryString,
+    Inputs = inputs,
+    UserContext = new MyUserContext
+    {
+        MyProperty = "the value"
+    }
+};
+options.UseFluentValidation(validatorTypeCache);
+```
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L50-L64)</sup>
+<!-- endsnippet -->
+
+
+#### 2. Have the user context class exist inside a IDictionary
+
+<!-- snippet: ExecuteQueryWithContextInsideDictionary -->
+```cs
+var options = new ExecutionOptions
+{
+    Schema = schema,
+    Query = queryString,
+    Inputs = inputs,
+    UserContext = new Dictionary<string, object>
+    {
+        {
+            "MyUserContext",
+            new MyUserContext
+            {
+                MyProperty = "the value"
+            }
+        }
+    }
+};
+options.UseFluentValidation(validatorTypeCache);
+```
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L69-L89)</sup>
+<!-- endsnippet -->
+
+
+#### No UserContext
+
+If no instance is passed to `ExecutionOptions.UserContext`:
+
+<!-- snippet: NoContext -->
+```cs
+var options = new ExecutionOptions
+{
+    Schema = schema,
+    Query = queryString,
+    Inputs = inputs
+};
+options.UseFluentValidation(validatorTypeCache);
+```
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L94-L104)</sup>
+<!-- endsnippet -->
+
+Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
+
 
 
 ### Validate when reading arguments

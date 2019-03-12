@@ -3,7 +3,7 @@
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
 
-## NuGet [![NuGet Status](https://badgen.net/nuget/v/GraphQL.FluentValidation/pre)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
+## NuGet [![NuGet Status](https://badgen.net/nuget/v/GraphQL.FluentValidation/)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
 
 https://nuget.org/packages/GraphQL.FluentValidation/
 
@@ -42,6 +42,37 @@ Generally ValidatorTypeCache is scoped per app and can be collocated with `Schem
 Validation needs to be added to any instance of `ExecutionOptions`.
 
 snippet: UseFluentValidation
+
+
+### UserContext must be a dictionary
+
+This library needs to be able to pass the list of validators, in the form of `ValidatorTypeCache`, through the graphql context. The only way of achieving this is to use the `ExecutionOptions.UserContext`. To facilitate this, the type passed to `ExecutionOptions.UserContext` has to implement `IDictionary<string, object>`. There are two approaches to achieving this:
+
+
+#### 1. Have the user context class implement IDictionary
+
+Given a user context class of the following form:
+
+snippet: ContextImplementingDictionary
+
+The `ExecutionOptions.UserContext` can then be set as follows:
+
+snippet: ExecuteQueryWithContextImplementingDictionary
+
+
+#### 2. Have the user context class exist inside a IDictionary
+
+snippet: ExecuteQueryWithContextInsideDictionary
+
+
+#### No UserContext
+
+If no instance is passed to `ExecutionOptions.UserContext`:
+
+snippet: NoContext
+
+Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
+
 
 
 ### Validate when reading arguments
