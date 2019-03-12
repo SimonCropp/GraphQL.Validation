@@ -1,7 +1,7 @@
 ﻿{
-  "data": {
-    "inputQuery": {
-      "data": "TheContent"
+  data: {
+    inputQuery: {
+      data: 'TheContent'
     }
   }
 }

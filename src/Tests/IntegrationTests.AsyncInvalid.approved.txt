@@ -1,10 +1,10 @@
 ﻿{
-  "data": {
-    "asyncQuery": null
+  data: {
+    asyncQuery: null
   },
-  "errors": [
+  errors: [
     {
-      "message": "Content: The specified condition was not met for 'Content'."
+      message: 'Content: The specified condition was not met for \'Content\'.'
     }
   ]
 }
