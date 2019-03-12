@@ -80,7 +80,7 @@ var executer = new DocumentExecuter();
 <sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L11-L18)</sup>
 <!-- endsnippet -->
 
-Generally ValidatorTypeCache is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
+Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
 
 ### Add to ExecutionOptions

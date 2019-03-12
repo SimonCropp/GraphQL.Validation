@@ -34,7 +34,7 @@ Validators need to be added to the `ValidatorTypeCache`. This should be done onc
 
 snippet: StartConfig
 
-Generally ValidatorTypeCache is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
+Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
 
 ### Add to ExecutionOptions
