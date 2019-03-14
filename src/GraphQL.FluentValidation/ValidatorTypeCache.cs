@@ -43,24 +43,24 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Add all <see cref="IValidator"/>s in the assembly that contains <typeparamref name="T"/>.
         /// </summary>
-        public void AddValidatorsFromAssemblyContaining<T>()
+        public void AddValidatorsFromAssemblyContaining<T>(bool throwIfNoneFound = true)
         {
-            AddValidatorsFromAssemblyContaining(typeof(T));
+            AddValidatorsFromAssemblyContaining(typeof(T), throwIfNoneFound);
         }
 
         /// <summary>
         /// Add all <see cref="IValidator"/>s in the assembly that contains <paramref name="type"/>.
         /// </summary>
-        public void AddValidatorsFromAssemblyContaining(Type type)
+        public void AddValidatorsFromAssemblyContaining(Type type, bool throwIfNoneFound = true)
         {
             Guard.AgainstNull(type, nameof(type));
-            AddValidatorsFromAssembly(type.GetTypeInfo().Assembly);
+            AddValidatorsFromAssembly(type.GetTypeInfo().Assembly, throwIfNoneFound);
         }
 
         /// <summary>
         /// Add all <see cref="IValidator"/>s in <paramref name="assembly"/>.
         /// </summary>
-        public void AddValidatorsFromAssembly(Assembly assembly)
+        public void AddValidatorsFromAssembly(Assembly assembly, bool throwIfNoneFound = true)
         {
             Guard.AgainstNull(assembly, nameof(assembly));
             ThrowIfFrozen();
@@ -69,7 +69,11 @@ namespace GraphQL.FluentValidation
             var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
             if (!results.Any())
             {
-                throw new Exception($"No validators were found in {assemblyName}.");
+                if (!throwIfNoneFound)
+                {
+                    throw new Exception($"No validators were found in {assemblyName}.");
+                }
+                return;
             }
 
             foreach (var result in results)
