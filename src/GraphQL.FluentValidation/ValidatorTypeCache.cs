@@ -69,7 +69,7 @@ namespace GraphQL.FluentValidation
             var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
             if (!results.Any())
             {
-                if (!throwIfNoneFound)
+                if (throwIfNoneFound)
                 {
                     throw new Exception($"No validators were found in {assemblyName}.");
                 }
