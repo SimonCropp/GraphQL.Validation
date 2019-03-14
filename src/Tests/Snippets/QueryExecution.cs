@@ -3,9 +3,16 @@ using System.Reflection;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.FluentValidation;
+#pragma warning disable 649
 
 class QueryExecution
 {
+    string queryString;
+    Inputs inputs;
+    Schema schema;
+    ValidatorTypeCache validatorTypeCache;
+    DocumentExecuter executer;
+
     void ExecuteQuery(Assembly assemblyContainingValidators)
     {
         #region StartConfig
@@ -18,7 +25,7 @@ class QueryExecution
         #endregion
     }
 
-    async Task ExecuteQuery(string queryString, Inputs inputs, Schema schema, ValidatorTypeCache validatorTypeCache, DocumentExecuter executer)
+    async Task ExecuteQuery()
     {
         #region UseFluentValidation
 
@@ -45,7 +52,7 @@ class QueryExecution
 
     #endregion
 
-    void ExecuteQueryWithContextImplementingDictionary(string queryString, Inputs inputs, Schema schema, ValidatorTypeCache validatorTypeCache, DocumentExecuter executer)
+    void ExecuteQueryWithContextImplementingDictionary()
     {
         #region ExecuteQueryWithContextImplementingDictionary
 
@@ -64,7 +71,7 @@ class QueryExecution
         #endregion
     }
 
-    void ExecuteQueryWithContextInsideDictionary(string queryString, Inputs inputs, Schema schema, ValidatorTypeCache validatorTypeCache, DocumentExecuter executer)
+    void ExecuteQueryWithContextInsideDictionary()
     {
         #region ExecuteQueryWithContextInsideDictionary
 
@@ -89,7 +96,7 @@ class QueryExecution
         #endregion
     }
 
-    void NoContext(string queryString, Inputs inputs, Schema schema, ValidatorTypeCache validatorTypeCache, DocumentExecuter executer)
+    void NoContext()
     {
         #region NoContext
 
