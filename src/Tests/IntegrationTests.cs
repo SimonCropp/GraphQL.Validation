@@ -2,8 +2,10 @@
 using GraphQL.FluentValidation;
 using ObjectApproval;
 using Xunit;
+using Xunit.Abstractions;
 
-public class IntegrationTests
+public class IntegrationTests :
+    XunitLoggingBase
 {
     static ValidatorTypeCache typeCache;
 
@@ -87,5 +89,10 @@ public class IntegrationTests
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
         ObjectApprover.VerifyWithJson(result);
+    }
+
+    public IntegrationTests(ITestOutputHelper output) : 
+        base(output)
+    {
     }
 }
