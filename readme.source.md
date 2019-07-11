@@ -7,8 +7,6 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
 
 https://nuget.org/packages/GraphQL.FluentValidation/
 
-    PM> Install-Package GraphQL.FluentValidation
-
 
 ## Usage
 
@@ -84,4 +82,4 @@ snippet: GetValidatedArgument
 
 ## Icon
 
-<a href="https://thenounproject.com/term/shield/1893182/" target="_blank">Shield</a> designed by [Maxim Kulikov](https://thenounproject.com/maxim221/) from [The Noun Project](https://thenounproject.com)
+[Shield](https://thenounproject.com/term/shield/1893182/) designed by [Maxim Kulikov](https://thenounproject.com/maxim221/) from [The Noun Project](https://thenounproject.com)
