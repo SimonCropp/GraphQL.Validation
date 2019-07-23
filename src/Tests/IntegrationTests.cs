@@ -91,7 +91,7 @@ public class IntegrationTests :
         ObjectApprover.VerifyWithJson(result);
     }
 
-    public IntegrationTests(ITestOutputHelper output) : 
+    public IntegrationTests(ITestOutputHelper output) :
         base(output)
     {
     }
