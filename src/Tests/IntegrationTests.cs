@@ -31,7 +31,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.Verify(result);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.Verify(result);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.Verify(result);
     }
 
     [Fact]
@@ -88,7 +88,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.Verify(result);
     }
 
     public IntegrationTests(ITestOutputHelper output) :

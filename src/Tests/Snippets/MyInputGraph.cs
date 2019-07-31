@@ -1,7 +1,8 @@
 ﻿using GraphQL.Types;
 
-#region graph
-public class MyInputGraph : InputObjectGraphType
+#region Graph
+public class MyInputGraph :
+    InputObjectGraphType
 {
     public MyInputGraph()
     {
