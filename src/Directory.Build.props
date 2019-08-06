@@ -2,18 +2,7 @@
 <Project>
   <PropertyGroup>
     <Version>1.1.0</Version>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <LangVersion>latest</LangVersion>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>Copyright $([System.DateTime]::UtcNow.ToString(yyyy)). All rights reserved</Copyright>
     <PackageTags>GraphQL, Validation, FluentValidation</PackageTags>
     <Description>Add FluentValidation (https://fluentvalidation.net/) support to GraphQL.net (https://github.com/graphql-dotnet/graphql-dotnet)</Description>
-    <PackageIconUrl>https://raw.githubusercontent.com/SimonCropp/GraphQL.Validation/master/src/icon.png</PackageIconUrl>
-    <PackageOutputPath>..\..\nugets</PackageOutputPath>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <RepositoryUrl>https://github.com/SimonCropp/GraphQL.Validation</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <DebugType>embedded</DebugType>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 </Project>
