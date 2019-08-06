@@ -10,9 +10,9 @@
     <PackageReference Include="XunitLogger" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="ObjectApproval" Version="9.2.0" />
+    <PackageReference Include="ObjectApproval" Version="10.0.0" />
     <PackageReference Include="ApprovalTests" Version="4.0.0" />
-    <PackageReference Include="MarkdownSnippets.MsBuild" Version="16.0.0" />
+    <PackageReference Include="MarkdownSnippets.MsBuild" Version="16.1.1" />
     <ProjectReference Include="..\GraphQL.FluentValidation\GraphQL.FluentValidation.csproj" />
     <PackageReference Include="ProjectDefaults" Version="1.0.3" PrivateAssets="All" />
   </ItemGroup>
