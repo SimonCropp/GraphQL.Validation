@@ -190,9 +190,9 @@ Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<s
 
 
 
-### Validate when reading arguments
+### Trigger validation
 
-When reading arguments use `GetValidatedArgument` instead of `GetArgument`:
+To trigger the validation, when reading arguments use `GetValidatedArgument` instead of `GetArgument`:
 
 <!-- snippet: GetValidatedArgument -->
 ```cs
