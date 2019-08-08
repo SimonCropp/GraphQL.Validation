@@ -5,7 +5,7 @@ Source File: /readme.source.md
 To change this file edit the source file and then run MarkdownSnippets.
 -->
 
-# <img src="https://raw.githubusercontent.com/SimonCropp/GraphQL.Validation/master/src/icon.png" height="40px"> GraphQL.FluentValidation
+# <img src="/src/icon.png" height="40px"> GraphQL.FluentValidation
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
@@ -190,9 +190,9 @@ Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<s
 
 
 
-### Validate when reading arguments
+### Trigger validation
 
-When reading arguments use `GetValidatedArgument` instead of `GetArgument`:
+To trigger the validation, when reading arguments use `GetValidatedArgument` instead of `GetArgument`:
 
 <!-- snippet: GetValidatedArgument -->
 ```cs
