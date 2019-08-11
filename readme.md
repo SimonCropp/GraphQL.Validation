@@ -23,18 +23,20 @@ https://nuget.org/packages/GraphQL.FluentValidation/
 Given the following input:
 
 <!-- snippet: input -->
+<a id='snippet-input'/></a>
 ```cs
 public class MyInput
 {
     public string Content { get; set; }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/MyInput.cs#L2-L7)</sup>
+<sup>[snippet source](/src/Tests/Snippets/MyInput.cs#L2-L7) / [anchor](#snippet-input)</sup>
 <!-- endsnippet -->
 
 And graph:
 
 <!-- snippet: graph -->
+<a id='snippet-graph'/></a>
 ```cs
 public class MyInputGraph :
     InputObjectGraphType
@@ -45,12 +47,13 @@ public class MyInputGraph :
     }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/MyInputGraph.cs#L3-L12)</sup>
+<sup>[snippet source](/src/Tests/Snippets/MyInputGraph.cs#L3-L12) / [anchor](#snippet-graph)</sup>
 <!-- endsnippet -->
 
 A custom validator can be defined as follows:
 
 <!-- snippet: validator -->
+<a id='snippet-validator'/></a>
 ```cs
 public class MyInputValidator :
     AbstractValidator<MyInput>
@@ -62,7 +65,7 @@ public class MyInputValidator :
     }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/MyInputValidator.cs#L3-L13)</sup>
+<sup>[snippet source](/src/Tests/Snippets/MyInputValidator.cs#L3-L13) / [anchor](#snippet-validator)</sup>
 <!-- endsnippet -->
 
 
@@ -71,13 +74,14 @@ public class MyInputValidator :
 Validators need to be added to the `ValidatorTypeCache`. This should be done once at application startup.
 
 <!-- snippet: StartConfig -->
+<a id='snippet-startconfig'/></a>
 ```cs
 var validatorTypeCache = new ValidatorTypeCache();
 validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
 var schema = new Schema();
 var executer = new DocumentExecuter();
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L18-L25)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L18-L25) / [anchor](#snippet-startconfig)</sup>
 <!-- endsnippet -->
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
@@ -88,6 +92,7 @@ Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Sch
 Validation needs to be added to any instance of `ExecutionOptions`.
 
 <!-- snippet: UseFluentValidation -->
+<a id='snippet-usefluentvalidation'/></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -99,7 +104,7 @@ options.UseFluentValidation(validatorTypeCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L30-L42)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L30-L42) / [anchor](#snippet-usefluentvalidation)</sup>
 <!-- endsnippet -->
 
 
@@ -113,6 +118,7 @@ This library needs to be able to pass the list of validators, in the form of `Va
 Given a user context class of the following form:
 
 <!-- snippet: ContextImplementingDictionary -->
+<a id='snippet-contextimplementingdictionary'/></a>
 ```cs
 public class MyUserContext :
     Dictionary<string, object>
@@ -120,12 +126,13 @@ public class MyUserContext :
     public string MyProperty { get; set; }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L45-L53)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L45-L53) / [anchor](#snippet-contextimplementingdictionary)</sup>
 <!-- endsnippet -->
 
 The `ExecutionOptions.UserContext` can then be set as follows:
 
 <!-- snippet: ExecuteQueryWithContextImplementingDictionary -->
+<a id='snippet-executequerywithcontextimplementingdictionary'/></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -139,13 +146,14 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L57-L71)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L57-L71) / [anchor](#snippet-executequerywithcontextimplementingdictionary)</sup>
 <!-- endsnippet -->
 
 
 #### 2. Have the user context class exist inside a IDictionary
 
 <!-- snippet: ExecuteQueryWithContextInsideDictionary -->
+<a id='snippet-executequerywithcontextinsidedictionary'/></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -165,7 +173,7 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L76-L96)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L76-L96) / [anchor](#snippet-executequerywithcontextinsidedictionary)</sup>
 <!-- endsnippet -->
 
 
@@ -174,6 +182,7 @@ options.UseFluentValidation(validatorTypeCache);
 If no instance is passed to `ExecutionOptions.UserContext`:
 
 <!-- snippet: NoContext -->
+<a id='snippet-nocontext'/></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -183,7 +192,7 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L101-L111)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L101-L111) / [anchor](#snippet-nocontext)</sup>
 <!-- endsnippet -->
 
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
@@ -195,6 +204,7 @@ Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<s
 To trigger the validation, when reading arguments use `GetValidatedArgument` instead of `GetArgument`:
 
 <!-- snippet: GetValidatedArgument -->
+<a id='snippet-getvalidatedargument'/></a>
 ```cs
 public class MyQuery :
     ObjectGraphType
@@ -221,7 +231,7 @@ public class MyQuery :
     }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/Query.cs#L4-L31)</sup>
+<sup>[snippet source](/src/Tests/Snippets/Query.cs#L4-L31) / [anchor](#snippet-getvalidatedargument)</sup>
 <!-- endsnippet -->
 
 
