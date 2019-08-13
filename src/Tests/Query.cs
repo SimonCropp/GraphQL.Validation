@@ -1,5 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
+using Newtonsoft.Json.Linq;
 
 public class Query :
     ObjectGraphType
@@ -9,7 +10,7 @@ public class Query :
         Field<ResultGraph>(
             "inputQuery",
             arguments: new QueryArguments(
-                new QueryArgument<InputGraph> {Name = "input",}
+                new QueryArgument<InputGraph> { Name = "input", }
             ),
             resolve: context =>
             {
@@ -20,10 +21,24 @@ public class Query :
                 };
             }
         );
+
+        Field<ResultGraph>(
+            "complexInputQuery",
+            arguments: new QueryArguments(
+                new QueryArgument<ComplexInputGraph> { Name = "input", }
+            ),
+            resolve: context =>
+            {
+                var input = JToken.FromObject(context.Arguments["input"]).ToObject<ComplexInput>();
+                ArgumentValidation.Validate(context.GetCache(), typeof(TArgument), argument, context.UserContext);
+                return input;
+            }
+        );
+
         FieldAsync<ResultGraph>(
             "asyncQuery",
             arguments: new QueryArguments(
-                new QueryArgument<InputGraph> {Name = "input",}
+                new QueryArgument<InputGraph> { Name = "input", }
             ),
             resolve: async context =>
             {
