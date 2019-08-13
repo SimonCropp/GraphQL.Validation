@@ -30,8 +30,11 @@ public class Query :
             resolve: context =>
             {
                 var input = JToken.FromObject(context.Arguments["input"]).ToObject<ComplexInput>();
-                ArgumentValidation.Validate(context.GetCache(), typeof(TArgument), argument, context.UserContext);
-                return input;
+                ArgumentValidation.Validate(ArgumentTypeCacheBag.GetCache(context), typeof(ComplexInput), input, context.UserContext);
+                return new Result
+                {
+                    Data = input.Inner.Content
+                };
             }
         );
 

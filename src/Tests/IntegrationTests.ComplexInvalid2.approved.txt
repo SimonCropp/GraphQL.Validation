@@ -1,0 +1,10 @@
+﻿{
+  data: {
+    complexInputQuery: null
+  },
+  errors: [
+    {
+      message: 'Inner: \'Inner\' must not be empty.'
+    }
+  ]
+}
