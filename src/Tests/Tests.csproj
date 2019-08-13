@@ -14,6 +14,6 @@
     <PackageReference Include="ApprovalTests" Version="4.0.0" />
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="16.2.0" />
     <ProjectReference Include="..\GraphQL.FluentValidation\GraphQL.FluentValidation.csproj" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.15" PrivateAssets="All" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.16" PrivateAssets="All" />
   </ItemGroup>
 </Project>
