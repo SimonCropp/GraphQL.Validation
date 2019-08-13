@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
 using GraphQL.FluentValidation;
+#pragma warning disable 1591
 
 namespace GraphQL
 {
