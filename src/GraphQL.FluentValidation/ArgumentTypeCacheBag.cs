@@ -4,9 +4,10 @@ using GraphQL;
 using GraphQL.FluentValidation;
 using GraphQL.Types;
 
-public static class ArgumentTypeCacheBag
+static class ArgumentTypeCacheBag
 {
     const string key = "GraphQL.FluentValidation.ValidatorTypeCache";
+
     public static ValidatorTypeCache GetCache(this ResolveFieldContext context)
     {
         return GetCache(context.UserContext);
@@ -25,6 +26,7 @@ public static class ArgumentTypeCacheBag
 
         UserContextAsDictionary(options.UserContext).Add(key, cache);
     }
+
     public static ValidatorTypeCache GetCache<T>(ResolveFieldContext<T> context)
     {
         return GetCache(context.UserContext);
@@ -48,6 +50,7 @@ public static class ArgumentTypeCacheBag
         {
             return dictionary;
         }
+
         throw NotDictionary();
     }
 

@@ -6,66 +6,62 @@ using FluentValidation;
 using FluentValidation.Results;
 using GraphQL.FluentValidation;
 #pragma warning disable 1591
-
-namespace GraphQL
+static class ArgumentValidation
 {
-    public static class ArgumentValidation
+    public static async Task ValidateAsync(ValidatorTypeCache typeCache, Type type, object instance, object userContext)
     {
-        public static async Task ValidateAsync(ValidatorTypeCache typeCache, Type type, object instance, object userContext)
+        Guard.AgainstNull(typeCache, nameof(typeCache));
+        Guard.AgainstNull(userContext, nameof(userContext));
+        Guard.AgainstNull(type, nameof(type));
+        Guard.AgainstNull(userContext, nameof(userContext));
+        if (!typeCache.TryGetValidators(type, out var buildAll))
         {
-            Guard.AgainstNull(typeCache, nameof(typeCache));
-            Guard.AgainstNull(userContext, nameof(userContext));
-            Guard.AgainstNull(type, nameof(type));
-            Guard.AgainstNull(userContext, nameof(userContext));
-            if (!typeCache.TryGetValidators(type, out var buildAll))
-            {
-                return;
-            }
-
-            var validationContext = BuildValidationContext(instance, userContext);
-
-            var tasks = buildAll.Select(x => x.ValidateAsync(validationContext));
-            var validationResults = await Task.WhenAll(tasks);
-
-            var results = validationResults
-                .SelectMany(result => result.Errors)
-                .ToList();
-
-            ThrowIfResults(results);
+            return;
         }
 
-        public static void Validate(ValidatorTypeCache typeCache, Type type, object instance, object userContext)
+        var validationContext = BuildValidationContext(instance, userContext);
+
+        var tasks = buildAll.Select(x => x.ValidateAsync(validationContext));
+        var validationResults = await Task.WhenAll(tasks);
+
+        var results = validationResults
+            .SelectMany(result => result.Errors)
+            .ToList();
+
+        ThrowIfResults(results);
+    }
+
+    public static void Validate(ValidatorTypeCache typeCache, Type type, object instance, object userContext)
+    {
+        Guard.AgainstNull(typeCache, nameof(typeCache));
+        Guard.AgainstNull(userContext, nameof(userContext));
+        Guard.AgainstNull(type, nameof(type));
+        Guard.AgainstNull(userContext, nameof(userContext));
+        if (!typeCache.TryGetValidators(type, out var buildAll))
         {
-            Guard.AgainstNull(typeCache, nameof(typeCache));
-            Guard.AgainstNull(userContext, nameof(userContext));
-            Guard.AgainstNull(type, nameof(type));
-            Guard.AgainstNull(userContext, nameof(userContext));
-            if (!typeCache.TryGetValidators(type, out var buildAll))
-            {
-                return;
-            }
-
-            var validationContext = BuildValidationContext(instance, userContext);
-            var results = buildAll
-                .SelectMany(validator => validator.Validate(validationContext).Errors)
-                .ToList();
-
-            ThrowIfResults(results);
+            return;
         }
 
-        static void ThrowIfResults(List<ValidationFailure> results)
-        {
-            if (results.Any())
-            {
-                throw new ValidationException(results);
-            }
-        }
+        var validationContext = BuildValidationContext(instance, userContext);
+        var results = buildAll
+            .SelectMany(validator => validator.Validate(validationContext).Errors)
+            .ToList();
 
-        static ValidationContext BuildValidationContext(object instance, object userContext)
+        ThrowIfResults(results);
+    }
+
+    static void ThrowIfResults(List<ValidationFailure> results)
+    {
+        if (results.Any())
         {
-            var validationContext = new ValidationContext(instance);
-            validationContext.RootContextData.Add("UserContext", userContext);
-            return validationContext;
+            throw new ValidationException(results);
         }
+    }
+
+    static ValidationContext BuildValidationContext(object instance, object userContext)
+    {
+        var validationContext = new ValidationContext(instance);
+        validationContext.RootContextData.Add("UserContext", userContext);
+        return validationContext;
     }
 }
