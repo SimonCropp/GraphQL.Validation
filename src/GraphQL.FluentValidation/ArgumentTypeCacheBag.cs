@@ -4,7 +4,7 @@ using GraphQL;
 using GraphQL.FluentValidation;
 using GraphQL.Types;
 
-static class ArgumentTypeCacheBag
+public static class ArgumentTypeCacheBag
 {
     const string key = "GraphQL.FluentValidation.ValidatorTypeCache";
     public static ValidatorTypeCache GetCache(this ResolveFieldContext context)
