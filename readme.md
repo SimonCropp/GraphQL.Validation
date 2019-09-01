@@ -5,14 +5,29 @@ Source File: /readme.source.md
 To change this file edit the source file and then run MarkdownSnippets.
 -->
 
-# <img src="/src/icon.png" height="40px"> GraphQL.FluentValidation
+# <img src="/src/icon.png" height="30px"> GraphQL.Validation
+
+[![Build status](https://ci.appveyor.com/api/projects/status/wvk8wm3n227b2b3q/branch/master?svg=true)](https://ci.appveyor.com/project/SimonCropp/GraphQL.Validation/branch/master) [![NuGet Status](https://img.shields.io/nuget/v/GraphQL.Validation.svg?cacheSeconds=86400)](https://www.nuget.org/packages/GraphQL.Validation/)
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
+<!-- toc -->
+## Contents
 
-## NuGet [![NuGet Status](https://badgen.net/nuget/v/GraphQL.FluentValidation/)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
+  * [NuGet](#nuget)
+  * [Usage](#usage)
+    * [Define validators](#define-validators)
+    * [Setup Validators](#setup-validators)
+    * [Add to ExecutionOptions](#add-to-executionoptions)
+    * [UserContext must be a dictionary](#usercontext-must-be-a-dictionary)
+    * [Trigger validation](#trigger-validation)
+<!-- endtoc -->
 
-https://nuget.org/packages/GraphQL.FluentValidation/
+
+
+## NuGet
+
+https://nuget.org/packages/GraphQL.Validation/
 
 
 ## Usage
@@ -198,7 +213,6 @@ options.UseFluentValidation(validatorTypeCache);
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
 
 
-
 ### Trigger validation
 
 To trigger the validation, when reading arguments use `GetValidatedArgument` instead of `GetArgument`:
@@ -233,6 +247,11 @@ public class MyQuery :
 ```
 <sup>[snippet source](/src/Tests/Snippets/Query.cs#L4-L31) / [anchor](#snippet-getvalidatedargument)</sup>
 <!-- endsnippet -->
+
+
+## Release Notes
+
+See [closed milestones](../../milestones?state=closed).
 
 
 ## Icon
