@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.28531.58
-MinimumVisualStudioVersion = 16.0.28721.148
+VisualStudioVersion = 16.0.29201.188
+MinimumVisualStudioVersion = 16.0.29201.188
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.FluentValidation", "GraphQL.FluentValidation\GraphQL.FluentValidation.csproj", "{8D87D482-BC30-49F6-946C-73DD62FC4EC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{49CBE4DA-DFE0-4320-A82A-8BC11FCBA14D}"
