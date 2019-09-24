@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using FluentValidation;
 
-public class AsyncInputValidator : AbstractValidator<AsyncInput>
+public class AsyncInputValidator :
+    AbstractValidator<AsyncInput>
 {
     public AsyncInputValidator()
     {

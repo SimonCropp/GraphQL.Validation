@@ -1,6 +1,7 @@
 ﻿using GraphQL.Types;
 
-public class ComplexInputInnerGraph : InputObjectGraphType<ComplexInputInner>
+public class ComplexInputInnerGraph :
+    InputObjectGraphType<ComplexInputInner>
 {
     public ComplexInputInnerGraph()
     {

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 
-public class InputValidator : AbstractValidator<Input>
+public class InputValidator :
+    AbstractValidator<Input>
 {
     public InputValidator()
     {

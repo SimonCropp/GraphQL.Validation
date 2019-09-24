@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 
-public class ComplexInputValidator : AbstractValidator<ComplexInput>
+public class ComplexInputValidator :
+    AbstractValidator<ComplexInput>
 {
     public ComplexInputValidator()
     {
