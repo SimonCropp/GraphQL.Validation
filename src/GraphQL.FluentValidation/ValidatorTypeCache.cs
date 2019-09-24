@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using FluentValidation;
@@ -79,6 +80,11 @@ namespace GraphQL.FluentValidation
             foreach (var result in results)
             {
                 var validatorType = result.ValidatorType;
+                if (validatorType.GetConstructor(new Type[]{}) == null)
+                {
+                    Trace.WriteLine($"Ignoring ''{validatorType.FullName}'' since it does not have a public parameterless constructor.");
+                    continue;
+                }
                 var single = result.InterfaceType.GenericTypeArguments.Single();
                 if (!typeCache.TryGetValue(single, out var list))
                 {
