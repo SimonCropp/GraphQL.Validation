@@ -5,7 +5,7 @@ public class ComplexInputInnerGraph :
 {
     public ComplexInputInnerGraph()
     {
-        Field<StringGraphType, string>()
+        Field<StringGraphType, string?>()
             .Name("content")
             .Resolve(ctx => ctx.Source.Content);
     }

@@ -33,7 +33,7 @@ public class Query :
                 context.ValidateInstance(input);
                 return new Result
                 {
-                    Data = input.Inner.Content
+                    Data = input.Inner!.Content
                 };
             }
         );

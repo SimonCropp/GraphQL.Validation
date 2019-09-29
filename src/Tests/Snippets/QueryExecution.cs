@@ -7,11 +7,11 @@ using GraphQL.FluentValidation;
 
 class QueryExecution
 {
-    string queryString;
-    Inputs inputs;
-    Schema schema;
-    ValidatorTypeCache validatorTypeCache;
-    DocumentExecuter executer;
+    string queryString = null!;
+    Inputs inputs = null!;
+    Schema schema = null!;
+    ValidatorTypeCache validatorTypeCache = null!;
+    DocumentExecuter executer = null!;
 
     void ExecuteQuery(Assembly assemblyContainingValidators)
     {
@@ -47,7 +47,12 @@ class QueryExecution
     public class MyUserContext :
         Dictionary<string, object>
     {
-        public string MyProperty { get; set; }
+        public MyUserContext(string myProperty)
+        {
+            MyProperty = myProperty;
+        }
+
+        public string MyProperty { get; }
     }
 
     #endregion
@@ -62,9 +67,9 @@ class QueryExecution
             Query = queryString,
             Inputs = inputs,
             UserContext = new MyUserContext
-            {
-                MyProperty = "the value"
-            }
+            (
+                myProperty: "the value"
+            )
         };
         options.UseFluentValidation(validatorTypeCache);
 
@@ -85,9 +90,9 @@ class QueryExecution
                 {
                     "MyUserContext",
                     new MyUserContext
-                    {
-                        MyProperty = "the value"
-                    }
+                    (
+                        myProperty: "the value"
+                    )
                 }
             }
         };

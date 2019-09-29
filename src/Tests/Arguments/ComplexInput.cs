@@ -1,4 +1,4 @@
 ﻿public class ComplexInput
 {
-    public ComplexInputInner Inner { get; set; }
+    public ComplexInputInner? Inner { get; set; }
 }

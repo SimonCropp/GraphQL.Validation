@@ -5,7 +5,7 @@ public class ComplexInputValidator :
 {
     public ComplexInputValidator()
     {
-        RuleFor(_ => _.Inner)
+        RuleFor(_ => _.Inner!)
             .NotEmpty()
             .SetValidator(new ComplexInputInnerValidator());
     }

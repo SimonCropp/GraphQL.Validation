@@ -4,22 +4,20 @@ using GraphQL.FluentValidation;
 
 static class QueryExecutor
 {
-    public static async Task<ExecutionResult> ExecuteQuery(string queryString, Inputs inputs, ValidatorTypeCache cache)
+    public static async Task<ExecutionResult> ExecuteQuery(string queryString, Inputs? inputs, ValidatorTypeCache cache)
     {
         queryString = queryString.Replace("'", "\"");
-        using (var schema = new Schema())
+        using var schema = new Schema();
+        var documentExecuter = new DocumentExecuter();
+
+        var executionOptions = new ExecutionOptions
         {
-            var documentExecuter = new DocumentExecuter();
+            Schema = schema,
+            Query = queryString,
+            Inputs = inputs
+        };
+        executionOptions.UseFluentValidation(cache);
 
-            var executionOptions = new ExecutionOptions
-            {
-                Schema = schema,
-                Query = queryString,
-                Inputs = inputs
-            };
-            executionOptions.UseFluentValidation(cache);
-
-            return await documentExecuter.ExecuteAsync(executionOptions);
-        }
+        return await documentExecuter.ExecuteAsync(executionOptions);
     }
 }

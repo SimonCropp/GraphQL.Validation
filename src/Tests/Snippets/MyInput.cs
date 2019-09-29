@@ -2,6 +2,11 @@
 #region input
 public class MyInput
 {
-    public string Content { get; set; }
+    public MyInput(string content)
+    {
+        Content = content;
+    }
+
+    public string Content { get; }
 }
 #endregion

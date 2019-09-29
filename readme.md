@@ -42,10 +42,15 @@ Given the following input:
 ```cs
 public class MyInput
 {
-    public string Content { get; set; }
+    public MyInput(string content)
+    {
+        Content = content;
+    }
+
+    public string Content { get; }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/MyInput.cs#L2-L7) / [anchor](#snippet-input)</sup>
+<sup>[snippet source](/src/Tests/Snippets/MyInput.cs#L2-L12) / [anchor](#snippet-input)</sup>
 <!-- endsnippet -->
 
 And graph:
@@ -138,10 +143,15 @@ Given a user context class of the following form:
 public class MyUserContext :
     Dictionary<string, object>
 {
-    public string MyProperty { get; set; }
+    public MyUserContext(string myProperty)
+    {
+        MyProperty = myProperty;
+    }
+
+    public string MyProperty { get; }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L45-L53) / [anchor](#snippet-contextimplementingdictionary)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L45-L58) / [anchor](#snippet-contextimplementingdictionary)</sup>
 <!-- endsnippet -->
 
 The `ExecutionOptions.UserContext` can then be set as follows:
@@ -155,13 +165,13 @@ var options = new ExecutionOptions
     Query = queryString,
     Inputs = inputs,
     UserContext = new MyUserContext
-    {
-        MyProperty = "the value"
-    }
+    (
+        myProperty: "the value"
+    )
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L57-L71) / [anchor](#snippet-executequerywithcontextimplementingdictionary)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L62-L76) / [anchor](#snippet-executequerywithcontextimplementingdictionary)</sup>
 <!-- endsnippet -->
 
 
@@ -180,15 +190,15 @@ var options = new ExecutionOptions
         {
             "MyUserContext",
             new MyUserContext
-            {
-                MyProperty = "the value"
-            }
+            (
+                myProperty: "the value"
+            )
         }
     }
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L76-L96) / [anchor](#snippet-executequerywithcontextinsidedictionary)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L81-L101) / [anchor](#snippet-executequerywithcontextinsidedictionary)</sup>
 <!-- endsnippet -->
 
 
@@ -207,7 +217,7 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L101-L111) / [anchor](#snippet-nocontext)</sup>
+<sup>[snippet source](/src/Tests/Snippets/QueryExecution.cs#L106-L116) / [anchor](#snippet-nocontext)</sup>
 <!-- endsnippet -->
 
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
