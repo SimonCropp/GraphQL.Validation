@@ -3,7 +3,7 @@
 static class Guard
 {
     // ReSharper disable UnusedParameter.Global
-    public static void AgainstNull(object value, string argumentName)
+    public static void AgainstNull(object? value, string argumentName)
     {
         if (value == null)
         {
@@ -11,7 +11,7 @@ static class Guard
         }
     }
 
-    public static void AgainstNullOrEmpty(string value, string argumentName)
+    public static void AgainstNullOrEmpty(string? value, string argumentName)
     {
         if (string.IsNullOrWhiteSpace(value))
         {

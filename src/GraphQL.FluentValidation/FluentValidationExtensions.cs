@@ -16,7 +16,7 @@ namespace GraphQL
         {
             Guard.AgainstNull(context, nameof(context));
             Guard.AgainstNull(input, nameof(input));
-            var type = input.GetType();
+            var type = input!.GetType();
             ArgumentValidation.Validate(ArgumentTypeCacheBag.GetCache(context), type, input, context.UserContext);
         }
 

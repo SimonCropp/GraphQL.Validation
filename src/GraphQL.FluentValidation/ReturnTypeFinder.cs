@@ -5,9 +5,9 @@ using Type = System.Type;
 
 static class ReturnTypeFinder
 {
-    static ConcurrentDictionary<Type, object> typeCache = new ConcurrentDictionary<Type, object>();
+    static ConcurrentDictionary<Type, object?> typeCache = new ConcurrentDictionary<Type, object?>();
 
-    public static object Find(ResolveFieldContext context)
+    public static object? Find(ResolveFieldContext context)
     {
         return typeCache.GetOrAdd(context.ReturnType.GetType(), type => GetDefault(GetReturnType(type)));
     }
@@ -26,7 +26,7 @@ static class ReturnTypeFinder
         throw new Exception($"Type is not a ObjectGraphType<>. Type: {type.FullName}");
     }
 
-    static object GetDefault(Type type)
+    static object? GetDefault(Type type)
     {
         if(type.IsValueType)
         {

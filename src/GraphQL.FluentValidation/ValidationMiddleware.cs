@@ -8,7 +8,7 @@ using GraphQL.Types;
 
 class ValidationMiddleware
 {
-    public async Task<object> Resolve(ResolveFieldContext context, FieldMiddlewareDelegate next)
+    public async Task<object?> Resolve(ResolveFieldContext context, FieldMiddlewareDelegate next)
     {
         try
         {
