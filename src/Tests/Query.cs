@@ -52,6 +52,22 @@ public class Query :
                 };
             }
         );
+
+        FieldAsync<ResultGraph>(
+            "asyncComplexInputQuery",
+            arguments: new QueryArguments(
+                new QueryArgument<ComplexInputGraph> { Name = "input", }
+            ),
+            resolve: async context =>
+            {
+                var input = JToken.FromObject(context.Arguments["input"]).ToObject<AsyncComplexInput>();
+                await context.ValidateInstanceAsync(input);
+                return new Result
+                {
+                    Data = input.Inner!.Content
+                };
+            }
+        );
     }
 
 }

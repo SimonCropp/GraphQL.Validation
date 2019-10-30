@@ -151,6 +151,49 @@ public class IntegrationTests :
         ObjectApprover.Verify(result);
     }
 
+    [Fact]
+    public async Task AsyncComplexValid()
+    {
+        var queryString = @"
+{
+  asyncComplexInputQuery
+    (
+      input: {
+        inner: {
+          content: ""TheContent""
+        }
+      }
+    )
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
+        ObjectApprover.Verify(result);
+    }
+
+    [Fact]
+    public async Task AsyncComplexInvalid()
+    {
+        var queryString = @"
+{
+  asyncComplexInputQuery
+    (
+      input: {
+        inner: {
+          content: """"
+        }
+      }
+    )
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
+        ObjectApprover.Verify(result);
+    }
+
+
     public IntegrationTests(ITestOutputHelper output) :
         base(output)
     {

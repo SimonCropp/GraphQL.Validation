@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using GraphQL.FluentValidation;
 using GraphQL.Types;
+using System.Threading.Tasks;
 
 namespace GraphQL
 {
@@ -18,6 +19,17 @@ namespace GraphQL
             Guard.AgainstNull(input, nameof(input));
             var type = input!.GetType();
             ArgumentValidation.Validate(ArgumentTypeCacheBag.GetCache(context), type, input, context.UserContext);
+        }
+
+        /// <summary>
+        /// Validate an instance asynchronously against the current cached validators defined by <see cref="ValidatorTypeCache"/>.
+        /// </summary>
+        public static async Task ValidateInstanceAsync<TSource, TInstance>(this ResolveFieldContext<TSource> context, TInstance input)
+        {
+            Guard.AgainstNull(context, nameof(context));
+            Guard.AgainstNull(input, nameof(input));
+            var type = input!.GetType();
+            await ArgumentValidation.ValidateAsync(ArgumentTypeCacheBag.GetCache(context), type, input, context.UserContext);
         }
 
         /// <summary>
