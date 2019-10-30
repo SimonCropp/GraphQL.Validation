@@ -1,6 +1,5 @@
 ﻿using GraphQL;
 using GraphQL.Types;
-using Newtonsoft.Json.Linq;
 
 public class Query :
     ObjectGraphType
@@ -29,8 +28,7 @@ public class Query :
             ),
             resolve: context =>
             {
-                var input = JToken.FromObject(context.Arguments["input"]).ToObject<ComplexInput>();
-                context.ValidateInstance(input);
+                var input = context.GetValidatedArgument<ComplexInput>("input");
                 return new Result
                 {
                     Data = input.Inner!.Content
