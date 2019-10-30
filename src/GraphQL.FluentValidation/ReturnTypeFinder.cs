@@ -23,15 +23,17 @@ static class ReturnTypeFinder
                 return type.GetGenericArguments()[0];
             }
         }
+
         throw new Exception($"Type is not a ObjectGraphType<>. Type: {type.FullName}");
     }
 
     static object? GetDefault(Type type)
     {
-        if(type.IsValueType)
+        if (type.IsValueType)
         {
             return Activator.CreateInstance(type);
         }
+
         return null;
     }
 }
