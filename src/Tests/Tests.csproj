@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.0" />
+    <PackageReference Include="FluentValidation" Version="8.5.1" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="Xunit.ApprovalTests" Version="4.1.0" />
