@@ -5,6 +5,9 @@
   errors: [
     {
       message: 'Inner: \'Inner\' must not be empty.'
+    },
+    {
+      message: 'Items: \'Items\' must not be empty.'
     }
   ]
 }

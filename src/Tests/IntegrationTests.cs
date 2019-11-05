@@ -100,7 +100,11 @@ public class IntegrationTests :
       input: {
         inner: {
           content: ""TheContent""
-        }
+        },
+        items: [
+            { id: 1, content: ""Some content 1"" },
+            { id: 2, content: ""Some content 2"" }
+        ]
       }
     )
   {
@@ -121,7 +125,8 @@ public class IntegrationTests :
       input: {
         inner: {
           content: """"
-        }
+        },
+        items: []
       }
     )
   {
@@ -140,7 +145,8 @@ public class IntegrationTests :
   complexInputQuery
     (
       input: {
-        inner: null
+        inner: null,
+        items: null
       }
     )
   {
@@ -161,7 +167,11 @@ public class IntegrationTests :
       input: {
         inner: {
           content: ""TheContent""
-        }
+        },
+        items: [
+            { id: 1, content: ""Some content 1"" },
+            { id: 2, content: ""Some content 2"" }
+        ]
       }
     )
   {
@@ -182,7 +192,8 @@ public class IntegrationTests :
       input: {
         inner: {
           content: """"
-        }
+        },
+        items: null
       }
     )
   {

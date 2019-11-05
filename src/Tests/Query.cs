@@ -1,6 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 public class Query :
     ObjectGraphType
@@ -29,11 +29,10 @@ public class Query :
             ),
             resolve: context =>
             {
-                var input = JToken.FromObject(context.Arguments["input"]).ToObject<ComplexInput>();
-                context.ValidateInstance(input);
+                var input = context.GetValidatedArgument<ComplexInput>("input");
                 return new Result
                 {
-                    Data = input.Inner!.Content
+                    Data = JsonConvert.SerializeObject(input)
                 };
             }
         );
@@ -60,8 +59,7 @@ public class Query :
             ),
             resolve: async context =>
             {
-                var input = JToken.FromObject(context.Arguments["input"]).ToObject<AsyncComplexInput>();
-                await context.ValidateInstanceAsync(input);
+                var input = await context.GetValidatedArgumentAsync<AsyncComplexInput>("input");
                 return new Result
                 {
                     Data = input.Inner!.Content
