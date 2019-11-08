@@ -100,7 +100,11 @@ public class IntegrationTests :
       input: {
         inner: {
           content: ""TheContent""
-        }
+        },
+        items: [
+            { id: 1, content: ""Some content 1"" },
+            { id: 2, content: ""Some content 2"" }
+        ]
       }
     )
   {
@@ -121,7 +125,8 @@ public class IntegrationTests :
       input: {
         inner: {
           content: """"
-        }
+        },
+        items: []
       }
     )
   {
@@ -140,7 +145,8 @@ public class IntegrationTests :
   complexInputQuery
     (
       input: {
-        inner: null
+        inner: null,
+        items: null
       }
     )
   {
@@ -150,6 +156,54 @@ public class IntegrationTests :
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
         ObjectApprover.Verify(result);
     }
+
+    [Fact]
+    public async Task AsyncComplexValid()
+    {
+        var queryString = @"
+{
+  asyncComplexInputQuery
+    (
+      input: {
+        inner: {
+          content: ""TheContent""
+        },
+        items: [
+            { id: 1, content: ""Some content 1"" },
+            { id: 2, content: ""Some content 2"" }
+        ]
+      }
+    )
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
+        ObjectApprover.Verify(result);
+    }
+
+    [Fact]
+    public async Task AsyncComplexInvalid()
+    {
+        var queryString = @"
+{
+  asyncComplexInputQuery
+    (
+      input: {
+        inner: {
+          content: """"
+        },
+        items: null
+      }
+    )
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
+        ObjectApprover.Verify(result);
+    }
+
 
     public IntegrationTests(ITestOutputHelper output) :
         base(output)

@@ -6,5 +6,7 @@ public class ComplexInputGraph :
     public ComplexInputGraph()
     {
         Field<ComplexInputInnerGraph>("inner");
+
+        Field<ListGraphType<NonNullGraphType<ComplexInputListItemGraph>>>("items");
     }
 }

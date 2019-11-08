@@ -1,5 +1,6 @@
-﻿using GraphQL;
+using GraphQL;
 using GraphQL.Types;
+using Newtonsoft.Json;
 
 public class Query :
     ObjectGraphType
@@ -31,7 +32,7 @@ public class Query :
                 var input = context.GetValidatedArgument<ComplexInput>("input");
                 return new Result
                 {
-                    Data = input.Inner!.Content
+                    Data = JsonConvert.SerializeObject(input)
                 };
             }
         );
@@ -47,6 +48,21 @@ public class Query :
                 return new Result
                 {
                     Data = input.Content
+                };
+            }
+        );
+
+        FieldAsync<ResultGraph>(
+            "asyncComplexInputQuery",
+            arguments: new QueryArguments(
+                new QueryArgument<ComplexInputGraph> { Name = "input", }
+            ),
+            resolve: async context =>
+            {
+                var input = await context.GetValidatedArgumentAsync<AsyncComplexInput>("input");
+                return new Result
+                {
+                    Data = input.Inner!.Content
                 };
             }
         );
