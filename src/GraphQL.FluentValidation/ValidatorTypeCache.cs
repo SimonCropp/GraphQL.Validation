@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using FluentValidation;
@@ -29,7 +30,7 @@ namespace GraphQL.FluentValidation
             }
         }
 
-        internal bool TryGetValidators(Type argumentType, out IEnumerable<IValidator> validators)
+        internal bool TryGetValidators(Type argumentType, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
         {
             if (typeCache.TryGetValue(argumentType, out var validatorInfo))
             {
@@ -37,7 +38,7 @@ namespace GraphQL.FluentValidation
                 return true;
             }
 
-            validators = Enumerable.Empty<IValidator>();
+            validators = null;
             return false;
         }
 
