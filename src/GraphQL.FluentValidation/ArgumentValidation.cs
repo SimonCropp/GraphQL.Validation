@@ -8,7 +8,7 @@ using GraphQL.FluentValidation;
 #pragma warning disable 1591
 static class ArgumentValidation
 {
-    internal static async Task ValidateAsync(ValidatorTypeCache typeCache, Type type, object? instance, object userContext)
+    public static async Task ValidateAsync(ValidatorTypeCache typeCache, Type type, object? instance, object userContext)
     {
         Guard.AgainstNull(typeCache, nameof(typeCache));
         Guard.AgainstNull(userContext, nameof(userContext));
@@ -31,7 +31,7 @@ static class ArgumentValidation
         ThrowIfResults(results);
     }
 
-    internal static void Validate(ValidatorTypeCache typeCache, Type type, object? instance, object userContext)
+    public static void Validate(ValidatorTypeCache typeCache, Type type, object? instance, object userContext)
     {
         Guard.AgainstNull(typeCache, nameof(typeCache));
         Guard.AgainstNull(userContext, nameof(userContext));
