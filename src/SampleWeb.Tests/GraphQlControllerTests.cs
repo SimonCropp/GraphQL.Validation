@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using ApprovalTests;
 using Microsoft.AspNetCore.Hosting;
@@ -23,16 +24,16 @@ public class GraphQlControllerTests :
     }
 
     [Fact]
-    public async Task Get()
+    public async Task RunQuery()
     {
         var query = @"
 {
-  companies
-  {
-    id
+  inputQuery(input: {content: ""TheContent""}) {
+    data
   }
-}";
-        using var response = await ClientQueryExecutor.ExecuteGet(client, query);
+}
+";
+        using var response = await ClientQueryExecutor.ExecutePost(client, query);
         response.EnsureSuccessStatusCode();
         Approvals.VerifyJson(await response.Content.ReadAsStringAsync());
     }
@@ -56,11 +57,17 @@ public class GraphQlControllerTests :
     {
         static string uri = "graphql";
 
-        public static Task<HttpResponseMessage> ExecuteGet(HttpClient client, string query, object? variables = null, Action<HttpHeaders>? headerAction = null)
+        public static Task<HttpResponseMessage> ExecutePost(HttpClient client, string query, object? variables = null, Action<HttpHeaders>? headerAction = null)
         {
-            var variablesString = ToJson(variables);
-            var getUri = $"{uri}?query={query}&variables={variablesString}";
-            var request = new HttpRequestMessage(HttpMethod.Get, getUri);
+            var body = new
+            {
+                query,
+                variables
+            };
+            var request = new HttpRequestMessage(HttpMethod.Post, uri)
+            {
+                Content = new StringContent(ToJson(body), Encoding.UTF8, "application/json")
+            };
             headerAction?.Invoke(request.Headers);
             return client.SendAsync(request);
         }

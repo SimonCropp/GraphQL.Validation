@@ -1,9 +1,8 @@
-﻿public class MyInput
-{
-    public MyInput(string content)
-    {
-        Content = content;
-    }
+﻿#region input
 
-    public string Content { get; }
+public class MyInput
+{
+    public string Content { get; set; } = null!;
 }
+
+#endregion

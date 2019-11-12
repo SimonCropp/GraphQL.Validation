@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 
+#region validator
 public class MyInputValidator :
     AbstractValidator<MyInput>
 {
@@ -9,3 +10,4 @@ public class MyInputValidator :
             .NotEmpty();
     }
 }
+#endregion

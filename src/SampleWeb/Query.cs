@@ -1,6 +1,8 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 
+#region GetValidatedArgument
+
 public class Query :
     ObjectGraphType
 {
@@ -25,3 +27,5 @@ public class Query :
         );
     }
 }
+
+#endregion

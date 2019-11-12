@@ -42,15 +42,10 @@ Given the following input:
 ```cs
 public class MyInput
 {
-    public MyInput(string content)
-    {
-        Content = content;
-    }
-
-    public string Content { get; }
+    public string Content { get; set; } = null!;
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/MyInput.cs#L2-L12) / [anchor](#snippet-input)</sup>
+<sup>[snippet source](/src/SampleWeb/Graphs/MyInput.cs#L1-L8) / [anchor](#snippet-input)</sup>
 <!-- endsnippet -->
 
 And graph:
@@ -67,7 +62,7 @@ public class MyInputGraph :
     }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/MyInputGraph.cs#L3-L12) / [anchor](#snippet-graph)</sup>
+<sup>[snippet source](/src/SampleWeb/Graphs/MyInputGraph.cs#L3-L12) / [anchor](#snippet-graph)</sup>
 <!-- endsnippet -->
 
 A custom validator can be defined as follows:
@@ -85,7 +80,7 @@ public class MyInputValidator :
     }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/MyInputValidator.cs#L3-L13) / [anchor](#snippet-validator)</sup>
+<sup>[snippet source](/src/SampleWeb/Graphs/MyInputValidator.cs#L3-L13) / [anchor](#snippet-validator)</sup>
 <!-- endsnippet -->
 
 
@@ -230,10 +225,10 @@ To trigger the validation, when reading arguments use `GetValidatedArgument` ins
 <!-- snippet: GetValidatedArgument -->
 <a id='snippet-getvalidatedargument'/></a>
 ```cs
-public class MyQuery :
+public class Query :
     ObjectGraphType
 {
-    public MyQuery()
+    public Query()
     {
         Field<ResultGraph>(
             "inputQuery",
@@ -255,7 +250,7 @@ public class MyQuery :
     }
 }
 ```
-<sup>[snippet source](/src/Tests/Snippets/Query.cs#L4-L31) / [anchor](#snippet-getvalidatedargument)</sup>
+<sup>[snippet source](/src/SampleWeb/Query.cs#L4-L31) / [anchor](#snippet-getvalidatedargument)</sup>
 <!-- endsnippet -->
 
 
