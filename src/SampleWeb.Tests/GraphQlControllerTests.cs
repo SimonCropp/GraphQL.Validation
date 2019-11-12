@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ApprovalTests;
@@ -33,7 +31,14 @@ public class GraphQlControllerTests :
   }
 }
 ";
-        using var response = await ClientQueryExecutor.ExecutePost(client, query);
+        var body = new
+        {
+            query
+        };
+        var serializeObject = JsonConvert.SerializeObject(body);
+        using var content = new StringContent(serializeObject, Encoding.UTF8, "application/json");
+        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql"){Content = content};
+        using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
         Approvals.VerifyJson(await response.Content.ReadAsStringAsync());
     }
@@ -52,34 +57,3 @@ public class GraphQlControllerTests :
 }
 
 #endregion
-
-  public static class ClientQueryExecutor
-    {
-        static string uri = "graphql";
-
-        public static Task<HttpResponseMessage> ExecutePost(HttpClient client, string query, object? variables = null, Action<HttpHeaders>? headerAction = null)
-        {
-            var body = new
-            {
-                query,
-                variables
-            };
-            var request = new HttpRequestMessage(HttpMethod.Post, uri)
-            {
-                Content = new StringContent(ToJson(body), Encoding.UTF8, "application/json")
-            };
-            headerAction?.Invoke(request.Headers);
-            return client.SendAsync(request);
-        }
-
-        static string ToJson(object? target)
-        {
-            if (target == null)
-            {
-                return string.Empty;
-            }
-
-            return JsonConvert.SerializeObject(target);
-        }
-
-    }
