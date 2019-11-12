@@ -3,10 +3,10 @@ using GraphQL.Types;
 
 #region GetValidatedArgument
 
-public class MyQuery :
+public class Query :
     ObjectGraphType
 {
-    public MyQuery()
+    public Query()
     {
         Field<ResultGraph>(
             "inputQuery",
