@@ -27,7 +27,7 @@ static class ArgumentTypeCacheBag
         UserContextAsDictionary(options.UserContext).Add(key, cache);
     }
 
-    public static ValidatorTypeCache GetCache<T>(ResolveFieldContext<T> context)
+    public static ValidatorTypeCache GetCache<T>(this ResolveFieldContext<T> context)
     {
         return GetCache(context.UserContext);
     }

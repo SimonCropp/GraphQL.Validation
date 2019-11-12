@@ -16,7 +16,8 @@ namespace GraphQL
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(name, defaultValue);
 
-            ArgumentValidation.Validate(context.GetCache(), typeof(TArgument), argument, context.UserContext);
+            var validatorCache = context.GetCache();
+            ArgumentValidation.Validate(validatorCache, typeof(TArgument), argument, context.UserContext);
             return argument;
         }
 
@@ -29,7 +30,8 @@ namespace GraphQL
         {
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(argumentType, name, defaultValue);
-            ArgumentValidation.Validate(context.GetCache(), argumentType, argument, context.UserContext);
+            var validatorCache = context.GetCache();
+            ArgumentValidation.Validate(validatorCache, argumentType, argument, context.UserContext);
             return argument;
         }
 
@@ -42,7 +44,8 @@ namespace GraphQL
         {
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(name, defaultValue);
-            ArgumentValidation.Validate(ArgumentTypeCacheBag.GetCache(context), typeof(TArgument), argument, context.UserContext);
+            var validatorCache = context.GetCache();
+            ArgumentValidation.Validate(validatorCache, typeof(TArgument), argument, context.UserContext);
             return argument;
         }
 
@@ -55,7 +58,8 @@ namespace GraphQL
         {
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(argumentType, name, defaultValue);
-            ArgumentValidation.Validate(ArgumentTypeCacheBag.GetCache(context), argumentType, argument, context.UserContext);
+            var validatorCache = context.GetCache();
+            ArgumentValidation.Validate(validatorCache, argumentType, argument, context.UserContext);
             return argument;
         }
 
@@ -68,7 +72,8 @@ namespace GraphQL
         {
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(name, defaultValue);
-            ArgumentValidation.Validate(ArgumentTypeCacheBag.GetCache(context), typeof(TArgument), argument, context.UserContext);
+            var validatorCache = context.GetCache();
+            ArgumentValidation.Validate(validatorCache, typeof(TArgument), argument, context.UserContext);
             return argument;
         }
 
@@ -81,7 +86,8 @@ namespace GraphQL
         {
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(argumentType, name, defaultValue);
-            ArgumentValidation.Validate(ArgumentTypeCacheBag.GetCache(context), argumentType, argument, context.UserContext);
+            var validatorCache = context.GetCache();
+            ArgumentValidation.Validate(validatorCache, argumentType, argument, context.UserContext);
             return argument;
         }
     }
