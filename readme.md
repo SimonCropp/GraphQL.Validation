@@ -21,6 +21,9 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
     * [Add to ExecutionOptions](#add-to-executionoptions)
     * [UserContext must be a dictionary](#usercontext-must-be-a-dictionary)
     * [Trigger validation](#trigger-validation)
+  * [Testing](#testing)
+    * [Integration](#integration)
+    * [Unit](#unit)
 <!-- endtoc -->
 
 
@@ -251,6 +254,124 @@ public class Query :
 }
 ```
 <sup>[snippet source](/src/SampleWeb/Query.cs#L4-L31) / [anchor](#snippet-getvalidatedargument)</sup>
+<!-- endsnippet -->
+
+
+## Testing
+
+### Integration
+
+A full end-to-en test can be run against the GraphQl controller:
+
+<!-- snippet: GraphQlControllerTests -->
+<a id='snippet-graphqlcontrollertests'/></a>
+```cs
+public class GraphQlControllerTests :
+    XunitApprovalBase
+{
+    [Fact]
+    public async Task RunQuery()
+    {
+        using var server = GetTestServer();
+        using var client = server.CreateClient();
+        var query = @"
+{
+  inputQuery(input: {content: ""TheContent""}) {
+    data
+  }
+}
+";
+        var body = new
+        {
+            query
+        };
+        var serializeObject = JsonConvert.SerializeObject(body);
+        using var content = new StringContent(serializeObject, Encoding.UTF8, "application/json");
+        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql") {Content = content};
+        using var response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+        Approvals.VerifyJson(await response.Content.ReadAsStringAsync());
+    }
+
+    static TestServer GetTestServer()
+    {
+        var hostBuilder = new WebHostBuilder();
+        hostBuilder.UseStartup<Startup>();
+        return new TestServer(hostBuilder);
+    }
+
+    public GraphQlControllerTests(ITestOutputHelper output) :
+        base(output)
+    {
+    }
+}
+```
+<sup>[snippet source](/src/SampleWeb.Tests/GraphQlControllerTests.cs#L11-L53) / [anchor](#snippet-graphqlcontrollertests)</sup>
+<!-- endsnippet -->
+
+
+### Unit
+
+Unit tests can be run a specific field of a query:
+
+<!-- snippet: QueryTests -->
+<a id='snippet-querytests'/></a>
+```cs
+public class QueryTests :
+    XunitApprovalBase
+{
+    [Fact]
+    public void RunInputQuery()
+    {
+        var field = new Query().GetField("inputQuery");
+
+        var userContext = new GraphQlUserContext();
+        FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+        var fieldContext = new ResolveFieldContext
+        {
+            Arguments = new Dictionary<string, object>
+            {
+                {
+                    "input", new Dictionary<string, object>
+                    {
+                        {"content", "TheContent"}
+                    }
+                }
+            },
+            UserContext = userContext
+        };
+        var result = (Result) field.Resolver.Resolve(fieldContext);
+        ObjectApprover.Verify(result);
+    }
+
+    [Fact]
+    public void RunInvalidInputQuery()
+    {
+        var field = new Query().GetField("inputQuery");
+
+        var userContext = new GraphQlUserContext();
+        FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+        var fieldContext = new ResolveFieldContext
+        {
+            Arguments = new Dictionary<string, object>
+            {
+                {
+                    "input", new Dictionary<string, object>()
+                }
+            },
+            UserContext = userContext
+        };
+        var exception = Assert.Throws<ValidationException>(() => field.Resolver.Resolve(fieldContext));
+        ObjectApprover.Verify(exception.Message);
+    }
+
+    public QueryTests(ITestOutputHelper output) :
+        base(output)
+    {
+    }
+}
+```
+<sup>[snippet source](/src/SampleWeb.Tests/QueryTests.cs#L8-L64) / [anchor](#snippet-querytests)</sup>
 <!-- endsnippet -->
 
 
