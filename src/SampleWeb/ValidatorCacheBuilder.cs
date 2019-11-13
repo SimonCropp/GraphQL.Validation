@@ -2,11 +2,11 @@
 
 public static class ValidatorCacheBuilder
 {
-    public static ValidatorTypeCache ValidatorTypeCache;
+    public static ValidatorTypeCache Instance;
 
     static ValidatorCacheBuilder()
     {
-        ValidatorTypeCache = new ValidatorTypeCache();
-        ValidatorTypeCache.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+        Instance = new ValidatorTypeCache();
+        Instance.AddValidatorsFromAssembly(typeof(Startup).Assembly);
     }
 }

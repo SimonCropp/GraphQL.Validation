@@ -83,6 +83,22 @@ To trigger the validation, when reading arguments use `GetValidatedArgument` ins
 snippet: GetValidatedArgument
 
 
+## Testing
+
+### Integration
+
+A full end-to-en test can be run against the GraphQl controller:
+
+snippet: GraphQlControllerTests
+
+
+### Unit
+
+Unit tests can be run a specific field of a query:
+
+snippet: QueryTests
+
+
 ## Release Notes
 
 See [closed milestones](../../milestones?state=closed).

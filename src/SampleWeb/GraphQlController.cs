@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Types;
@@ -53,25 +52,8 @@ public class GraphQlController :
             EnableMetrics = true,
 #endif
         };
-        options.UseFluentValidation(ValidatorCacheBuilder.ValidatorTypeCache);
+        options.UseFluentValidation(ValidatorCacheBuilder.Instance);
 
         return executer.ExecuteAsync(options);
-    }
-
-    static JObject? ParseVariables(string? variables)
-    {
-        if (variables == null)
-        {
-            return null;
-        }
-
-        try
-        {
-            return JObject.Parse(variables);
-        }
-        catch (Exception exception)
-        {
-            throw new Exception("Could not parse variables.", exception);
-        }
     }
 }
