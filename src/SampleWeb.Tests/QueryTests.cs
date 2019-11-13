@@ -2,6 +2,8 @@
 using FluentValidation;
 using GraphQL;
 using GraphQL.Types;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,15 +19,18 @@ public class QueryTests :
 
         var userContext = new GraphQlUserContext();
         FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+
+        var input = new MyInput
+        {
+            Content = "TheContent"
+        };
+        var dictionary = input.AsDictionary();
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
             {
                 {
-                    "input", new Dictionary<string, object>
-                    {
-                        {"content", "TheContent"}
-                    }
+                    "input", dictionary
                 }
             },
             UserContext = userContext

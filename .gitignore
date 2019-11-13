@@ -8,3 +8,4 @@
 *.received.txt
 *.received.json
 *.user
+nugets/
