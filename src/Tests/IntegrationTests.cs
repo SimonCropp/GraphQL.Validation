@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using GraphQL.FluentValidation;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class IntegrationTests :
-    XunitApprovalBase
+    VerifyBase
 {
     static ValidatorTypeCache typeCache;
 
@@ -30,7 +31,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -49,7 +50,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -68,7 +69,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -87,7 +88,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -112,7 +113,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -134,7 +135,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -154,7 +155,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -179,7 +180,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
 
     [Fact]
@@ -201,9 +202,8 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        ObjectApprover.Verify(result);
+        await Verify(result);
     }
-
 
     public IntegrationTests(ITestOutputHelper output) :
         base(output)

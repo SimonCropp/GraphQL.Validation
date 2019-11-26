@@ -1,0 +1,7 @@
+{
+  data: {
+    complexInputQuery: {
+      data: '{"Inner":{"Content":"TheContent"},"Items":[{"Id":1,"Content":"Some content 1"},{"Id":2,"Content":"Some content 2"}]}'
+    }
+  }
+}

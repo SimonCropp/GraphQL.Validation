@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentValidation;
 using GraphQL;
 using GraphQL.Types;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Routing;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 #region QueryTests
 
 public class QueryTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
-    public void RunInputQuery()
+    public Task RunInputQuery()
     {
         var field = new Query().GetField("inputQuery");
 
@@ -36,11 +36,11 @@ public class QueryTests :
             UserContext = userContext
         };
         var result = (Result) field.Resolver.Resolve(fieldContext);
-        ObjectApprover.Verify(result);
+        return Verify(result);
     }
 
     [Fact]
-    public void RunInvalidInputQuery()
+    public Task RunInvalidInputQuery()
     {
         var field = new Query().GetField("inputQuery");
 
@@ -57,7 +57,7 @@ public class QueryTests :
             UserContext = userContext
         };
         var exception = Assert.Throws<ValidationException>(() => field.Resolver.Resolve(fieldContext));
-        ObjectApprover.Verify(exception.Message);
+        return Verify(exception.Message);
     }
 
     public QueryTests(ITestOutputHelper output) :

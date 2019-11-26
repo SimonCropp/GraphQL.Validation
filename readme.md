@@ -267,7 +267,7 @@ A full end-to-en test can be run against the GraphQl controller:
 <a id='snippet-graphqlcontrollertests'/></a>
 ```cs
 public class GraphQlControllerTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public async Task RunQuery()
@@ -287,10 +287,13 @@ public class GraphQlControllerTests :
         };
         var serializeObject = JsonConvert.SerializeObject(body);
         using var content = new StringContent(serializeObject, Encoding.UTF8, "application/json");
-        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql") {Content = content};
+        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
+        {
+            Content = content
+        };
         using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
-        Approvals.VerifyJson(await response.Content.ReadAsStringAsync());
+        await Verify(await response.Content.ReadAsStringAsync());
     }
 
     static TestServer GetTestServer()
@@ -306,7 +309,7 @@ public class GraphQlControllerTests :
     }
 }
 ```
-<sup>[snippet source](/src/SampleWeb.Tests/GraphQlControllerTests.cs#L11-L53) / [anchor](#snippet-graphqlcontrollertests)</sup>
+<sup>[snippet source](/src/SampleWeb.Tests/GraphQlControllerTests.cs#L11-L56) / [anchor](#snippet-graphqlcontrollertests)</sup>
 <!-- endsnippet -->
 
 
@@ -318,34 +321,37 @@ Unit tests can be run a specific field of a query:
 <a id='snippet-querytests'/></a>
 ```cs
 public class QueryTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
-    public void RunInputQuery()
+    public Task RunInputQuery()
     {
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQlUserContext();
         FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+
+        var input = new MyInput
+        {
+            Content = "TheContent"
+        };
+        var dictionary = input.AsDictionary();
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
             {
                 {
-                    "input", new Dictionary<string, object>
-                    {
-                        {"content", "TheContent"}
-                    }
+                    "input", dictionary
                 }
             },
             UserContext = userContext
         };
         var result = (Result) field.Resolver.Resolve(fieldContext);
-        ObjectApprover.Verify(result);
+        return Verify(result);
     }
 
     [Fact]
-    public void RunInvalidInputQuery()
+    public Task RunInvalidInputQuery()
     {
         var field = new Query().GetField("inputQuery");
 
@@ -362,7 +368,7 @@ public class QueryTests :
             UserContext = userContext
         };
         var exception = Assert.Throws<ValidationException>(() => field.Resolver.Resolve(fieldContext));
-        ObjectApprover.Verify(exception.Message);
+        return Verify(exception.Message);
     }
 
     public QueryTests(ITestOutputHelper output) :
@@ -371,7 +377,7 @@ public class QueryTests :
     }
 }
 ```
-<sup>[snippet source](/src/SampleWeb.Tests/QueryTests.cs#L8-L64) / [anchor](#snippet-querytests)</sup>
+<sup>[snippet source](/src/SampleWeb.Tests/QueryTests.cs#L10-L69) / [anchor](#snippet-querytests)</sup>
 <!-- endsnippet -->
 
 

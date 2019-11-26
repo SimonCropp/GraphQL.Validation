@@ -1,7 +1,0 @@
-﻿{
-  data: {
-    asyncQuery: {
-      data: 'TheContent'
-    }
-  }
-}

@@ -1,17 +1,17 @@
 ﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using ApprovalTests;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 #region GraphQlControllerTests
 
 public class GraphQlControllerTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public async Task RunQuery()
@@ -31,10 +31,13 @@ public class GraphQlControllerTests :
         };
         var serializeObject = JsonConvert.SerializeObject(body);
         using var content = new StringContent(serializeObject, Encoding.UTF8, "application/json");
-        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql") {Content = content};
+        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
+        {
+            Content = content
+        };
         using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
-        Approvals.VerifyJson(await response.Content.ReadAsStringAsync());
+        await Verify(await response.Content.ReadAsStringAsync());
     }
 
     static TestServer GetTestServer()
