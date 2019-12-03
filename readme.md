@@ -23,9 +23,7 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
     * [Trigger validation](#trigger-validation)
   * [Testing](#testing)
     * [Integration](#integration)
-    * [Unit](#unit)
-<!-- endtoc -->
-
+    * [Unit](#unit)<!-- endtoc -->
 
 
 ## NuGet
