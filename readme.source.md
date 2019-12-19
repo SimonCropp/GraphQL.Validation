@@ -1,6 +1,7 @@
 # <img src="/src/icon.png" height="30px"> GraphQL.Validation
 
-[![Build status](https://ci.appveyor.com/api/projects/status/wvk8wm3n227b2b3q/branch/master?svg=true)](https://ci.appveyor.com/project/SimonCropp/graphql-validation) [![NuGet Status](https://img.shields.io/nuget/v/GraphQL.FluentValidation.svg?cacheSeconds=86400)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
+[![Build status](https://ci.appveyor.com/api/projects/status/wvk8wm3n227b2b3q/branch/master?svg=true)](https://ci.appveyor.com/project/SimonCropp/graphql-validation)
+[![NuGet Status](https://img.shields.io/nuget/v/GraphQL.FluentValidation.svg)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
