@@ -18,7 +18,9 @@ public class QueryTests :
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
 
         var input = new MyInput
         {
@@ -45,7 +47,9 @@ public class QueryTests :
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
@@ -56,7 +60,8 @@ public class QueryTests :
             },
             UserContext = userContext
         };
-        var exception = Assert.Throws<ValidationException>(() => field.Resolver.Resolve(fieldContext));
+        var exception = Assert.Throws<ValidationException>(
+            () => field.Resolver.Resolve(fieldContext));
         return Verify(exception.Message);
     }
 

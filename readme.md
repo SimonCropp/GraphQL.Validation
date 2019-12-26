@@ -284,8 +284,11 @@ public class GraphQlControllerTests :
         {
             query
         };
-        var serializeObject = JsonConvert.SerializeObject(body);
-        using var content = new StringContent(serializeObject, Encoding.UTF8, "application/json");
+        var serialized = JsonConvert.SerializeObject(body);
+        using var content = new StringContent(
+            serialized,
+            Encoding.UTF8,
+            "application/json");
         using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
         {
             Content = content
@@ -308,7 +311,7 @@ public class GraphQlControllerTests :
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L11-L56' title='File snippet `graphqlcontrollertests` was extracted from'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Navigate to start of snippet `graphqlcontrollertests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L11-L59' title='File snippet `graphqlcontrollertests` was extracted from'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Navigate to start of snippet `graphqlcontrollertests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
@@ -328,7 +331,9 @@ public class QueryTests :
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
 
         var input = new MyInput
         {
@@ -355,7 +360,9 @@ public class QueryTests :
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(userContext, ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
@@ -366,7 +373,8 @@ public class QueryTests :
             },
             UserContext = userContext
         };
-        var exception = Assert.Throws<ValidationException>(() => field.Resolver.Resolve(fieldContext));
+        var exception = Assert.Throws<ValidationException>(
+            () => field.Resolver.Resolve(fieldContext));
         return Verify(exception.Message);
     }
 
@@ -376,7 +384,7 @@ public class QueryTests :
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L69' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L74' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 

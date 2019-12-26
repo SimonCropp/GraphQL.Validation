@@ -29,8 +29,11 @@ public class GraphQlControllerTests :
         {
             query
         };
-        var serializeObject = JsonConvert.SerializeObject(body);
-        using var content = new StringContent(serializeObject, Encoding.UTF8, "application/json");
+        var serialized = JsonConvert.SerializeObject(body);
+        using var content = new StringContent(
+            serialized,
+            Encoding.UTF8,
+            "application/json");
         using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
         {
             Content = content
