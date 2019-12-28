@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using GraphQL.FluentValidation;
 using GraphQL.Types;
 
 namespace GraphQL
