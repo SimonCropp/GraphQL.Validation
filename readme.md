@@ -15,7 +15,6 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
 <!-- toc -->
 ## Contents
 
-  * [NuGet](#nuget)
   * [Usage](#usage)
     * [Define validators](#define-validators)
     * [Setup Validators](#setup-validators)
@@ -27,7 +26,7 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
     * [Unit](#unit)<!-- endtoc -->
 
 
-## NuGet
+## NuGet package
 
 https://nuget.org/packages/GraphQL.FluentValidation/
 

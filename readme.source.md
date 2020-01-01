@@ -8,7 +8,7 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
 toc
 
 
-## NuGet
+## NuGet package
 
 https://nuget.org/packages/GraphQL.FluentValidation/
 
