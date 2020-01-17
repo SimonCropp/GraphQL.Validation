@@ -100,6 +100,11 @@ Unit tests can be run a specific field of a query:
 snippet: QueryTests
 
 
+## Security contact information
+
+To report a security vulnerability, please use the [Tidelift security contact](https://tidelift.com/security). Tidelift will coordinate the fix and disclosure.
+
+
 ## Release Notes
 
 See [closed milestones](../../milestones?state=closed).

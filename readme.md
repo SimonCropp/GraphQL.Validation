@@ -23,7 +23,8 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
     * [Trigger validation](#trigger-validation)
   * [Testing](#testing)
     * [Integration](#integration)
-    * [Unit](#unit)<!-- endtoc -->
+    * [Unit](#unit)
+  * [Security contact information](#security-contact-information)<!-- endtoc -->
 
 
 ## NuGet package
@@ -385,6 +386,11 @@ public class QueryTests :
 ```
 <sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L74' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endsnippet -->
+
+
+## Security contact information
+
+To report a security vulnerability, please use the [Tidelift security contact](https://tidelift.com/security). Tidelift will coordinate the fix and disclosure.
 
 
 ## Release Notes
