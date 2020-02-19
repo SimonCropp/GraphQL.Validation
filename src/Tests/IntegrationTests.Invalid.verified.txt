@@ -1,10 +1,10 @@
 {
-  data: {
-    inputQuery: null
+  "data": {
+    "inputQuery": null
   },
-  errors: [
+  "errors": [
     {
-      message: 'Content: \'Content\' must not be empty.'
+      "message": "Content: 'Content' must not be empty."
     }
   ]
 }

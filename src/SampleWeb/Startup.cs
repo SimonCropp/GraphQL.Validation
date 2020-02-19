@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GraphiQl;
 using GraphQL;
+using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
 using GraphQL.Utilities;
 using Microsoft.AspNetCore.Builder;
@@ -23,6 +24,7 @@ public class Startup
 
         services.AddSingleton<ISchema, Schema>();
         services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+        services.AddSingleton<IDocumentWriter, DocumentWriter>();
         var mvc = services.AddMvc(option => option.EnableEndpointRouting = false);
         mvc.SetCompatibilityVersion(CompatibilityVersion.Latest);
         mvc.AddNewtonsoftJson();
