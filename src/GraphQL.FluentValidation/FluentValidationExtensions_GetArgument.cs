@@ -8,7 +8,7 @@ namespace GraphQL
     public static partial class FluentValidationExtensions
     {
         /// <summary>
-        /// Wraps <see cref="IResolveFieldContext.GetArgument{TType}"/> to validate the resulting argument instance.
+        /// Wraps <see cref="ResolveFieldContextExtensions.GetArgument{TType}"/> to validate the resulting argument instance.
         /// Uses <see cref="IValidator.Validate(ValidationContext)"/> to perform validation.
         /// If a <see cref="ValidationException"/> it will be converted <see cref="ExecutionError"/>s by a field middleware.
         /// </summary>
@@ -22,7 +22,7 @@ namespace GraphQL
         }
 
         /// <summary>
-        /// Wraps <see cref="IResolveFieldContext.GetArgument"/> to validate the resulting argument instance.
+        /// Wraps <see cref="ResolveFieldContextExtensions.GetArgument{TType}"/> to validate the resulting argument instance.
         /// Uses <see cref="IValidator.Validate(ValidationContext)"/> to perform validation.
         /// If a <see cref="ValidationException"/> it will be converted <see cref="ExecutionError"/>s by a field middleware.
         /// </summary>
