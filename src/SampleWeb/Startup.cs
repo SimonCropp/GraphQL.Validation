@@ -21,8 +21,6 @@ public class Startup
             services.AddSingleton(type);
         }
 
-        services.AddSingleton<IDependencyResolver>(
-            provider => new FuncDependencyResolver(provider.GetRequiredService));
         services.AddSingleton<ISchema, Schema>();
         services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
         var mvc = services.AddMvc(option => option.EnableEndpointRouting = false);

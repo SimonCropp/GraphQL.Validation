@@ -7,7 +7,7 @@ static class ReturnTypeFinder
 {
     static ConcurrentDictionary<Type, object?> typeCache = new ConcurrentDictionary<Type, object?>();
 
-    public static object? Find(ResolveFieldContext context)
+    public static object? Find(IResolveFieldContext context)
     {
         return typeCache.GetOrAdd(context.ReturnType.GetType(), type => GetDefault(GetReturnType(type)));
     }
