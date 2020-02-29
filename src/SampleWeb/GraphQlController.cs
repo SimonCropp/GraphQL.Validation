@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using GraphQL;
+using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -11,21 +12,24 @@ using Newtonsoft.Json.Linq;
 public class GraphQlController :
     Controller
 {
-    IDocumentExecuter executer;
     ISchema schema;
+    IDocumentExecuter executer;
+    IDocumentWriter writer;    
 
-    public GraphQlController(ISchema schema, IDocumentExecuter executer)
+    public GraphQlController(ISchema schema, IDocumentExecuter executer, IDocumentWriter writer)
     {
         this.schema = schema;
         this.executer = executer;
+        this.writer = writer;
     }
 
     [HttpPost]
-    public Task<ExecutionResult> Post(
+    public async Task<string> Post(
         [BindRequired, FromBody] PostBody body,
         CancellationToken cancellation)
     {
-        return Execute(body.Query, body.OperationName, body.Variables, cancellation);
+        var result = await Execute(body.Query, body.OperationName, body.Variables, cancellation);
+        return await writer.WriteToStringAsync(result);
     }
 
     public class PostBody

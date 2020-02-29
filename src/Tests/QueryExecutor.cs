@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.FluentValidation;
+using GraphQL.NewtonsoftJson;
 
 static class QueryExecutor
 {
-    public static async Task<ExecutionResult> ExecuteQuery(string queryString, Inputs? inputs, ValidatorTypeCache cache)
+    public static async Task<string> ExecuteQuery(string queryString, Inputs? inputs, ValidatorTypeCache cache)
     {
         queryString = queryString.Replace("'", "\"");
         using var schema = new Schema();
@@ -18,6 +19,7 @@ static class QueryExecutor
         };
         executionOptions.UseFluentValidation(cache);
 
-        return await documentExecuter.ExecuteAsync(executionOptions);
+        var result = await documentExecuter.ExecuteAsync(executionOptions);
+        return await new DocumentWriter(indent: true).WriteToStringAsync(result);
     }
 }

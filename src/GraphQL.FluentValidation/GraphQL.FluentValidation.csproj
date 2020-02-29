@@ -6,7 +6,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.6.1" />
     <PackageReference Include="ModuleInit.Fody" Version="2.1.0" PrivateAssets="All" />
-    <PackageReference Include="GraphQL" Version="2.4.0" />
+    <PackageReference Include="GraphQL" Version="$(GraphQLVersion)" />
     <PackageReference Include="ConfigureAwait.Fody" Version="3.3.1" PrivateAssets="All" />
     <PackageReference Include="Fody" Version="6.1.1" PrivateAssets="all" />
     <PackageReference Include="ProjectDefaults" Version="1.0.41" PrivateAssets="All" />

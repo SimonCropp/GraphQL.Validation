@@ -1,13 +1,13 @@
 {
-  data: {
-    complexInputQuery: null
-  },
-  errors: [
+  "errors": [
     {
-      message: 'Inner.Content: \'Content\' must not be empty.'
-    },
-    {
-      message: 'Items: \'Items\' must not be empty.'
+      "message": "Value cannot be null. (Parameter 'source')",
+      "extensions": {
+        "code": "ARGUMENT_NULL",
+        "codes": [
+          "ARGUMENT_NULL"
+        ]
+      }
     }
   ]
 }

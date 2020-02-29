@@ -8,11 +8,6 @@ static class ArgumentTypeCacheBag
 {
     const string key = "GraphQL.FluentValidation.ValidatorTypeCache";
 
-    public static ValidatorTypeCache GetCache(this ResolveFieldContext context)
-    {
-        return GetCache(context.UserContext);
-    }
-
     public static void SetCache(this ExecutionOptions options, ValidatorTypeCache cache)
     {
         if (options.UserContext == null)
@@ -33,7 +28,7 @@ static class ArgumentTypeCacheBag
         dictionary.Add(key, cache);
     }
 
-    public static ValidatorTypeCache GetCache<T>(this ResolveFieldContext<T> context)
+    public static ValidatorTypeCache GetCache(this IResolveFieldContext context)
     {
         return GetCache(context.UserContext);
     }
@@ -47,7 +42,7 @@ static class ArgumentTypeCacheBag
             return (ValidatorTypeCache) result;
         }
 
-        throw new Exception($"Could not extract {nameof(ValidatorTypeCache)} from ResolveFieldContext.UserContext. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
+        throw new Exception($"Could not extract {nameof(ValidatorTypeCache)} from {nameof(IResolveFieldContext)}.{nameof(IResolveFieldContext.UserContext)}. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
     }
 
     static IDictionary<string, object> UserContextAsDictionary(object userContext)
