@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using GraphQL.FluentValidation;
+using GraphQL.Instrumentation;
 
 namespace GraphQL
 {
@@ -19,7 +20,7 @@ namespace GraphQL
             validatorTypeCache.Freeze();
             executionOptions.SetCache(validatorTypeCache);
             var validationMiddleware = new ValidationMiddleware();
-            executionOptions.FieldMiddleware.Use(next => { return context => validationMiddleware.Resolve(context, next); });
+            executionOptions.FieldMiddleware.Use(validationMiddleware);
         }
     }
 }
