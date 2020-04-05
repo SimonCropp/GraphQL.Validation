@@ -6,7 +6,7 @@ public static class ValidatorCacheBuilder
 
     static ValidatorCacheBuilder()
     {
-        Instance = new ValidatorTypeCache();
+        Instance = new ValidatorTypeCache(useDependencyInjection: true);
         Instance.AddValidatorsFromAssembly(typeof(Startup).Assembly);
     }
 }

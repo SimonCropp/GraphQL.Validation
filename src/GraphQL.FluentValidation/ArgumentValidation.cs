@@ -15,13 +15,19 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static async Task ValidateAsync(ValidatorTypeCache cache, Type type, object? instance, object userContext)
+        public static Task ValidateAsync(ValidatorTypeCache cache, Type type, object? instance, object userContext)
+            => ValidateAsync(cache, type, instance, userContext, null);
+
+        /// <summary>
+        /// Validate an instance
+        /// </summary>
+        public static async Task ValidateAsync(ValidatorTypeCache cache, Type type, object? instance, object userContext, IServiceProvider? provider)
         {
             Guard.AgainstNull(cache, nameof(cache));
             Guard.AgainstNull(userContext, nameof(userContext));
             Guard.AgainstNull(type, nameof(type));
             Guard.AgainstNull(userContext, nameof(userContext));
-            if (!cache.TryGetValidators(type, out var buildAll))
+            if (!cache.TryGetValidators(type, provider, out var buildAll))
             {
                 return;
             }
@@ -41,12 +47,18 @@ namespace GraphQL.FluentValidation
         /// Validate an instance
         /// </summary>
         public static void Validate(ValidatorTypeCache cache, Type type, object? instance, object userContext)
+            => Validate(cache, type, instance, userContext, null);
+
+        /// <summary>
+        /// Validate an instance
+        /// </summary>
+        public static void Validate(ValidatorTypeCache cache, Type type, object? instance, object userContext, IServiceProvider? provider)
         {
             Guard.AgainstNull(cache, nameof(cache));
             Guard.AgainstNull(userContext, nameof(userContext));
             Guard.AgainstNull(type, nameof(type));
             Guard.AgainstNull(userContext, nameof(userContext));
-            if (!cache.TryGetValidators(type, out var buildAll))
+            if (!cache.TryGetValidators(type, provider, out var buildAll))
             {
                 return;
             }

@@ -9,13 +9,28 @@ using FluentValidation;
 namespace GraphQL.FluentValidation
 {
     /// <summary>
-    /// Static cache for all <see cref="IValidator"/>.
+    /// Cache for all <see cref="IValidator"/>.
     /// Should only be configured once at startup time.
     /// </summary>
     public class ValidatorTypeCache
     {
-        Dictionary<Type, List<IValidator>> typeCache = new Dictionary<Type, List<IValidator>>();
+        Dictionary<Type, List<IValidator>>? typeCache;
+        Dictionary<Type, List<Type>>? typeCacheDI;
         bool isFrozen;
+
+        public ValidatorTypeCache() : this(false)
+        {
+        }
+
+        public ValidatorTypeCache(bool useDependencyInjection)
+        {
+            if (useDependencyInjection)
+                typeCacheDI = new Dictionary<Type, List<Type>>();
+            else
+                typeCache = new Dictionary<Type, List<IValidator>>();
+        }
+
+        private bool UseDI => typeCacheDI != null;
 
         internal void Freeze()
         {
@@ -30,16 +45,32 @@ namespace GraphQL.FluentValidation
             }
         }
 
-        internal bool TryGetValidators(Type argumentType, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
+        internal bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
         {
-            if (typeCache.TryGetValue(argumentType, out var validatorInfo))
+            if (UseDI)
             {
-                validators = validatorInfo;
-                return true;
-            }
+                Guard.AgainstNull(provider, nameof(provider));
 
-            validators = null;
-            return false;
+                if (typeCacheDI!.TryGetValue(argumentType, out var validatorInfo))
+                {
+                    validators = validatorInfo.Select(t => (IValidator)provider!.GetService(t));
+                    return true;
+                }
+
+                validators = null;
+                return false;
+            }
+            else
+            {
+                if (typeCache!.TryGetValue(argumentType, out var validatorInfo))
+                {
+                    validators = validatorInfo;
+                    return true;
+                }
+
+                validators = null;
+                return false;
+            }
         }
 
         /// <summary>
@@ -81,18 +112,34 @@ namespace GraphQL.FluentValidation
             foreach (var result in results)
             {
                 var validatorType = result.ValidatorType;
-                if (validatorType.GetConstructor(new Type[]{}) == null)
-                {
-                    Trace.WriteLine($"Ignoring ''{validatorType.FullName}'' since it does not have a public parameterless constructor.");
+                if (validatorType.IsAbstract)
                     continue;
-                }
-                var single = result.InterfaceType.GenericTypeArguments.Single();
-                if (!typeCache.TryGetValue(single, out var list))
-                {
-                    typeCache[single] = list = new List<IValidator>();
-                }
 
-                list.Add((IValidator) Activator.CreateInstance(validatorType, true));
+                if (UseDI)
+                {
+                    var single = result.InterfaceType.GenericTypeArguments.Single();
+                    if (!typeCacheDI!.TryGetValue(single, out var list))
+                    {
+                        typeCacheDI[single] = list = new List<Type>();
+                    }
+
+                    list.Add(validatorType);
+                }
+                else
+                {
+                    if (validatorType.GetConstructor(new Type[] { }) == null)
+                    {
+                        Trace.WriteLine($"Ignoring ''{validatorType.FullName}'' since it does not have a public parameterless constructor.");
+                        continue;
+                    }
+                    var single = result.InterfaceType.GenericTypeArguments.Single();
+                    if (!typeCache!.TryGetValue(single, out var list))
+                    {
+                        typeCache[single] = list = new List<IValidator>();
+                    }
+
+                    list.Add((IValidator)Activator.CreateInstance(validatorType, true));
+                }
             }
         }
     }

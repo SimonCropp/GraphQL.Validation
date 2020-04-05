@@ -22,6 +22,7 @@ public class Startup
             services.AddSingleton(type);
         }
 
+        services.AddFluentValidation();
         services.AddSingleton<ISchema, Schema>();
         services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
         services.AddSingleton<IDocumentWriter, DocumentWriter>();
