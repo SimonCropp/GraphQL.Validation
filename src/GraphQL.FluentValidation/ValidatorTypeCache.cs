@@ -18,10 +18,20 @@ namespace GraphQL.FluentValidation
         Dictionary<Type, List<Type>>? typeCacheDI;
         bool isFrozen;
 
+        /// <summary>
+        /// Create cache with default DI behavior i.e. cache creates all validators itself.
+        /// </summary>
         public ValidatorTypeCache() : this(false)
         {
         }
 
+        /// <summary>
+        /// Create cache with specified DI behavior.
+        /// </summary>
+        /// <param name="useDependencyInjection">
+        /// <c>true</c> to use schema's ServiceProvider for resolving validators,
+        /// <c>false</c> to use Activator.CreateInstance instead.
+        /// </param>
         public ValidatorTypeCache(bool useDependencyInjection)
         {
             if (useDependencyInjection)

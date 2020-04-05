@@ -7,6 +7,9 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
+    /// <summary>
+    /// Extension methods for <see cref="IServiceCollection"/> to add fluent validators types.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
