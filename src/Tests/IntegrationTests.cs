@@ -7,13 +7,7 @@ using Xunit.Abstractions;
 public class IntegrationTests :
     VerifyBase
 {
-    static ValidatorTypeCache typeCache;
-
-    static IntegrationTests()
-    {
-        typeCache = new ValidatorTypeCache();
-        typeCache.AddValidatorsFromAssemblyContaining<IntegrationTests>();
-    }
+    static ValidatorTypeCache typeCache = new ValidatorTypeCache().AddValidatorsFromAssemblyContaining<IntegrationTests>();
 
     [Fact]
     public async Task AsyncValid()

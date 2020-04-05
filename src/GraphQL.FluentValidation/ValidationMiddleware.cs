@@ -6,7 +6,7 @@ using GraphQL;
 using GraphQL.Instrumentation;
 using GraphQL.Types;
 
-class ValidationMiddleware
+class ValidationMiddleware : IFieldMiddleware
 {
     public async Task<object?> Resolve(IResolveFieldContext context, FieldMiddlewareDelegate next)
     {

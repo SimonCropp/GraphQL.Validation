@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
@@ -15,7 +16,7 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static async Task ValidateAsync(ValidatorTypeCache cache, Type type, object? instance, object userContext)
+        public static async Task ValidateAsync(ValidatorTypeCache cache, Type type, object? instance, IDictionary<string, object> userContext, CancellationToken cancellation = default)
         {
             Guard.AgainstNull(cache, nameof(cache));
             Guard.AgainstNull(userContext, nameof(userContext));
@@ -28,7 +29,7 @@ namespace GraphQL.FluentValidation
 
             var validationContext = BuildValidationContext(instance, userContext);
 
-            var tasks = buildAll.Select(x => x.ValidateAsync(validationContext));
+            var tasks = buildAll.Select(x => x.ValidateAsync(validationContext, cancellation));
             var validationResults = await Task.WhenAll(tasks);
 
             var results = validationResults
@@ -40,7 +41,7 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static void Validate(ValidatorTypeCache cache, Type type, object? instance, object userContext)
+        public static void Validate(ValidatorTypeCache cache, Type type, object? instance, IDictionary<string, object> userContext)
         {
             Guard.AgainstNull(cache, nameof(cache));
             Guard.AgainstNull(userContext, nameof(userContext));
@@ -67,7 +68,7 @@ namespace GraphQL.FluentValidation
             }
         }
 
-        static ValidationContext BuildValidationContext(object? instance, object userContext)
+        static ValidationContext BuildValidationContext(object? instance, IDictionary<string, object> userContext)
         {
             var validationContext = new ValidationContext(instance);
             validationContext.RootContextData.Add("UserContext", userContext);

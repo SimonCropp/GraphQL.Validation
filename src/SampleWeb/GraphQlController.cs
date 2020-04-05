@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.NewtonsoftJson;
@@ -9,14 +10,14 @@ using Newtonsoft.Json.Linq;
 
 [Route("[controller]")]
 [ApiController]
-public class GraphQlController :
+public class GraphQLController :
     Controller
 {
     ISchema schema;
     IDocumentExecuter executer;
     IDocumentWriter writer;    
 
-    public GraphQlController(ISchema schema, IDocumentExecuter executer, IDocumentWriter writer)
+    public GraphQLController(ISchema schema, IDocumentExecuter executer, IDocumentWriter writer)
     {
         this.schema = schema;
         this.executer = executer;
@@ -44,6 +45,8 @@ public class GraphQlController :
         JObject? variables,
         CancellationToken cancellation)
     {
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
         var options = new ExecutionOptions
         {
             Schema = schema,
@@ -55,8 +58,8 @@ public class GraphQlController :
             ExposeExceptions = true,
             EnableMetrics = true,
 #endif
-        };
-        options.UseFluentValidation(ValidatorCacheBuilder.Instance);
+        }
+        .UseFluentValidation(ValidatorCacheBuilder.Instance);
 
         return executer.ExecuteAsync(options);
     }

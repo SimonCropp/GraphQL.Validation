@@ -14,13 +14,12 @@ static class ArgumentTypeCacheBag
         {
             options.UserContext = new Dictionary<string, object>
             {
-                {key, cache}
+                { key, cache }
             };
             return;
         }
 
-        var asDictionary = UserContextAsDictionary(options.UserContext);
-        AddValidatorCache(asDictionary, cache);
+        AddValidatorCache(options.UserContext, cache);
     }
 
     internal static void AddValidatorCache(this IDictionary<string, object> dictionary, ValidatorTypeCache cache)
@@ -30,29 +29,17 @@ static class ArgumentTypeCacheBag
 
     public static ValidatorTypeCache GetCache(this IResolveFieldContext context)
     {
-        return GetCache(context.UserContext);
-    }
-
-    static ValidatorTypeCache GetCache(object userContext)
-    {
-        var dictionary = UserContextAsDictionary(userContext);
-
-        if (dictionary.TryGetValue(key, out var result))
+        if (context.UserContext == null)
         {
-            return (ValidatorTypeCache) result;
+            throw NotDictionary();
+        }
+
+        if (context.UserContext.TryGetValue(key, out var result))
+        {
+            return (ValidatorTypeCache)result;
         }
 
         throw new Exception($"Could not extract {nameof(ValidatorTypeCache)} from {nameof(IResolveFieldContext)}.{nameof(IResolveFieldContext.UserContext)}. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
-    }
-
-    static IDictionary<string, object> UserContextAsDictionary(object userContext)
-    {
-        if (userContext is IDictionary<string, object> dictionary)
-        {
-            return dictionary;
-        }
-
-        throw NotDictionary();
     }
 
     static Exception NotDictionary()
