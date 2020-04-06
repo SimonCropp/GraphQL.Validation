@@ -35,9 +35,9 @@ public class QueryTests :
                     "input", dictionary
                 }
             },
-            UserContext = userContext,
+            UserContext = userContext
         };
-        var result = (Result)field.Resolver.Resolve(fieldContext);
+        var result = (Result) field.Resolver.Resolve(fieldContext);
         return Verify(result);
     }
 
