@@ -56,7 +56,7 @@ public class GraphQlController :
             EnableMetrics = true,
 #endif
         };
-        options.UseFluentValidation(ValidatorCacheBuilder.Instance);
+        options.UseFluentValidation(ValidatorCacheBuilder.InstanceDI);
 
         return executer.ExecuteAsync(options);
     }
