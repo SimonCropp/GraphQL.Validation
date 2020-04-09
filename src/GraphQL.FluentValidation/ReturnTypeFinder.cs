@@ -1,7 +1,7 @@
-﻿using GraphQL;
-using GraphQL.Types;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
+using GraphQL;
+using GraphQL.Types;
 using Type = System.Type;
 
 static class ReturnTypeFinder
