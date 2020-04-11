@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using GraphQL;
@@ -17,10 +19,8 @@ public class QueryTests :
     {
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(
-            userContext,
-            ValidatorCacheBuilder.Instance);
+        var userContext = new GraphQLUserContext();
+        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
 
         var input = new MyInput
         {
@@ -44,12 +44,11 @@ public class QueryTests :
     [Fact]
     public Task RunInvalidInputQuery()
     {
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(
-            userContext,
-            ValidatorCacheBuilder.Instance);
+        var userContext = new GraphQLUserContext();
+        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>

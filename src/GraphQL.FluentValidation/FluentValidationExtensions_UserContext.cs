@@ -26,16 +26,7 @@ namespace GraphQL
         public static T UserContext<T>(this ValidationContext validationContext)
         {
             Guard.AgainstNull(validationContext, nameof(validationContext));
-            return (T) validationContext.RootContextData["UserContext"];
-        }
-
-        /// <summary>
-        /// Injects a <see cref="ValidatorTypeCache"/> instance into a user context for testing purposes
-        /// </summary>
-        public static void AddCacheToContext<T>(T userContext, ValidatorTypeCache cache)
-            where T : Dictionary<string, object>
-        {
-            userContext.AddValidatorCache(cache);
+            return (T)validationContext.RootContextData["UserContext"];
         }
     }
 }

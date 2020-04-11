@@ -118,8 +118,8 @@ var options = new ExecutionOptions
     Schema = schema,
     Query = queryString,
     Inputs = inputs
-};
-options.UseFluentValidation(validatorTypeCache);
+}
+.UseFluentValidation(validatorTypeCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
@@ -167,8 +167,8 @@ var options = new ExecutionOptions
     (
         myProperty: "the value"
     )
-};
-options.UseFluentValidation(validatorTypeCache);
+}
+.UseFluentValidation(validatorTypeCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L62-L76' title='File snippet `executequerywithcontextimplementingdictionary` was extracted from'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Navigate to start of snippet `executequerywithcontextimplementingdictionary`'>anchor</a></sup>
 <!-- endsnippet -->
@@ -194,8 +194,8 @@ var options = new ExecutionOptions
             )
         }
     }
-};
-options.UseFluentValidation(validatorTypeCache);
+}
+.UseFluentValidation(validatorTypeCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L81-L101' title='File snippet `executequerywithcontextinsidedictionary` was extracted from'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Navigate to start of snippet `executequerywithcontextinsidedictionary`'>anchor</a></sup>
 <!-- endsnippet -->
@@ -213,8 +213,8 @@ var options = new ExecutionOptions
     Schema = schema,
     Query = queryString,
     Inputs = inputs
-};
-options.UseFluentValidation(validatorTypeCache);
+}
+.UseFluentValidation(validatorTypeCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L106-L116' title='File snippet `nocontext` was extracted from'>snippet source</a> | <a href='#snippet-nocontext' title='Navigate to start of snippet `nocontext`'>anchor</a></sup>
 <!-- endsnippet -->
@@ -262,12 +262,12 @@ public class Query :
 
 ### Integration
 
-A full end-to-en test can be run against the GraphQl controller:
+A full end-to-en test can be run against the GraphQL controller:
 
 <!-- snippet: GraphQlControllerTests -->
 <a id='snippet-graphqlcontrollertests'/></a>
 ```cs
-public class GraphQlControllerTests :
+public class GraphQLControllerTests :
     VerifyBase
 {
     [Fact]
@@ -307,7 +307,7 @@ public class GraphQlControllerTests :
         return new TestServer(hostBuilder);
     }
 
-    public GraphQlControllerTests(ITestOutputHelper output) :
+    public GraphQLControllerTests(ITestOutputHelper output) :
         base(output)
     {
     }
@@ -332,10 +332,8 @@ public class QueryTests :
     {
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(
-            userContext,
-            ValidatorCacheBuilder.Instance);
+        var userContext = new GraphQLUserContext();
+        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
 
         var input = new MyInput
         {
@@ -359,12 +357,11 @@ public class QueryTests :
     [Fact]
     public Task RunInvalidInputQuery()
     {
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQlUserContext();
-        FluentValidationExtensions.AddCacheToContext(
-            userContext,
-            ValidatorCacheBuilder.Instance);
+        var userContext = new GraphQLUserContext();
+        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
@@ -386,7 +383,7 @@ public class QueryTests :
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L74' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L12-L73' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 

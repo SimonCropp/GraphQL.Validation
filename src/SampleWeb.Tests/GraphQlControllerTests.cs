@@ -8,9 +8,9 @@ using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
-#region GraphQlControllerTests
+#region GraphQLControllerTests
 
-public class GraphQlControllerTests :
+public class GraphQLControllerTests :
     VerifyBase
 {
     [Fact]
@@ -50,7 +50,7 @@ public class GraphQlControllerTests :
         return new TestServer(hostBuilder);
     }
 
-    public GraphQlControllerTests(ITestOutputHelper output) :
+    public GraphQLControllerTests(ITestOutputHelper output) :
         base(output)
     {
     }

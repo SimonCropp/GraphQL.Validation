@@ -51,7 +51,7 @@ namespace GraphQL.FluentValidation
         {
             if (isFrozen)
             {
-                throw new InvalidOperationException($"{nameof(ValidatorTypeCache)} cannot be changed once it has been used. Use a new instance instance instead.");
+                throw new InvalidOperationException($"{nameof(ValidatorTypeCache)} cannot be changed once it has been used. Use a new instance instead.");
             }
         }
 
@@ -84,39 +84,38 @@ namespace GraphQL.FluentValidation
         }
 
         /// <summary>
-        /// Add all <see cref="IValidator"/>s in the assembly that contains <typeparamref name="T"/>.
+        /// Add all <see cref="IValidator"/>s from the assembly that contains <typeparamref name="T"/>.
         /// </summary>
-        public void AddValidatorsFromAssemblyContaining<T>(bool throwIfNoneFound = true)
+        public ValidatorTypeCache AddValidatorsFromAssemblyContaining<T>(bool throwIfNoneFound = true)
         {
-            AddValidatorsFromAssemblyContaining(typeof(T), throwIfNoneFound);
+            return AddValidatorsFromAssemblyContaining(typeof(T), throwIfNoneFound);
         }
 
         /// <summary>
-        /// Add all <see cref="IValidator"/>s in the assembly that contains <paramref name="type"/>.
+        /// Add all <see cref="IValidator"/>s from the assembly that contains <paramref name="type"/>.
         /// </summary>
-        public void AddValidatorsFromAssemblyContaining(Type type, bool throwIfNoneFound = true)
+        public ValidatorTypeCache AddValidatorsFromAssemblyContaining(Type type, bool throwIfNoneFound = true)
         {
             Guard.AgainstNull(type, nameof(type));
-            AddValidatorsFromAssembly(type.GetTypeInfo().Assembly, throwIfNoneFound);
+            return AddValidatorsFromAssembly(type.Assembly, throwIfNoneFound);
         }
 
         /// <summary>
         /// Add all <see cref="IValidator"/>s in <paramref name="assembly"/>.
         /// </summary>
-        public void AddValidatorsFromAssembly(Assembly assembly, bool throwIfNoneFound = true)
+        public ValidatorTypeCache AddValidatorsFromAssembly(Assembly assembly, bool throwIfNoneFound = true)
         {
             Guard.AgainstNull(assembly, nameof(assembly));
             ThrowIfFrozen();
-            var assemblyName = assembly.GetName().Name;
 
             var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
             if (!results.Any())
             {
                 if (throwIfNoneFound)
                 {
-                    throw new Exception($"No validators were found in {assemblyName}.");
+                    throw new Exception($"No validators were found in {assembly.GetName().Name}.");
                 }
-                return;
+                return this;
             }
 
             foreach (var result in results)
@@ -151,6 +150,8 @@ namespace GraphQL.FluentValidation
                     list.Add((IValidator)Activator.CreateInstance(validatorType, true));
                 }
             }
+
+            return this;
         }
     }
 }

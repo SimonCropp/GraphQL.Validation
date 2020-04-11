@@ -34,8 +34,8 @@ class QueryExecution
             Schema = schema,
             Query = queryString,
             Inputs = inputs
-        };
-        options.UseFluentValidation(validatorTypeCache);
+        }
+        .UseFluentValidation(validatorTypeCache);
 
         var executionResult = await executer.ExecuteAsync(options);
 
@@ -70,8 +70,8 @@ class QueryExecution
             (
                 myProperty: "the value"
             )
-        };
-        options.UseFluentValidation(validatorTypeCache);
+        }
+        .UseFluentValidation(validatorTypeCache);
 
         #endregion
     }
@@ -95,8 +95,8 @@ class QueryExecution
                     )
                 }
             }
-        };
-        options.UseFluentValidation(validatorTypeCache);
+        }
+        .UseFluentValidation(validatorTypeCache);
 
         #endregion
     }
@@ -110,8 +110,8 @@ class QueryExecution
             Schema = schema,
             Query = queryString,
             Inputs = inputs
-        };
-        options.UseFluentValidation(validatorTypeCache);
+        }
+        .UseFluentValidation(validatorTypeCache);
 
         #endregion
     }

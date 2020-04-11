@@ -90,7 +90,7 @@ snippet: GetValidatedArgument
 
 ### Integration
 
-A full end-to-en test can be run against the GraphQl controller:
+A full end-to-en test can be run against the GraphQL controller:
 
 snippet: GraphQlControllerTests
 
