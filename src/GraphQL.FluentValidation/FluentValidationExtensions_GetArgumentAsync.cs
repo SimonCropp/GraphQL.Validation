@@ -19,7 +19,7 @@ namespace GraphQL
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(name, defaultValue);
             var validatorCache = context.GetCache();
-            await ArgumentValidation.ValidateAsync(validatorCache, typeof(TArgument), argument, context.UserContext);
+            await ArgumentValidation.ValidateAsync(validatorCache, typeof(TArgument), argument, context.UserContext, context.Schema as IServiceProvider);
             return argument;
         }
 
@@ -33,7 +33,7 @@ namespace GraphQL
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(argumentType, name, defaultValue);
             var validatorCache = context.GetCache();
-            await ArgumentValidation.ValidateAsync(validatorCache, argumentType, argument, context.UserContext);
+            await ArgumentValidation.ValidateAsync(validatorCache, argumentType, argument, context.UserContext, context.Schema as IServiceProvider);
             return argument;
         }
     }

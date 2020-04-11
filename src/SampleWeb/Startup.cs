@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentValidation;
 using GraphiQl;
 using GraphQL;
 using GraphQL.NewtonsoftJson;
@@ -22,6 +23,7 @@ public class Startup
             services.AddSingleton(type);
         }
 
+        services.AddValidatorsFromAssemblyContaining<Startup>();
         services.AddSingleton<ISchema, Schema>();
         services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
         services.AddSingleton<IDocumentWriter, DocumentWriter>();

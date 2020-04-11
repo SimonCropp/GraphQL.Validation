@@ -58,8 +58,8 @@ public class GraphQLController :
             ExposeExceptions = true,
             EnableMetrics = true,
 #endif
-        }
-        .UseFluentValidation(ValidatorCacheBuilder.Instance);
+        };
+        options.UseFluentValidation(ValidatorCacheBuilder.InstanceDI);
 
         return executer.ExecuteAsync(options);
     }
