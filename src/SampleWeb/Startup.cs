@@ -17,7 +17,7 @@ public class Startup
         GraphTypeTypeRegistry.Register<MyInput, MyInputGraph>();
         GraphTypeTypeRegistry.Register<Result, ResultGraph>();
 
-        foreach (var type in GetGraphQlTypes())
+        foreach (var type in GetGraphQLTypes())
         {
             services.AddSingleton(type);
         }
@@ -30,7 +30,7 @@ public class Startup
         mvc.AddNewtonsoftJson();
     }
 
-    static IEnumerable<Type> GetGraphQlTypes()
+    static IEnumerable<Type> GetGraphQLTypes()
     {
         return typeof(Startup).Assembly
             .GetTypes()

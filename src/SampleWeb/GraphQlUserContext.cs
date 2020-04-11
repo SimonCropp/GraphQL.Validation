@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class GraphQlUserContext :
+public class GraphQLUserContext :
     Dictionary<string, object>
 {
 }
