@@ -41,6 +41,10 @@ snippet: StartConfig
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
+Also you can use Dependency Injection for your validators. For this you should create `ValidatorTypeCache` with the
+`useDependencyInjection: true` parameter and call one of the `AddValidatorsFrom*` methods from
+[FluentValidation.DependencyInjectionExtensions](https://www.nuget.org/packages/FluentValidation.DependencyInjectionExtensions/)
+package in your `Startup`. By default, validators are added to the DI container with a transient lifetime.
 
 ### Add to ExecutionOptions
 
@@ -84,6 +88,16 @@ Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<s
 To trigger the validation, when reading arguments use `GetValidatedArgument` instead of `GetArgument`:
 
 snippet: GetValidatedArgument
+
+
+### Difference from IValidationRule
+
+The validation implemented in this project has nothing to do with the validation of the incoming GraphQL
+request, which is described in the [official specification](http://spec.graphql.org/June2018/#sec-Validation).
+[GraphQL.NET](https://github.com/graphql-dotnet/graphql-dotnet) has a concept of [validation rules](https://github.com/graphql-dotnet/graphql-dotnet/blob/master/src/GraphQL/Validation/IValidationRule.cs)
+that would work **before** request execution stage. In this project validation occurs for input arguments
+**at the request execution stage**. This additional validation complements but does not replace the standard
+set of validation rules.
 
 
 ## Testing
