@@ -23,6 +23,7 @@ Support is available via a [Tidelift Subscription](https://tidelift.com/subscrip
     * [Add to ExecutionOptions](#add-to-executionoptions)
     * [UserContext must be a dictionary](#usercontext-must-be-a-dictionary)
     * [Trigger validation](#trigger-validation)
+    * [Difference from IValidationRule](#difference-from-ivalidationrule)
   * [Testing](#testing)
     * [Integration](#integration)
     * [Unit](#unit)
@@ -105,6 +106,10 @@ var executer = new DocumentExecuter();
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
+Also you can use Dependency Injection for your validators. For this you should create `ValidatorTypeCache` with the
+`useDependencyInjection: true` parameter and call one of the `AddValidatorsFrom*` methods from
+[FluentValidation.DependencyInjectionExtensions](https://www.nuget.org/packages/FluentValidation.DependencyInjectionExtensions/)
+package in your `Startup`. By default, validators are added to the DI container with a transient lifetime.
 
 ### Add to ExecutionOptions
 
@@ -256,6 +261,16 @@ public class Query :
 ```
 <sup><a href='/src/SampleWeb/Query.cs#L4-L31' title='File snippet `getvalidatedargument` was extracted from'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Navigate to start of snippet `getvalidatedargument`'>anchor</a></sup>
 <!-- endsnippet -->
+
+
+### Difference from IValidationRule
+
+The validation implemented in this project has nothing to do with the validation of the incoming GraphQL
+request, which is described in the [official specification](http://spec.graphql.org/June2018/#sec-Validation).
+[GraphQL.NET](https://github.com/graphql-dotnet/graphql-dotnet) has a concept of [validation rules](https://github.com/graphql-dotnet/graphql-dotnet/blob/master/src/GraphQL/Validation/IValidationRule.cs)
+that would work **before** request execution stage. In this project validation occurs for input arguments
+**at the request execution stage**. This additional validation complements but does not replace the standard
+set of validation rules.
 
 
 ## Testing
