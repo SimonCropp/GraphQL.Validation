@@ -1,7 +1,4 @@
 {
-  "data": {
-    "asyncComplexInputQuery": null
-  },
   "errors": [
     {
       "message": "Inner: Inner async test failed msg."
@@ -9,5 +6,8 @@
     {
       "message": "Inner.Content: 'Content' must not be empty."
     }
-  ]
+  ],
+  "data": {
+    "asyncComplexInputQuery": null
+  }
 }
