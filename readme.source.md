@@ -41,10 +41,11 @@ snippet: StartConfig
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
-Also you can use Dependency Injection for your validators. For this you should create `ValidatorTypeCache` with the
+Dependency Injection can be used for validators. Create a `ValidatorTypeCache` with the
 `useDependencyInjection: true` parameter and call one of the `AddValidatorsFrom*` methods from
 [FluentValidation.DependencyInjectionExtensions](https://www.nuget.org/packages/FluentValidation.DependencyInjectionExtensions/)
-package in your `Startup`. By default, validators are added to the DI container with a transient lifetime.
+package in the `Startup`. By default, validators are added to the DI container with a transient lifetime.
+
 
 ### Add to ExecutionOptions
 
