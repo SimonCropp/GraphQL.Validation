@@ -399,7 +399,7 @@ public class QueryTests :
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L12-L73' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L11-L72' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 

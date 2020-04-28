@@ -1,7 +1,6 @@
 ﻿using System;
 using FluentValidation;
 using GraphQL.FluentValidation;
-using GraphQL.Types;
 
 namespace GraphQL
 {

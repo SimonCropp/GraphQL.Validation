@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 
 public class Schema : GraphQL.Types.Schema
 {

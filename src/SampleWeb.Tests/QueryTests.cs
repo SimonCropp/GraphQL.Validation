@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using GraphQL;
-using GraphQL.Types;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;

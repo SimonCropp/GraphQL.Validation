@@ -4,7 +4,6 @@ using FluentValidation;
 using FluentValidation.Results;
 using GraphQL;
 using GraphQL.Instrumentation;
-using GraphQL.Types;
 
 class ValidationMiddleware : IFieldMiddleware
 {

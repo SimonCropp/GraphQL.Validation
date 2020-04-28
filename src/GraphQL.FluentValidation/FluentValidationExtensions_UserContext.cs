@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Validators;
-using GraphQL.FluentValidation;
 
 namespace GraphQL
 {

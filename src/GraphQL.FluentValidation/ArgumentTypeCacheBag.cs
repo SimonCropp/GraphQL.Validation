@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using GraphQL;
 using GraphQL.FluentValidation;
-using GraphQL.Types;
 
 static class ArgumentTypeCacheBag
 {
