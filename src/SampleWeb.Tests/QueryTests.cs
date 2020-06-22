@@ -6,12 +6,10 @@ using FluentValidation;
 using GraphQL;
 using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
 #region QueryTests
-
-public class QueryTests :
-    VerifyBase
+[UsesVerify]
+public class QueryTests
 {
     [Fact]
     public Task RunInputQuery()
@@ -37,7 +35,7 @@ public class QueryTests :
             UserContext = userContext
         };
         var result = (Result) field.Resolver.Resolve(fieldContext);
-        return Verify(result);
+        return Verifier.Verify(result);
     }
 
     [Fact]
@@ -60,12 +58,7 @@ public class QueryTests :
         };
         var exception = Assert.Throws<ValidationException>(
             () => field.Resolver.Resolve(fieldContext));
-        return Verify(exception.Message);
-    }
-
-    public QueryTests(ITestOutputHelper output) :
-        base(output)
-    {
+        return Verifier.Verify(exception.Message);
     }
 }
 

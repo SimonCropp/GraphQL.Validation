@@ -283,8 +283,8 @@ A full end-to-en test can be run against the GraphQL controller:
 <!-- snippet: GraphQlControllerTests -->
 <a id='snippet-graphqlcontrollertests'/></a>
 ```cs
-public class GraphQLControllerTests :
-    VerifyBase
+[UsesVerify]
+public class GraphQLControllerTests
 {
     [Fact]
     public async Task RunQuery()
@@ -313,7 +313,7 @@ public class GraphQLControllerTests :
         };
         using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
-        await Verify(await response.Content.ReadAsStringAsync());
+        await Verifier.Verify(await response.Content.ReadAsStringAsync());
     }
 
     static TestServer GetTestServer()
@@ -322,14 +322,9 @@ public class GraphQLControllerTests :
         hostBuilder.UseStartup<Startup>();
         return new TestServer(hostBuilder);
     }
-
-    public GraphQLControllerTests(ITestOutputHelper output) :
-        base(output)
-    {
-    }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L11-L59' title='File snippet `graphqlcontrollertests` was extracted from'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Navigate to start of snippet `graphqlcontrollertests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L10-L52' title='File snippet `graphqlcontrollertests` was extracted from'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Navigate to start of snippet `graphqlcontrollertests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
@@ -340,8 +335,8 @@ Unit tests can be run a specific field of a query:
 <!-- snippet: QueryTests -->
 <a id='snippet-querytests'/></a>
 ```cs
-public class QueryTests :
-    VerifyBase
+[UsesVerify]
+public class QueryTests
 {
     [Fact]
     public Task RunInputQuery()
@@ -367,7 +362,7 @@ public class QueryTests :
             UserContext = userContext
         };
         var result = (Result) field.Resolver.Resolve(fieldContext);
-        return Verify(result);
+        return Verifier.Verify(result);
     }
 
     [Fact]
@@ -390,16 +385,11 @@ public class QueryTests :
         };
         var exception = Assert.Throws<ValidationException>(
             () => field.Resolver.Resolve(fieldContext));
-        return Verify(exception.Message);
-    }
-
-    public QueryTests(ITestOutputHelper output) :
-        base(output)
-    {
+        return Verifier.Verify(exception.Message);
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L11-L72' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L65' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 

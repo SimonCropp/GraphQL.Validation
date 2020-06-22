@@ -2,10 +2,9 @@
 using GraphQL.FluentValidation;
 using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class IntegrationTests :
-    VerifyBase
+[UsesVerify]
+public class IntegrationTests
 {
     static ValidatorTypeCache typeCache = new ValidatorTypeCache().AddValidatorsFromAssemblyContaining<IntegrationTests>();
 
@@ -25,7 +24,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -44,7 +43,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -63,7 +62,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -82,7 +81,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -107,7 +106,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -129,7 +128,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -149,7 +148,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -174,7 +173,7 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
+        await Verifier.Verify(result);
     }
 
     [Fact]
@@ -196,11 +195,6 @@ public class IntegrationTests :
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verify(result);
-    }
-
-    public IntegrationTests(ITestOutputHelper output) :
-        base(output)
-    {
+        await Verifier.Verify(result);
     }
 }
