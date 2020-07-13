@@ -4,6 +4,6 @@ static class ModuleInitializer
 {
     public static void Initialize()
     {
-        ValidatorOptions.DisplayNameResolver = ValidatorOptions.PropertyNameResolver;
+        ValidatorOptions.Global.DisplayNameResolver = ValidatorOptions.Global.PropertyNameResolver;
     }
 }

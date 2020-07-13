@@ -16,13 +16,13 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static Task ValidateAsync(ValidatorTypeCache cache, Type type, object? instance, IDictionary<string, object> userContext)
+        public static Task ValidateAsync<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object> userContext)
             => ValidateAsync(cache, type, instance, userContext, null);
 
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static async Task ValidateAsync(ValidatorTypeCache cache, Type type, object? instance, IDictionary<string, object> userContext, IServiceProvider? provider, CancellationToken cancellation = default)
+        public static async Task ValidateAsync<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object> userContext, IServiceProvider? provider, CancellationToken cancellation = default)
         {
             Guard.AgainstNull(cache, nameof(cache));
             Guard.AgainstNull(userContext, nameof(userContext));
@@ -47,13 +47,13 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static void Validate(ValidatorTypeCache cache, Type type, object? instance, IDictionary<string, object> userContext)
-            => Validate(cache, type, instance, userContext, null);
+        public static void Validate<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object> userContext)
+            => Validate<TArgument>(cache, type, instance, userContext, null);
 
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static void Validate(ValidatorTypeCache cache, Type type, object? instance, IDictionary<string, object> userContext, IServiceProvider? provider)
+        public static void Validate<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object> userContext, IServiceProvider? provider)
         {
             Guard.AgainstNull(cache, nameof(cache));
             Guard.AgainstNull(userContext, nameof(userContext));
@@ -80,9 +80,9 @@ namespace GraphQL.FluentValidation
             }
         }
 
-        static ValidationContext BuildValidationContext(object? instance, IDictionary<string, object> userContext)
+        static ValidationContext<TArgument> BuildValidationContext<TArgument>(TArgument instance, IDictionary<string, object> userContext)
         {
-            var validationContext = new ValidationContext(instance);
+            var validationContext = new ValidationContext<TArgument>(instance);
             validationContext.RootContextData.Add("UserContext", userContext);
             return validationContext;
         }
