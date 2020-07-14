@@ -13,7 +13,7 @@ namespace GraphQL
         public static T UserContext<T>(this CustomContext customContext)
         {
             Guard.AgainstNull(customContext, nameof(customContext));
-            return customContext.UserContext<T>();
+            return customContext.ParentContext.UserContext<T>();
         }
 
         /// <summary>
