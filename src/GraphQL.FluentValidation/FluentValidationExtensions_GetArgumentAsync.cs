@@ -10,7 +10,7 @@ namespace GraphQL
     {
         /// <summary>
         /// Wraps <see cref="ResolveFieldContextExtensions.GetArgument{TType}"/> to validate the resulting argument instance.
-        /// Uses <see cref="IValidator.ValidateAsync(ValidationContext,CancellationToken)"/> to perform validation.
+        /// Uses <see cref="IValidator.ValidateAsync(IValidationContext,CancellationToken)"/> to perform validation.
         /// If a <see cref="ValidationException"/> occurs it will be converted to <see cref="ExecutionError"/>s by a field middleware.
         /// </summary>
         public static async Task<TArgument> GetValidatedArgumentAsync<TArgument>(this IResolveFieldContext context, string name, TArgument defaultValue = default)
@@ -24,7 +24,7 @@ namespace GraphQL
 
         /// <summary>
         /// Wraps <see cref="ResolveFieldContextExtensions.GetArgument{TType}"/> to validate the resulting argument instance.
-        /// Uses <see cref="IValidator.ValidateAsync(ValidationContext,CancellationToken)"/> to perform validation.
+        /// Uses <see cref="IValidator.ValidateAsync(IValidationContext,CancellationToken)"/> to perform validation.
         /// If a <see cref="ValidationException"/> occurs it will be converted to <see cref="ExecutionError"/>s by a field middleware.
         /// </summary>
         public static async Task<object> GetValidatedArgumentAsync(this IResolveFieldContext context, Type argumentType, string name, object? defaultValue = null)
