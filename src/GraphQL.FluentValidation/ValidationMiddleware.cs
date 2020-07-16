@@ -23,6 +23,12 @@ class ValidationMiddleware : IFieldMiddleware
 
     static ExecutionError ToExecutionError(ValidationFailure failure)
     {
-        return new ExecutionError($"{failure.PropertyName}: {failure.ErrorMessage}");
+        ExecutionError executionError = new ExecutionError($"{failure.PropertyName}: {failure.ErrorMessage}");
+
+        List<string> fields = new List<string>();
+        fields.Add(failure.PropertyName);
+        executionError.Path = fields;
+
+        return executionError;
     }
 }
