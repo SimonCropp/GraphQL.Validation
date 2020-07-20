@@ -14,10 +14,10 @@ public class Query :
             ),
             resolve: context =>
             {
-                var input = context.GetValidatedArgument<Input>("input");
+                var input = context.GetValidatedArgument<Input?>("input");
                 return new Result
                 {
-                    Data = input.Content
+                    Data = input?.Content ?? "it was null"
                 };
             }
         );

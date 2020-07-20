@@ -1,0 +1,7 @@
+{
+  "data": {
+    "inputQuery": {
+      "data": "it was null"
+    }
+  }
+}

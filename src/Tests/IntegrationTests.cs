@@ -47,6 +47,20 @@ public class IntegrationTests
     }
 
     [Fact]
+    public async Task ValidNull()
+    {
+        var queryString = @"
+{
+  inputQuery
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
+        await Verifier.Verify(result);
+    }
+
+    [Fact]
     public async Task Valid()
     {
         var queryString = @"

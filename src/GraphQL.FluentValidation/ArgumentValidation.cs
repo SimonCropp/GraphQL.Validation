@@ -59,6 +59,10 @@ namespace GraphQL.FluentValidation
             Guard.AgainstNull(userContext, nameof(userContext));
             Guard.AgainstNull(type, nameof(type));
             Guard.AgainstNull(userContext, nameof(userContext));
+            if (instance == null)
+            {
+                return;
+            }
             if (!cache.TryGetValidators(type, provider, out var buildAll))
             {
                 return;
