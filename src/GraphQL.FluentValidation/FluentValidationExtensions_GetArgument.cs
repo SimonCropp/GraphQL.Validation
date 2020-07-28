@@ -16,7 +16,7 @@ namespace GraphQL
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(name, defaultValue);
             var validatorCache = context.GetCache();
-            ArgumentValidation.Validate<TArgument>(validatorCache, typeof(TArgument), argument, context.UserContext, context.Schema as IServiceProvider);
+            ArgumentValidation.Validate(validatorCache, typeof(TArgument), argument, context.UserContext, context.Schema as IServiceProvider);
             return argument;
         }
 

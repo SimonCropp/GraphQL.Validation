@@ -1,10 +1,16 @@
 {
   "errors": [
     {
-      "message": "Inner: Inner async test failed msg."
+      "message": "Inner: Inner async test failed msg.",
+      "path": [
+        "Inner"
+      ]
     },
     {
-      "message": "Inner.Content: 'Content' must not be empty."
+      "message": "Inner.Content: 'Content' must not be empty.",
+      "path": [
+        "Inner.Content"
+      ]
     }
   ],
   "data": {

@@ -1,7 +1,10 @@
 {
   "errors": [
     {
-      "message": "Content: 'Content' must not be empty."
+      "message": "Content: 'Content' must not be empty.",
+      "path": [
+        "Content"
+      ]
     }
   ],
   "data": {
