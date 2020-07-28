@@ -60,6 +60,8 @@ public class QueryTests
             () => field.Resolver.Resolve(fieldContext));
         return Verifier.Verify(exception.Message);
     }
+
+ 
 }
 
 #endregion
