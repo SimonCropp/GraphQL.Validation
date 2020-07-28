@@ -387,11 +387,9 @@ public class QueryTests
             () => field.Resolver.Resolve(fieldContext));
         return Verifier.Verify(exception.Message);
     }
-
- 
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L67' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L65' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
