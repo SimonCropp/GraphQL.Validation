@@ -48,7 +48,7 @@ namespace GraphQL.FluentValidation
         /// Validate an instance
         /// </summary>
         public static void Validate<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object> userContext)
-            => Validate<TArgument>(cache, type, instance, userContext, null);
+            => Validate(cache, type, instance, userContext, null);
 
         /// <summary>
         /// Validate an instance
