@@ -17,7 +17,9 @@ public class QueryTests
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQLUserContext();
-        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
 
         var input = new MyInput
         {
@@ -45,7 +47,9 @@ public class QueryTests
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQLUserContext();
-        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>

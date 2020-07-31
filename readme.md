@@ -344,7 +344,9 @@ public class QueryTests
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQLUserContext();
-        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
 
         var input = new MyInput
         {
@@ -372,7 +374,9 @@ public class QueryTests
         var field = new Query().GetField("inputQuery");
 
         var userContext = new GraphQLUserContext();
-        userContext.AddValidatorCache(ValidatorCacheBuilder.Instance);
+        FluentValidationExtensions.AddCacheToContext(
+            userContext,
+            ValidatorCacheBuilder.Instance);
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
@@ -389,7 +393,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L65' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L69' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endsnippet -->
 
 
