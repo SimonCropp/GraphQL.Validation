@@ -43,7 +43,7 @@ https://nuget.org/packages/GraphQL.FluentValidation/
 Given the following input:
 
 <!-- snippet: input -->
-<a id='snippet-input'/></a>
+<a id='snippet-input'></a>
 ```cs
 public class MyInput
 {
@@ -56,7 +56,7 @@ public class MyInput
 And graph:
 
 <!-- snippet: graph -->
-<a id='snippet-graph'/></a>
+<a id='snippet-graph'></a>
 ```cs
 public class MyInputGraph :
     InputObjectGraphType
@@ -73,7 +73,7 @@ public class MyInputGraph :
 A custom validator can be defined as follows:
 
 <!-- snippet: validator -->
-<a id='snippet-validator'/></a>
+<a id='snippet-validator'></a>
 ```cs
 public class MyInputValidator :
     AbstractValidator<MyInput>
@@ -94,7 +94,7 @@ public class MyInputValidator :
 Validators need to be added to the `ValidatorTypeCache`. This should be done once at application startup.
 
 <!-- snippet: StartConfig -->
-<a id='snippet-startconfig'/></a>
+<a id='snippet-startconfig'></a>
 ```cs
 var validatorTypeCache = new ValidatorTypeCache();
 validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
@@ -117,7 +117,7 @@ package in the `Startup`. By default, validators are added to the DI container w
 Validation needs to be added to any instance of `ExecutionOptions`.
 
 <!-- snippet: UseFluentValidation -->
-<a id='snippet-usefluentvalidation'/></a>
+<a id='snippet-usefluentvalidation'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -143,7 +143,7 @@ This library needs to be able to pass the list of validators, in the form of `Va
 Given a user context class of the following form:
 
 <!-- snippet: ContextImplementingDictionary -->
-<a id='snippet-contextimplementingdictionary'/></a>
+<a id='snippet-contextimplementingdictionary'></a>
 ```cs
 public class MyUserContext :
     Dictionary<string, object>
@@ -162,7 +162,7 @@ public class MyUserContext :
 The `ExecutionOptions.UserContext` can then be set as follows:
 
 <!-- snippet: ExecuteQueryWithContextImplementingDictionary -->
-<a id='snippet-executequerywithcontextimplementingdictionary'/></a>
+<a id='snippet-executequerywithcontextimplementingdictionary'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -183,7 +183,7 @@ var options = new ExecutionOptions
 #### 2. Have the user context class exist inside a IDictionary
 
 <!-- snippet: ExecuteQueryWithContextInsideDictionary -->
-<a id='snippet-executequerywithcontextinsidedictionary'/></a>
+<a id='snippet-executequerywithcontextinsidedictionary'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -212,7 +212,7 @@ var options = new ExecutionOptions
 If no instance is passed to `ExecutionOptions.UserContext`:
 
 <!-- snippet: NoContext -->
-<a id='snippet-nocontext'/></a>
+<a id='snippet-nocontext'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -233,7 +233,7 @@ Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<s
 To trigger the validation, when reading arguments use `GetValidatedArgument` instead of `GetArgument`:
 
 <!-- snippet: GetValidatedArgument -->
-<a id='snippet-getvalidatedargument'/></a>
+<a id='snippet-getvalidatedargument'></a>
 ```cs
 public class Query :
     ObjectGraphType
@@ -281,7 +281,7 @@ set of validation rules.
 A full end-to-en test can be run against the GraphQL controller:
 
 <!-- snippet: GraphQlControllerTests -->
-<a id='snippet-graphqlcontrollertests'/></a>
+<a id='snippet-graphqlcontrollertests'></a>
 ```cs
 [UsesVerify]
 public class GraphQLControllerTests
@@ -333,7 +333,7 @@ public class GraphQLControllerTests
 Unit tests can be run a specific field of a query:
 
 <!-- snippet: QueryTests -->
-<a id='snippet-querytests'/></a>
+<a id='snippet-querytests'></a>
 ```cs
 [UsesVerify]
 public class QueryTests
