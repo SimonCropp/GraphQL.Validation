@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="9.1.1" />
+    <PackageReference Include="FluentValidation" Version="9.1.2" />
     <PackageReference Include="GraphQL.NewtonsoftJson" Version="3.0.0-preview-1648" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
