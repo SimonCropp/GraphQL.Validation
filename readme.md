@@ -352,13 +352,12 @@ public class QueryTests
         {
             Content = "TheContent"
         };
-        var dictionary = input.AsDictionary();
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
             {
                 {
-                    "input", dictionary
+                    "input", input
                 }
             },
             UserContext = userContext
@@ -393,7 +392,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L69' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L68' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
 <!-- endSnippet -->
 
 
