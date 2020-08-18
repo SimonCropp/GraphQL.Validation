@@ -25,13 +25,12 @@ public class QueryTests
         {
             Content = "TheContent"
         };
-        var dictionary = input.AsDictionary();
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, object>
             {
                 {
-                    "input", dictionary
+                    "input", input
                 }
             },
             UserContext = userContext
