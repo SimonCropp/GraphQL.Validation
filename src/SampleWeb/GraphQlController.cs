@@ -15,7 +15,7 @@ public class GraphQLController :
 {
     ISchema schema;
     IDocumentExecuter executer;
-    IDocumentWriter writer;    
+    IDocumentWriter writer;
 
     public GraphQLController(ISchema schema, IDocumentExecuter executer, IDocumentWriter writer)
     {
@@ -55,7 +55,7 @@ public class GraphQLController :
             Inputs = variables?.ToInputs(),
             CancellationToken = cancellation,
 #if (DEBUG)
-            ExposeExceptions = true,
+            ThrowOnUnhandledException = true,
             EnableMetrics = true,
 #endif
         };
