@@ -9,6 +9,6 @@
     <PackageReference Include="GraphQL.NewtonsoftJson" Version="3.0.0.2026" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
     <ProjectReference Include="..\GraphQL.FluentValidation\GraphQL.FluentValidation.csproj" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.45" PrivateAssets="All" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.46" PrivateAssets="All" />
   </ItemGroup>
 </Project>
