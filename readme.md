@@ -50,7 +50,7 @@ public class MyInput
     public string Content { get; set; } = null!;
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInput.cs#L1-L8' title='File snippet `input` was extracted from'>snippet source</a> | <a href='#snippet-input' title='Navigate to start of snippet `input`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInput.cs#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-input' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 And graph:
@@ -67,7 +67,7 @@ public class MyInputGraph :
     }
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInputGraph.cs#L3-L12' title='File snippet `graph` was extracted from'>snippet source</a> | <a href='#snippet-graph' title='Navigate to start of snippet `graph`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInputGraph.cs#L3-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-graph' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 A custom validator can be defined as follows:
@@ -85,7 +85,7 @@ public class MyInputValidator :
     }
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInputValidator.cs#L3-L13' title='File snippet `validator` was extracted from'>snippet source</a> | <a href='#snippet-validator' title='Navigate to start of snippet `validator`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInputValidator.cs#L3-L13' title='Snippet source file'>snippet source</a> | <a href='#snippet-validator' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -101,7 +101,7 @@ validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
 var schema = new Schema();
 var executer = new DocumentExecuter();
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L18-L25' title='File snippet `startconfig` was extracted from'>snippet source</a> | <a href='#snippet-startconfig' title='Navigate to start of snippet `startconfig`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L18-L25' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
@@ -129,7 +129,7 @@ var options = new ExecutionOptions
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L30-L42' title='File snippet `usefluentvalidation` was extracted from'>snippet source</a> | <a href='#snippet-usefluentvalidation' title='Navigate to start of snippet `usefluentvalidation`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L30-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-usefluentvalidation' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -156,7 +156,7 @@ public class MyUserContext :
     public string MyProperty { get; }
 }
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L45-L58' title='File snippet `contextimplementingdictionary` was extracted from'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Navigate to start of snippet `contextimplementingdictionary`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L45-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The `ExecutionOptions.UserContext` can then be set as follows:
@@ -176,7 +176,7 @@ var options = new ExecutionOptions
 }
 .UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L62-L76' title='File snippet `executequerywithcontextimplementingdictionary` was extracted from'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Navigate to start of snippet `executequerywithcontextimplementingdictionary`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L62-L76' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -203,7 +203,7 @@ var options = new ExecutionOptions
 }
 .UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L81-L101' title='File snippet `executequerywithcontextinsidedictionary` was extracted from'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Navigate to start of snippet `executequerywithcontextinsidedictionary`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L81-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -222,7 +222,7 @@ var options = new ExecutionOptions
 }
 .UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L106-L116' title='File snippet `nocontext` was extracted from'>snippet source</a> | <a href='#snippet-nocontext' title='Navigate to start of snippet `nocontext`'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L106-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
@@ -260,7 +260,7 @@ public class Query :
     }
 }
 ```
-<sup><a href='/src/SampleWeb/Query.cs#L4-L31' title='File snippet `getvalidatedargument` was extracted from'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Navigate to start of snippet `getvalidatedargument`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Query.cs#L4-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -324,7 +324,7 @@ public class GraphQLControllerTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L10-L52' title='File snippet `graphqlcontrollertests` was extracted from'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Navigate to start of snippet `graphqlcontrollertests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L10-L52' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -392,7 +392,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L68' title='File snippet `querytests` was extracted from'>snippet source</a> | <a href='#snippet-querytests' title='Navigate to start of snippet `querytests`'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L68' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
