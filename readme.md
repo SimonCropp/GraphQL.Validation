@@ -43,20 +43,20 @@ https://nuget.org/packages/GraphQL.FluentValidation/
 Given the following input:
 
 <!-- snippet: input -->
-<a id='input'></a>
+<a id='snippet-input'></a>
 ```cs
 public class MyInput
 {
     public string Content { get; set; } = null!;
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInput.cs#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#input' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInput.cs#L1-L8' title='Snippet source file'>snippet source</a> | <a href='#snippet-input' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 And graph:
 
 <!-- snippet: graph -->
-<a id='graph'></a>
+<a id='snippet-graph'></a>
 ```cs
 public class MyInputGraph :
     InputObjectGraphType
@@ -67,13 +67,13 @@ public class MyInputGraph :
     }
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInputGraph.cs#L3-L12' title='Snippet source file'>snippet source</a> | <a href='#graph' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInputGraph.cs#L3-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-graph' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 A custom validator can be defined as follows:
 
 <!-- snippet: validator -->
-<a id='validator'></a>
+<a id='snippet-validator'></a>
 ```cs
 public class MyInputValidator :
     AbstractValidator<MyInput>
@@ -85,7 +85,7 @@ public class MyInputValidator :
     }
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInputValidator.cs#L3-L13' title='Snippet source file'>snippet source</a> | <a href='#validator' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInputValidator.cs#L3-L13' title='Snippet source file'>snippet source</a> | <a href='#snippet-validator' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -94,14 +94,14 @@ public class MyInputValidator :
 Validators need to be added to the `ValidatorTypeCache`. This should be done once at application startup.
 
 <!-- snippet: StartConfig -->
-<a id='startconfig'></a>
+<a id='snippet-startconfig'></a>
 ```cs
 var validatorTypeCache = new ValidatorTypeCache();
 validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
 var schema = new Schema();
 var executer = new DocumentExecuter();
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L18-L25' title='Snippet source file'>snippet source</a> | <a href='#startconfig' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L18-L25' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
@@ -117,7 +117,7 @@ package in the `Startup`. By default, validators are added to the DI container w
 Validation needs to be added to any instance of `ExecutionOptions`.
 
 <!-- snippet: UseFluentValidation -->
-<a id='usefluentvalidation'></a>
+<a id='snippet-usefluentvalidation'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -129,7 +129,7 @@ var options = new ExecutionOptions
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L30-L42' title='Snippet source file'>snippet source</a> | <a href='#usefluentvalidation' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L30-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-usefluentvalidation' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -143,7 +143,7 @@ This library needs to be able to pass the list of validators, in the form of `Va
 Given a user context class of the following form:
 
 <!-- snippet: ContextImplementingDictionary -->
-<a id='contextimplementingdictionary'></a>
+<a id='snippet-contextimplementingdictionary'></a>
 ```cs
 public class MyUserContext :
     Dictionary<string, object>
@@ -156,13 +156,13 @@ public class MyUserContext :
     public string MyProperty { get; }
 }
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L45-L58' title='Snippet source file'>snippet source</a> | <a href='#contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L45-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The `ExecutionOptions.UserContext` can then be set as follows:
 
 <!-- snippet: ExecuteQueryWithContextImplementingDictionary -->
-<a id='executequerywithcontextimplementingdictionary'></a>
+<a id='snippet-executequerywithcontextimplementingdictionary'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -176,14 +176,14 @@ var options = new ExecutionOptions
 }
 .UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L62-L76' title='Snippet source file'>snippet source</a> | <a href='#executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L62-L76' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
 #### 2. Have the user context class exist inside a IDictionary
 
 <!-- snippet: ExecuteQueryWithContextInsideDictionary -->
-<a id='executequerywithcontextinsidedictionary'></a>
+<a id='snippet-executequerywithcontextinsidedictionary'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -203,7 +203,7 @@ var options = new ExecutionOptions
 }
 .UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L81-L101' title='Snippet source file'>snippet source</a> | <a href='#executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L81-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -212,7 +212,7 @@ var options = new ExecutionOptions
 If no instance is passed to `ExecutionOptions.UserContext`:
 
 <!-- snippet: NoContext -->
-<a id='nocontext'></a>
+<a id='snippet-nocontext'></a>
 ```cs
 var options = new ExecutionOptions
 {
@@ -222,7 +222,7 @@ var options = new ExecutionOptions
 }
 .UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L106-L116' title='Snippet source file'>snippet source</a> | <a href='#nocontext' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L106-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
@@ -233,7 +233,7 @@ Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<s
 To trigger the validation, when reading arguments use `GetValidatedArgument` instead of `GetArgument`:
 
 <!-- snippet: GetValidatedArgument -->
-<a id='getvalidatedargument'></a>
+<a id='snippet-getvalidatedargument'></a>
 ```cs
 public class Query :
     ObjectGraphType
@@ -260,7 +260,7 @@ public class Query :
     }
 }
 ```
-<sup><a href='/src/SampleWeb/Query.cs#L4-L31' title='Snippet source file'>snippet source</a> | <a href='#getvalidatedargument' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Query.cs#L4-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -281,7 +281,7 @@ set of validation rules.
 A full end-to-en test can be run against the GraphQL controller:
 
 <!-- snippet: GraphQlControllerTests -->
-<a id='graphqlcontrollertests'></a>
+<a id='snippet-graphqlcontrollertests'></a>
 ```cs
 [UsesVerify]
 public class GraphQLControllerTests
@@ -324,7 +324,7 @@ public class GraphQLControllerTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L10-L52' title='Snippet source file'>snippet source</a> | <a href='#graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQlControllerTests.cs#L10-L52' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -333,7 +333,7 @@ public class GraphQLControllerTests
 Unit tests can be run a specific field of a query:
 
 <!-- snippet: QueryTests -->
-<a id='querytests'></a>
+<a id='snippet-querytests'></a>
 ```cs
 [UsesVerify]
 public class QueryTests
@@ -392,7 +392,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L68' title='Snippet source file'>snippet source</a> | <a href='#querytests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L68' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
