@@ -17,7 +17,8 @@ namespace GraphQL
             var argument = context.GetArgument(name, defaultValue);
             var validatorCache = context.GetCache();
             ArgumentValidation.Validate(validatorCache, typeof(TArgument), argument, context.UserContext, context.Schema as IServiceProvider);
-            return argument;
+            //TODO: handle null
+            return argument!;
         }
 
         /// <summary>
