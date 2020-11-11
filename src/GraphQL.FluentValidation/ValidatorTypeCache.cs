@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using FluentValidation;
+using GraphQL.Utilities;
 
 namespace GraphQL.FluentValidation
 {
@@ -63,7 +64,7 @@ namespace GraphQL.FluentValidation
 
                 if (typeCacheDI!.TryGetValue(argumentType, out var validatorInfo))
                 {
-                    validators = validatorInfo.Select(t => (IValidator)provider!.GetService(t));
+                    validators = validatorInfo.Select(t => (IValidator)provider!.GetRequiredService(t));
                     return true;
                 }
 
@@ -147,7 +148,7 @@ namespace GraphQL.FluentValidation
                         typeCache[single] = list = new List<IValidator>();
                     }
 
-                    list.Add((IValidator)Activator.CreateInstance(validatorType, true));
+                    list.Add((IValidator)Activator.CreateInstance(validatorType, true)!);
                 }
             }
 
