@@ -43,6 +43,6 @@ static class ArgumentTypeCacheBag
 
     static Exception NotDictionary()
     {
-        return new Exception("Expected UserContext to be of type IDictionary<string, object>.");
+        return new("Expected UserContext to be of type IDictionary<string, object>.");
     }
 }

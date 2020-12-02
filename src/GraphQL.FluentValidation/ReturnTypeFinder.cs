@@ -5,7 +5,7 @@ using GraphQL.Types;
 
 static class ReturnTypeFinder
 {
-    static ConcurrentDictionary<Type, object?> typeCache = new ConcurrentDictionary<Type, object?>();
+    static ConcurrentDictionary<Type, object?> typeCache = new();
 
     public static object? Find(IResolveFieldContext context)
     {
