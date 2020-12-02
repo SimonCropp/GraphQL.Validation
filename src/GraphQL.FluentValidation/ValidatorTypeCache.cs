@@ -123,7 +123,9 @@ namespace GraphQL.FluentValidation
             {
                 var validatorType = result.ValidatorType;
                 if (validatorType.IsAbstract)
+                {
                     continue;
+                }
 
                 if (UseDI)
                 {
@@ -137,7 +139,7 @@ namespace GraphQL.FluentValidation
                 }
                 else
                 {
-                    if (validatorType.GetConstructor(new Type[] { }) == null)
+                    if (validatorType.GetConstructor(Array.Empty<Type>()) == null)
                     {
                         Trace.WriteLine($"Ignoring ''{validatorType.FullName}'' since it does not have a public parameterless constructor.");
                         continue;
@@ -145,7 +147,7 @@ namespace GraphQL.FluentValidation
                     var single = result.InterfaceType.GenericTypeArguments.Single();
                     if (!typeCache!.TryGetValue(single, out var list))
                     {
-                        typeCache[single] = list = new List<IValidator>();
+                        typeCache[single] = list = new();
                     }
 
                     list.Add((IValidator)Activator.CreateInstance(validatorType, true)!);

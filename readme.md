@@ -96,10 +96,10 @@ Validators need to be added to the `ValidatorTypeCache`. This should be done onc
 <!-- snippet: StartConfig -->
 <a id='snippet-startconfig'></a>
 ```cs
-var validatorTypeCache = new ValidatorTypeCache();
+ValidatorTypeCache validatorTypeCache = new();
 validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
-var schema = new Schema();
-var executer = new DocumentExecuter();
+Schema schema = new();
+DocumentExecuter executer = new();
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L18-L25' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -119,13 +119,13 @@ Validation needs to be added to any instance of `ExecutionOptions`.
 <!-- snippet: UseFluentValidation -->
 <a id='snippet-usefluentvalidation'></a>
 ```cs
-var options = new ExecutionOptions
+ExecutionOptions options = new()
 {
     Schema = schema,
     Query = queryString,
     Inputs = inputs
-}
-.UseFluentValidation(validatorTypeCache);
+};
+options.UseFluentValidation(validatorTypeCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
@@ -164,7 +164,7 @@ The `ExecutionOptions.UserContext` can then be set as follows:
 <!-- snippet: ExecuteQueryWithContextImplementingDictionary -->
 <a id='snippet-executequerywithcontextimplementingdictionary'></a>
 ```cs
-var options = new ExecutionOptions
+ExecutionOptions options = new()
 {
     Schema = schema,
     Query = queryString,
@@ -173,8 +173,8 @@ var options = new ExecutionOptions
     (
         myProperty: "the value"
     )
-}
-.UseFluentValidation(validatorTypeCache);
+};
+options.UseFluentValidation(validatorTypeCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L62-L76' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -185,7 +185,7 @@ var options = new ExecutionOptions
 <!-- snippet: ExecuteQueryWithContextInsideDictionary -->
 <a id='snippet-executequerywithcontextinsidedictionary'></a>
 ```cs
-var options = new ExecutionOptions
+ExecutionOptions options = new()
 {
     Schema = schema,
     Query = queryString,
@@ -200,8 +200,8 @@ var options = new ExecutionOptions
             )
         }
     }
-}
-.UseFluentValidation(validatorTypeCache);
+};
+options.UseFluentValidation(validatorTypeCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L81-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -214,13 +214,13 @@ If no instance is passed to `ExecutionOptions.UserContext`:
 <!-- snippet: NoContext -->
 <a id='snippet-nocontext'></a>
 ```cs
-var options = new ExecutionOptions
+ExecutionOptions options = new()
 {
     Schema = schema,
     Query = queryString,
     Inputs = inputs
-}
-.UseFluentValidation(validatorTypeCache);
+};
+options.UseFluentValidation(validatorTypeCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L106-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -303,11 +303,11 @@ public class GraphQLControllerTests
             query
         };
         var serialized = JsonConvert.SerializeObject(body);
-        using var content = new StringContent(
+        using StringContent content = new(
             serialized,
             Encoding.UTF8,
             "application/json");
-        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
+        using HttpRequestMessage request = new(HttpMethod.Post, "graphql")
         {
             Content = content
         };
@@ -318,9 +318,9 @@ public class GraphQLControllerTests
 
     static TestServer GetTestServer()
     {
-        var hostBuilder = new WebHostBuilder();
+        WebHostBuilder hostBuilder = new();
         hostBuilder.UseStartup<Startup>();
-        return new TestServer(hostBuilder);
+        return new(hostBuilder);
     }
 }
 ```
@@ -343,7 +343,7 @@ public class QueryTests
     {
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQLUserContext();
+        GraphQLUserContext userContext = new();
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
@@ -352,7 +352,7 @@ public class QueryTests
         {
             Content = "TheContent"
         };
-        var fieldContext = new ResolveFieldContext
+        ResolveFieldContext fieldContext = new()
         {
             Arguments = new Dictionary<string, object>
             {
@@ -369,14 +369,14 @@ public class QueryTests
     [Fact]
     public Task RunInvalidInputQuery()
     {
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+        Thread.CurrentThread.CurrentUICulture = new("en-US");
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQLUserContext();
+        GraphQLUserContext userContext = new();
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
-        var fieldContext = new ResolveFieldContext
+        ResolveFieldContext fieldContext = new()
         {
             Arguments = new Dictionary<string, object>
             {

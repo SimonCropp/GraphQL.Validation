@@ -28,11 +28,11 @@ public class GraphQLControllerTests
             query
         };
         var serialized = JsonConvert.SerializeObject(body);
-        using var content = new StringContent(
+        using StringContent content = new(
             serialized,
             Encoding.UTF8,
             "application/json");
-        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
+        using HttpRequestMessage request = new(HttpMethod.Post, "graphql")
         {
             Content = content
         };
@@ -43,9 +43,9 @@ public class GraphQLControllerTests
 
     static TestServer GetTestServer()
     {
-        var hostBuilder = new WebHostBuilder();
+        WebHostBuilder hostBuilder = new();
         hostBuilder.UseStartup<Startup>();
-        return new TestServer(hostBuilder);
+        return new(hostBuilder);
     }
 }
 

@@ -19,7 +19,7 @@ namespace GraphQL
 
             validatorTypeCache.Freeze();
             executionOptions.SetCache(validatorTypeCache);
-            var validationMiddleware = new ValidationMiddleware();
+            ValidationMiddleware validationMiddleware = new();
             executionOptions.FieldMiddleware.Use(validationMiddleware);
             return executionOptions;
         }

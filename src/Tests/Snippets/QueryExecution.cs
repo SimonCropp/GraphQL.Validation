@@ -17,10 +17,10 @@ class QueryExecution
     {
         #region StartConfig
 
-        var validatorTypeCache = new ValidatorTypeCache();
+        ValidatorTypeCache validatorTypeCache = new();
         validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
-        var schema = new Schema();
-        var executer = new DocumentExecuter();
+        Schema schema = new();
+        DocumentExecuter executer = new();
 
         #endregion
     }
@@ -29,13 +29,13 @@ class QueryExecution
     {
         #region UseFluentValidation
 
-        var options = new ExecutionOptions
+        ExecutionOptions options = new()
         {
             Schema = schema,
             Query = queryString,
             Inputs = inputs
-        }
-        .UseFluentValidation(validatorTypeCache);
+        };
+        options.UseFluentValidation(validatorTypeCache);
 
         var executionResult = await executer.ExecuteAsync(options);
 
@@ -61,7 +61,7 @@ class QueryExecution
     {
         #region ExecuteQueryWithContextImplementingDictionary
 
-        var options = new ExecutionOptions
+        ExecutionOptions options = new()
         {
             Schema = schema,
             Query = queryString,
@@ -70,8 +70,8 @@ class QueryExecution
             (
                 myProperty: "the value"
             )
-        }
-        .UseFluentValidation(validatorTypeCache);
+        };
+        options.UseFluentValidation(validatorTypeCache);
 
         #endregion
     }
@@ -80,7 +80,7 @@ class QueryExecution
     {
         #region ExecuteQueryWithContextInsideDictionary
 
-        var options = new ExecutionOptions
+        ExecutionOptions options = new()
         {
             Schema = schema,
             Query = queryString,
@@ -95,8 +95,8 @@ class QueryExecution
                     )
                 }
             }
-        }
-        .UseFluentValidation(validatorTypeCache);
+        };
+        options.UseFluentValidation(validatorTypeCache);
 
         #endregion
     }
@@ -105,13 +105,13 @@ class QueryExecution
     {
         #region NoContext
 
-        var options = new ExecutionOptions
+        ExecutionOptions options = new()
         {
             Schema = schema,
             Query = queryString,
             Inputs = inputs
-        }
-        .UseFluentValidation(validatorTypeCache);
+        };
+        options.UseFluentValidation(validatorTypeCache);
 
         #endregion
     }

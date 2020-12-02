@@ -86,7 +86,7 @@ namespace GraphQL.FluentValidation
 
         static ValidationContext<TArgument> BuildValidationContext<TArgument>(TArgument instance, IDictionary<string, object> userContext)
         {
-            var validationContext = new ValidationContext<TArgument>(instance);
+            ValidationContext<TArgument> validationContext = new(instance);
             validationContext.RootContextData.Add("UserContext", userContext);
             return validationContext;
         }

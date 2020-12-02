@@ -16,7 +16,7 @@ public class QueryTests
     {
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQLUserContext();
+        GraphQLUserContext userContext = new();
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
@@ -25,7 +25,7 @@ public class QueryTests
         {
             Content = "TheContent"
         };
-        var fieldContext = new ResolveFieldContext
+        ResolveFieldContext fieldContext = new()
         {
             Arguments = new Dictionary<string, object>
             {
@@ -42,14 +42,14 @@ public class QueryTests
     [Fact]
     public Task RunInvalidInputQuery()
     {
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+        Thread.CurrentThread.CurrentUICulture = new("en-US");
         var field = new Query().GetField("inputQuery");
 
-        var userContext = new GraphQLUserContext();
+        GraphQLUserContext userContext = new();
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
-        var fieldContext = new ResolveFieldContext
+        ResolveFieldContext fieldContext = new()
         {
             Arguments = new Dictionary<string, object>
             {
