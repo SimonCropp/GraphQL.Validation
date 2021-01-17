@@ -13,7 +13,7 @@ namespace GraphQL
         /// Uses <see cref="IValidator.ValidateAsync(IValidationContext,CancellationToken)"/> to perform validation.
         /// If a <see cref="ValidationException"/> occurs it will be converted to <see cref="ExecutionError"/>s by a field middleware.
         /// </summary>
-        public static async Task<TArgument> GetValidatedArgumentAsync<TArgument>(this IResolveFieldContext context, string name, TArgument defaultValue = default)
+        public static async Task<TArgument> GetValidatedArgumentAsync<TArgument>(this IResolveFieldContext context, string name, TArgument defaultValue = default!)
         {
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(name, defaultValue);

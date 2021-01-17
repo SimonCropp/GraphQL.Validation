@@ -7,6 +7,6 @@ public class AsyncInputValidator :
     public AsyncInputValidator()
     {
         RuleFor(_ => _.Content)
-            .MustAsync((s, token) => Task.FromResult(!string.IsNullOrWhiteSpace(s)));
+            .MustAsync((s, _) => Task.FromResult(!string.IsNullOrWhiteSpace(s)));
     }
 }

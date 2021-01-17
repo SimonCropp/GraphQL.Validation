@@ -11,7 +11,7 @@ namespace GraphQL
         /// Uses <see cref="IValidator.Validate(IValidationContext)"/> to perform validation.
         /// If a <see cref="ValidationException"/> occurs it will be converted to <see cref="ExecutionError"/>s by a field middleware.
         /// </summary>
-        public static TArgument GetValidatedArgument<TArgument>(this IResolveFieldContext context, string name, TArgument defaultValue = default)
+        public static TArgument GetValidatedArgument<TArgument>(this IResolveFieldContext context, string name, TArgument defaultValue = default!)
         {
             Guard.AgainstNull(context, nameof(context));
             var argument = context.GetArgument(name, defaultValue);
