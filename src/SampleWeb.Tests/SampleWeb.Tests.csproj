@@ -12,4 +12,9 @@
     <ProjectReference Include="..\SampleWeb\SampleWeb.csproj" />
     <PackageReference Include="ProjectDefaults" Version="1.0.51" PrivateAssets="All" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="GraphQlC2ontrollerTests.RunQuery.verified.txt">
+      <DependentUpon>GraphQlC2ontrollerTests.cs</DependentUpon>
+    </None>
+  </ItemGroup>
 </Project>
