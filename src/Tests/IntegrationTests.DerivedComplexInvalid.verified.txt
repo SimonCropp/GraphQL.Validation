@@ -1,0 +1,19 @@
+{
+  "errors": [
+    {
+      "message": "Inner.Content: 'Content' must not be empty.",
+      "path": [
+        "Inner.Content"
+      ]
+    },
+    {
+      "message": "Items: 'Items' must not be empty.",
+      "path": [
+        "Items"
+      ]
+    }
+  ],
+  "data": {
+    "derivedComplexInputQuery": null
+  }
+}

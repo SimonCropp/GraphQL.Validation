@@ -146,6 +146,28 @@ public class IntegrationTests
     }
 
     [Fact]
+    public async Task DerivedComplexInvalid()
+    {
+        var queryString = @"
+{
+  derivedComplexInputQuery
+    (
+      input: {
+        inner: {
+          content: """"
+        },
+        items: []
+      }
+    )
+  {
+    data
+  }
+}";
+        var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
+        await Verifier.Verify(result);
+    }
+
+    [Fact]
     public async Task ComplexInvalid2()
     {
         var queryString = @"

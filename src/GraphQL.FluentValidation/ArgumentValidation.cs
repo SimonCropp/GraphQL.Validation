@@ -28,20 +28,27 @@ namespace GraphQL.FluentValidation
             Guard.AgainstNull(userContext, nameof(userContext));
             Guard.AgainstNull(type, nameof(type));
             Guard.AgainstNull(userContext, nameof(userContext));
-            if (!cache.TryGetValidators(type, provider, out var buildAll))
+
+            var currentType = (Type?)type;
+            var validationContext = default(ValidationContext<TArgument>);
+
+            while (currentType != null)
             {
-                return;
+                if (cache.TryGetValidators(currentType, provider, out var buildAll))
+                {
+                    validationContext ??= BuildValidationContext(instance, userContext);
+
+                    var tasks = buildAll.Select(x => x.ValidateAsync(validationContext, cancellation));
+                    var validationResults = await Task.WhenAll(tasks);
+
+                    var results = validationResults
+                        .SelectMany(result => result.Errors);
+
+                    ThrowIfResults(results);
+                }
+
+                currentType = currentType.BaseType;
             }
-
-            var validationContext = BuildValidationContext(instance, userContext);
-
-            var tasks = buildAll.Select(x => x.ValidateAsync(validationContext, cancellation));
-            var validationResults = await Task.WhenAll(tasks);
-
-            var results = validationResults
-                .SelectMany(result => result.Errors);
-
-            ThrowIfResults(results);
         }
 
         /// <summary>
@@ -63,16 +70,23 @@ namespace GraphQL.FluentValidation
             {
                 return;
             }
-            if (!cache.TryGetValidators(type, provider, out var buildAll))
+
+            var currentType = (Type?)type;
+            var validationContext = default(ValidationContext<TArgument>);
+
+            while (currentType != null)
             {
-                return;
+                if (cache.TryGetValidators(currentType, provider, out var buildAll))
+                {
+                    validationContext ??= BuildValidationContext(instance, userContext);
+                    var results = buildAll
+                        .SelectMany(validator => validator.Validate(validationContext).Errors);
+
+                    ThrowIfResults(results);
+                }
+
+                currentType = currentType.BaseType;
             }
-
-            var validationContext = BuildValidationContext(instance, userContext);
-            var results = buildAll
-                .SelectMany(validator => validator.Validate(validationContext).Errors);
-
-            ThrowIfResults(results);
         }
 
         static void ThrowIfResults(IEnumerable<ValidationFailure> results)
