@@ -33,6 +33,19 @@ public class Query :
             }
         );
 
+        Field<ResultGraph>(
+            "derivedComplexInputQuery",
+            arguments: new(new QueryArgument<DerivedComplexInputGraph> { Name = "input" }),
+            resolve: context =>
+            {
+                var input = context.GetValidatedArgument<DerivedComplexInput>("input");
+                return new Result
+                {
+                    Data = JsonConvert.SerializeObject(input)
+                };
+            }
+        );
+
         FieldAsync<ResultGraph>(
             "asyncQuery",
             arguments: new(new QueryArgument<InputGraph> { Name = "input" }),
