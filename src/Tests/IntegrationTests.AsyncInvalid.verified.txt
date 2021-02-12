@@ -4,7 +4,13 @@
       "message": "Content: The specified condition was not met for 'Content'.",
       "path": [
         "Content"
-      ]
+      ],
+      "extensions": {
+        "code": "AsyncPredicateValidator",
+        "codes": [
+          "AsyncPredicateValidator"
+        ]
+      }
     }
   ],
   "data": {

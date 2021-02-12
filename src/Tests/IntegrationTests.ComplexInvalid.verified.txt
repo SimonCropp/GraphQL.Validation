@@ -4,13 +4,25 @@
       "message": "Inner.Content: 'Content' must not be empty.",
       "path": [
         "Inner.Content"
-      ]
+      ],
+      "extensions": {
+        "code": "NotEmptyValidator",
+        "codes": [
+          "NotEmptyValidator"
+        ]
+      }
     },
     {
       "message": "Items: 'Items' must not be empty.",
       "path": [
         "Items"
-      ]
+      ],
+      "extensions": {
+        "code": "NotEmptyValidator",
+        "codes": [
+          "NotEmptyValidator"
+        ]
+      }
     }
   ],
   "data": {

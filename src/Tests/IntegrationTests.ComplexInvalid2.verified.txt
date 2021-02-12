@@ -4,13 +4,25 @@
       "message": "Inner: 'Inner' must not be empty.",
       "path": [
         "Inner"
-      ]
+      ],
+      "extensions": {
+        "code": "NotEmptyValidator",
+        "codes": [
+          "NotEmptyValidator"
+        ]
+      }
     },
     {
       "message": "Items: 'Items' must not be empty.",
       "path": [
         "Items"
-      ]
+      ],
+      "extensions": {
+        "code": "NotEmptyValidator",
+        "codes": [
+          "NotEmptyValidator"
+        ]
+      }
     }
   ],
   "data": {

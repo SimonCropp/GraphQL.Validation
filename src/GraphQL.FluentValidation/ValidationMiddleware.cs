@@ -26,7 +26,8 @@ class ValidationMiddleware : IFieldMiddleware
     {
         return new($"{failure.PropertyName}: {failure.ErrorMessage}")
         {
-            Path = new List<string> {failure.PropertyName}
+            Path = new List<string> {failure.PropertyName},
+            Code = failure.ErrorCode
         };
     }
 }
