@@ -36,9 +36,9 @@ namespace GraphQL.FluentValidation
         public ValidatorTypeCache(bool useDependencyInjection)
         {
             if (useDependencyInjection)
-                typeCacheDI = new Dictionary<Type, List<Type>>();
+                typeCacheDI = new();
             else
-                typeCache = new Dictionary<Type, List<IValidator>>();
+                typeCache = new();
         }
 
         private bool UseDI => typeCacheDI != null;
@@ -114,7 +114,7 @@ namespace GraphQL.FluentValidation
             {
                 if (throwIfNoneFound)
                 {
-                    throw new Exception($"No validators were found in {assembly.GetName().Name}.");
+                    throw new($"No validators were found in {assembly.GetName().Name}.");
                 }
                 return this;
             }

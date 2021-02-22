@@ -11,7 +11,7 @@ static class QueryExecutor
         Thread.CurrentThread.CurrentUICulture = new("en-US");
 
         queryString = queryString.Replace("'", "\"");
-        using var schema = new Schema();
+        using Schema schema = new();
         DocumentExecuter documentExecuter = new();
 
         ExecutionOptions executionOptions = new()

@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.NewtonsoftJson;
@@ -45,7 +44,7 @@ public class GraphQLController :
         JObject? variables,
         CancellationToken cancellation)
     {
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+        Thread.CurrentThread.CurrentUICulture = new("en-US");
 
         ExecutionOptions options = new()
         {

@@ -8,10 +8,10 @@ public static class ValidatorCacheBuilder
 
     static ValidatorCacheBuilder()
     {
-        Instance = new ValidatorTypeCache(useDependencyInjection: false);
+        Instance = new(useDependencyInjection: false);
         Instance.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
-        InstanceDI = new ValidatorTypeCache(useDependencyInjection: true);
+        InstanceDI = new(useDependencyInjection: true);
         InstanceDI.AddValidatorsFromAssembly(typeof(Startup).Assembly);
     }
 }
