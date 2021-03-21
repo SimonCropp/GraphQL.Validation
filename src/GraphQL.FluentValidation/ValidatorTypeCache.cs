@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using FluentValidation;
-using GraphQL.Utilities;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GraphQL.FluentValidation
 {
