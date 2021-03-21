@@ -99,9 +99,10 @@ Validators need to be added to the `ValidatorTypeCache`. This should be done onc
 ValidatorTypeCache validatorTypeCache = new();
 validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
 Schema schema = new();
+schema.UseFluentValidation();
 DocumentExecuter executer = new();
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L18-L25' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L18-L26' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
@@ -129,7 +130,7 @@ options.UseFluentValidation(validatorTypeCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L30-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-usefluentvalidation' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L31-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-usefluentvalidation' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -156,7 +157,7 @@ public class MyUserContext :
     public string MyProperty { get; }
 }
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L45-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L46-L59' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The `ExecutionOptions.UserContext` can then be set as follows:
@@ -176,7 +177,7 @@ ExecutionOptions options = new()
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L62-L76' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L63-L77' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -203,7 +204,7 @@ ExecutionOptions options = new()
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L81-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L82-L102' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -222,7 +223,7 @@ ExecutionOptions options = new()
 };
 options.UseFluentValidation(validatorTypeCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L106-L116' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L107-L117' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
@@ -354,10 +355,10 @@ public class QueryTests
         };
         ResolveFieldContext fieldContext = new()
         {
-            Arguments = new Dictionary<string, object>
+            Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", input
+                    "input", new ArgumentValue(input, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
@@ -376,12 +377,14 @@ public class QueryTests
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
+
+        var value = new Dictionary<string, object>();
         ResolveFieldContext fieldContext = new()
         {
-            Arguments = new Dictionary<string, object>
+            Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", new Dictionary<string, object>()
+                    "input", new ArgumentValue(value, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
@@ -392,7 +395,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L9-L67' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

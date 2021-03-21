@@ -20,6 +20,7 @@ class QueryExecution
         ValidatorTypeCache validatorTypeCache = new();
         validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
         Schema schema = new();
+        schema.UseFluentValidation();
         DocumentExecuter executer = new();
 
         #endregion
