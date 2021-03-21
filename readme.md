@@ -354,10 +354,10 @@ public class QueryTests
         };
         ResolveFieldContext fieldContext = new()
         {
-            Arguments = new Dictionary<string, object>
+            Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", input
+                    "input", new ArgumentValue(input, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
@@ -376,12 +376,14 @@ public class QueryTests
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
+
+        var value = new Dictionary<string, object>();
         ResolveFieldContext fieldContext = new()
         {
-            Arguments = new Dictionary<string, object>
+            Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", new Dictionary<string, object>()
+                    "input", new ArgumentValue(value, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
@@ -392,7 +394,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L9-L67' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L10-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
