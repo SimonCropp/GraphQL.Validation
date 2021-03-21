@@ -6,7 +6,6 @@ using GraphiQl;
 using GraphQL;
 using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
-using GraphQL.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +14,6 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        GraphTypeTypeRegistry.Register<MyInput, MyInputGraph>();
-        GraphTypeTypeRegistry.Register<Result, ResultGraph>();
-
         foreach (var type in GetGraphQLTypes())
         {
             services.AddSingleton(type);

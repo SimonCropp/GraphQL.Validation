@@ -3,10 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using GraphQL;
+using GraphQL.Execution;
 using VerifyXunit;
 using Xunit;
 
 #region QueryTests
+
 [UsesVerify]
 public class QueryTests
 {
@@ -26,10 +28,10 @@ public class QueryTests
         };
         ResolveFieldContext fieldContext = new()
         {
-            Arguments = new Dictionary<string, object>
+            Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", input
+                    "input", new ArgumentValue(input, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
@@ -48,12 +50,14 @@ public class QueryTests
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
+
+        var value = new Dictionary<string, object>();
         ResolveFieldContext fieldContext = new()
         {
-            Arguments = new Dictionary<string, object>
+            Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", new Dictionary<string, object>()
+                    "input", new ArgumentValue(value, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext

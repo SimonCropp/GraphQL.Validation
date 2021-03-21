@@ -13,7 +13,7 @@ static class QueryExecutor
         queryString = queryString.Replace("'", "\"");
         using Schema schema = new();
         DocumentExecuter documentExecuter = new();
-
+        schema.UseFluentValidation();
         ExecutionOptions executionOptions = new()
         {
             Schema = schema,

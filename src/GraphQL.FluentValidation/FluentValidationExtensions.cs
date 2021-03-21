@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using GraphQL.FluentValidation;
 using GraphQL.Instrumentation;
+using GraphQL.Types;
 
 namespace GraphQL
 {
@@ -19,9 +20,18 @@ namespace GraphQL
 
             validatorTypeCache.Freeze();
             executionOptions.SetCache(validatorTypeCache);
-            ValidationMiddleware validationMiddleware = new();
-            executionOptions.FieldMiddleware.Use(validationMiddleware);
             return executionOptions;
+        }
+
+        /// <summary>
+        /// Adds a FieldMiddleware to the GraphQL pipeline that converts a <see cref="ValidationException"/> to <see cref="ExecutionError"/>s./>
+        /// </summary>
+        public static void UseFluentValidation(this Schema schema)
+        {
+            Guard.AgainstNull(schema, nameof(schema));
+
+            ValidationMiddleware validationMiddleware = new();
+            schema.FieldMiddleware.Use(validationMiddleware);
         }
     }
 }
