@@ -18,7 +18,7 @@ class ValidationMiddleware : IFieldMiddleware
         {
             context.Errors.AddRange(validationException.Errors.Select(ToExecutionError));
 
-            return ReturnTypeFinder.Find(context);
+            return null;
         }
     }
 
