@@ -14,21 +14,6 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
 
 Support is available via a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-graphql.fluentvalidation?utm_source=nuget-graphql.fluentvalidation&utm_medium=referral&utm_campaign=enterprise).
 
-<!-- toc -->
-## Contents
-
-  * [Usage](#usage)
-    * [Define validators](#define-validators)
-    * [Setup Validators](#setup-validators)
-    * [Add to ExecutionOptions](#add-to-executionoptions)
-    * [UserContext must be a dictionary](#usercontext-must-be-a-dictionary)
-    * [Trigger validation](#trigger-validation)
-    * [Difference from IValidationRule](#difference-from-ivalidationrule)
-  * [Testing](#testing)
-    * [Integration](#integration)
-    * [Unit](#unit)
-  * [Security contact information](#security-contact-information)<!-- endToc -->
-
 
 ## NuGet package
 
