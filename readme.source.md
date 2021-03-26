@@ -7,8 +7,6 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
 
 Support is available via a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-graphql.fluentvalidation?utm_source=nuget-graphql.fluentvalidation&utm_medium=referral&utm_campaign=enterprise).
 
-toc
-
 
 ## NuGet package
 
