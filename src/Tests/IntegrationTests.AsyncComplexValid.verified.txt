@@ -1,7 +1,7 @@
 {
-  "data": {
-    "asyncComplexInputQuery": {
-      "data": "TheContent"
+  data: {
+    asyncComplexInputQuery: {
+      data: TheContent
     }
   }
 }

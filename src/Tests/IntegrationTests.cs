@@ -24,7 +24,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -57,7 +57,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -95,7 +95,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -142,7 +142,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -164,7 +164,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -184,7 +184,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -209,7 +209,7 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 
     [Fact]
@@ -231,6 +231,6 @@ public class IntegrationTests
   }
 }";
         var result = await QueryExecutor.ExecuteQuery(queryString, null, typeCache);
-        await Verifier.Verify(result);
+        await Verifier.VerifyJson(result);
     }
 }

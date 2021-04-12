@@ -1,7 +1,7 @@
 {
-  "data": {
-    "inputQuery": {
-      "data": "it was null"
+  data: {
+    inputQuery: {
+      data: it was null
     }
   }
 }

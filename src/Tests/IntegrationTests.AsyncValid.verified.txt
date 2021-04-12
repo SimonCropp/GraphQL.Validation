@@ -1,7 +1,7 @@
 {
-  "data": {
-    "asyncQuery": {
-      "data": "TheContent"
+  data: {
+    asyncQuery: {
+      data: TheContent
     }
   }
 }
