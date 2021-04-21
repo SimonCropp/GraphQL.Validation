@@ -1,19 +1,19 @@
-{
-  "errors": [
+﻿{
+  errors: [
     {
-      "message": "Content: 'Content' must not be empty.",
-      "path": [
-        "Content"
+      message: Content: 'Content' must not be empty.,
+      path: [
+        Content
       ],
-      "extensions": {
-        "code": "NotEmptyValidator",
-        "codes": [
-          "NotEmptyValidator"
+      extensions: {
+        code: NotEmptyValidator,
+        codes: [
+          NotEmptyValidator
         ]
       }
     }
   ],
-  "data": {
-    "inputQuery": null
+  data: {
+    inputQuery: null
   }
 }

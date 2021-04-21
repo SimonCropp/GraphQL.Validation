@@ -1,19 +1,19 @@
-{
-  "errors": [
+﻿{
+  errors: [
     {
-      "message": "Content: The specified condition was not met for 'Content'.",
-      "path": [
-        "Content"
+      message: Content: The specified condition was not met for 'Content'.,
+      path: [
+        Content
       ],
-      "extensions": {
-        "code": "AsyncPredicateValidator",
-        "codes": [
-          "AsyncPredicateValidator"
+      extensions: {
+        code: AsyncPredicateValidator,
+        codes: [
+          AsyncPredicateValidator
         ]
       }
     }
   ],
-  "data": {
-    "asyncQuery": null
+  data: {
+    asyncQuery: null
   }
 }

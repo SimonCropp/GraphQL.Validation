@@ -1,31 +1,31 @@
-{
-  "errors": [
+﻿{
+  errors: [
     {
-      "message": "Inner: Inner async test failed msg.",
-      "path": [
-        "Inner"
+      message: Inner: Inner async test failed msg.,
+      path: [
+        Inner
       ],
-      "extensions": {
-        "code": "AsyncPredicateValidator",
-        "codes": [
-          "AsyncPredicateValidator"
+      extensions: {
+        code: AsyncPredicateValidator,
+        codes: [
+          AsyncPredicateValidator
         ]
       }
     },
     {
-      "message": "Inner.Content: 'Content' must not be empty.",
-      "path": [
-        "Inner.Content"
+      message: Inner.Content: 'Content' must not be empty.,
+      path: [
+        Inner.Content
       ],
-      "extensions": {
-        "code": "NotEmptyValidator",
-        "codes": [
-          "NotEmptyValidator"
+      extensions: {
+        code: NotEmptyValidator,
+        codes: [
+          NotEmptyValidator
         ]
       }
     }
   ],
-  "data": {
-    "asyncComplexInputQuery": null
+  data: {
+    asyncComplexInputQuery: null
   }
 }
