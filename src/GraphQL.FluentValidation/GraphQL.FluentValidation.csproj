@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.0.4" />
-    <PackageReference Include="GraphQL" Version="4.3.0" />
+    <PackageReference Include="GraphQL" Version="4.4.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="ProjectDefaults" Version="1.0.54" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
