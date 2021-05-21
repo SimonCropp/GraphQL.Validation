@@ -5,8 +5,6 @@
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
-Support is available via a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-graphql.fluentvalidation?utm_source=nuget-graphql.fluentvalidation&utm_medium=referral&utm_campaign=enterprise).
-
 
 ## NuGet package
 
@@ -114,10 +112,6 @@ Unit tests can be run a specific field of a query:
 
 snippet: QueryTests
 
-
-## Security contact information
-
-To report a security vulnerability, use the [Tidelift security contact](https://tidelift.com/security). Tidelift will coordinate the fix and disclosure.
 
 
 ## Icon
