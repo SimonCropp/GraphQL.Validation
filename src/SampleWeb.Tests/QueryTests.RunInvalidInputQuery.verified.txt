@@ -1,2 +1,2 @@
-Validation failed: 
- -- Content: 'Content' must not be empty.
+﻿Validation failed: 
+ -- Content: 'Content' must not be empty. Severity: Error
