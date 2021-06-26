@@ -11,6 +11,6 @@
     <PackageReference Include="Verify.Xunit" Version="11.19.2" />
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="23.1.4" PrivateAssets="all" />
     <ProjectReference Include="..\GraphQL.FluentValidation\GraphQL.FluentValidation.csproj" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.54" PrivateAssets="All" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.56" PrivateAssets="All" />
   </ItemGroup>
 </Project>
