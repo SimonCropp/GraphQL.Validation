@@ -9,9 +9,10 @@ static class ArgumentTypeCacheBag
 
     public static void SetCache(this ExecutionOptions options, ValidatorTypeCache cache)
     {
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
         if (options.UserContext == null)
         {
-            options.UserContext = new Dictionary<string, object>
+            options.UserContext = new Dictionary<string, object?>
             {
                 { key, cache }
             };
@@ -21,7 +22,7 @@ static class ArgumentTypeCacheBag
         AddValidatorCache(options.UserContext, cache);
     }
 
-    internal static void AddValidatorCache(this IDictionary<string, object> dictionary, ValidatorTypeCache cache)
+    internal static void AddValidatorCache(this IDictionary<string, object?> dictionary, ValidatorTypeCache cache)
     {
         dictionary.Add(key, cache);
     }
@@ -35,7 +36,7 @@ static class ArgumentTypeCacheBag
 
         if (context.UserContext.TryGetValue(key, out var result))
         {
-            return (ValidatorTypeCache)result;
+            return (ValidatorTypeCache)result!;
         }
 
         throw new($"Could not extract {nameof(ValidatorTypeCache)} from {nameof(IResolveFieldContext)}.{nameof(IResolveFieldContext.UserContext)}. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");

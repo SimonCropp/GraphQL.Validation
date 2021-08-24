@@ -46,7 +46,7 @@ class QueryExecution
     #region ContextImplementingDictionary
 
     public class MyUserContext :
-        Dictionary<string, object>
+        Dictionary<string, object?>
     {
         public MyUserContext(string myProperty)
         {
@@ -86,7 +86,7 @@ class QueryExecution
             Schema = schema,
             Query = queryString,
             Inputs = inputs,
-            UserContext = new Dictionary<string, object>
+            UserContext = new Dictionary<string, object?>
             {
                 {
                     "MyUserContext",
