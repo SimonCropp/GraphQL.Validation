@@ -24,11 +24,6 @@ namespace GraphQL.FluentValidation
         /// </summary>
         public static async Task ValidateAsync<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object> userContext, IServiceProvider? provider, CancellationToken cancellation = default)
         {
-            Guard.AgainstNull(cache, nameof(cache));
-            Guard.AgainstNull(userContext, nameof(userContext));
-            Guard.AgainstNull(type, nameof(type));
-            Guard.AgainstNull(userContext, nameof(userContext));
-
             var currentType = (Type?)type;
             var validationContext = default(ValidationContext<TArgument>);
 
@@ -62,10 +57,6 @@ namespace GraphQL.FluentValidation
         /// </summary>
         public static void Validate<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object> userContext, IServiceProvider? provider)
         {
-            Guard.AgainstNull(cache, nameof(cache));
-            Guard.AgainstNull(userContext, nameof(userContext));
-            Guard.AgainstNull(type, nameof(type));
-            Guard.AgainstNull(userContext, nameof(userContext));
             if (instance == null)
             {
                 return;

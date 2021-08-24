@@ -15,9 +15,6 @@ namespace GraphQL
         /// </summary>
         public static ExecutionOptions UseFluentValidation(this ExecutionOptions executionOptions, ValidatorTypeCache validatorTypeCache)
         {
-            Guard.AgainstNull(executionOptions, nameof(executionOptions));
-            Guard.AgainstNull(validatorTypeCache, nameof(validatorTypeCache));
-
             validatorTypeCache.Freeze();
             executionOptions.SetCache(validatorTypeCache);
             return executionOptions;
@@ -28,8 +25,6 @@ namespace GraphQL
         /// </summary>
         public static void UseFluentValidation(this Schema schema)
         {
-            Guard.AgainstNull(schema, nameof(schema));
-
             ValidationMiddleware validationMiddleware = new();
             schema.FieldMiddleware.Use(validationMiddleware);
         }

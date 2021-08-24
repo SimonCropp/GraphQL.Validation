@@ -13,7 +13,6 @@ namespace GraphQL
         /// </summary>
         public static T UserContext<T>(this IValidationContext validationContext)
         {
-            Guard.AgainstNull(validationContext, nameof(validationContext));
             return (T)validationContext.RootContextData["UserContext"];
         }
 

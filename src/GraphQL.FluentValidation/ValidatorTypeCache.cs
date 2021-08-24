@@ -60,8 +60,6 @@ namespace GraphQL.FluentValidation
         {
             if (UseDI)
             {
-                Guard.AgainstNull(provider, nameof(provider));
-
                 if (typeCacheDI!.TryGetValue(argumentType, out var validatorInfo))
                 {
                     validators = validatorInfo.Select(t => (IValidator)provider!.GetRequiredService(t));
@@ -97,7 +95,6 @@ namespace GraphQL.FluentValidation
         /// </summary>
         public ValidatorTypeCache AddValidatorsFromAssemblyContaining(Type type, bool throwIfNoneFound = true)
         {
-            Guard.AgainstNull(type, nameof(type));
             return AddValidatorsFromAssembly(type.Assembly, throwIfNoneFound);
         }
 
@@ -106,7 +103,6 @@ namespace GraphQL.FluentValidation
         /// </summary>
         public ValidatorTypeCache AddValidatorsFromAssembly(Assembly assembly, bool throwIfNoneFound = true)
         {
-            Guard.AgainstNull(assembly, nameof(assembly));
             ThrowIfFrozen();
 
             var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
