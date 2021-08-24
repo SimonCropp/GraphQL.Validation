@@ -130,7 +130,7 @@ Given a user context class of the following form:
 <a id='snippet-contextimplementingdictionary'></a>
 ```cs
 public class MyUserContext :
-    Dictionary<string, object>
+    Dictionary<string, object?>
 {
     public MyUserContext(string myProperty)
     {
@@ -174,7 +174,7 @@ ExecutionOptions options = new()
     Schema = schema,
     Query = queryString,
     Inputs = inputs,
-    UserContext = new Dictionary<string, object>
+    UserContext = new Dictionary<string, object?>
     {
         {
             "MyUserContext",
@@ -325,7 +325,7 @@ public class QueryTests
     [Fact]
     public Task RunInputQuery()
     {
-        var field = new Query().GetField("inputQuery");
+        var field = new Query().GetField("inputQuery")!;
 
         GraphQLUserContext userContext = new();
         FluentValidationExtensions.AddCacheToContext(
@@ -346,7 +346,7 @@ public class QueryTests
             },
             UserContext = userContext
         };
-        var result = (Result) field.Resolver.Resolve(fieldContext);
+        var result = (Result) field.Resolver!.Resolve(fieldContext)!;
         return Verifier.Verify(result);
     }
 
@@ -354,7 +354,7 @@ public class QueryTests
     public Task RunInvalidInputQuery()
     {
         Thread.CurrentThread.CurrentUICulture = new("en-US");
-        var field = new Query().GetField("inputQuery");
+        var field = new Query().GetField("inputQuery")!;
 
         GraphQLUserContext userContext = new();
         FluentValidationExtensions.AddCacheToContext(
@@ -373,7 +373,7 @@ public class QueryTests
             UserContext = userContext
         };
         var exception = Assert.Throws<ValidationException>(
-            () => field.Resolver.Resolve(fieldContext));
+            () => field.Resolver!.Resolve(fieldContext));
         return Verifier.Verify(exception.Message);
     }
 }

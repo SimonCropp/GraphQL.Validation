@@ -7,10 +7,10 @@ public class ComplexInputListItemGraph :
     {
         Field<NonNullGraphType<IntGraphType>>()
             .Name("id")
-            .Resolve(ctx => ctx.Source.Id);
+            .Resolve(ctx => ctx.Source!.Id);
 
         Field<StringGraphType, string?>()
             .Name("content")
-            .Resolve(ctx => ctx.Source.Content);
+            .Resolve(ctx => ctx.Source!.Content);
     }
 }
