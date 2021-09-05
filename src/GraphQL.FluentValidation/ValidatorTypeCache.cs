@@ -46,7 +46,7 @@ namespace GraphQL.FluentValidation
 
         private bool UseDI => typeCacheDI != null;
 
-        internal void Freeze()
+        public void Freeze()
         {
             isFrozen = true;
         }
