@@ -10,15 +10,15 @@ class QueryExecution
     string queryString = null!;
     Inputs inputs = null!;
     Schema schema = null!;
-    ValidatorTypeCache validatorTypeCache = null!;
+    ValidatorInstanceCache validatorCache = null!;
     DocumentExecuter executer = null!;
 
     void ExecuteQuery(Assembly assemblyContainingValidators)
     {
         #region StartConfig
 
-        ValidatorTypeCache validatorTypeCache = new();
-        validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
+        ValidatorInstanceCache validatorCache = new();
+        validatorCache.AddValidatorsFromAssembly(assemblyContainingValidators);
         Schema schema = new();
         schema.UseFluentValidation();
         DocumentExecuter executer = new();
@@ -36,7 +36,7 @@ class QueryExecution
             Query = queryString,
             Inputs = inputs
         };
-        options.UseFluentValidation(validatorTypeCache);
+        options.UseFluentValidation(validatorCache);
 
         var executionResult = await executer.ExecuteAsync(options);
 
@@ -72,7 +72,7 @@ class QueryExecution
                 myProperty: "the value"
             )
         };
-        options.UseFluentValidation(validatorTypeCache);
+        options.UseFluentValidation(validatorCache);
 
         #endregion
     }
@@ -97,7 +97,7 @@ class QueryExecution
                 }
             }
         };
-        options.UseFluentValidation(validatorTypeCache);
+        options.UseFluentValidation(validatorCache);
 
         #endregion
     }
@@ -112,7 +112,7 @@ class QueryExecution
             Query = queryString,
             Inputs = inputs
         };
-        options.UseFluentValidation(validatorTypeCache);
+        options.UseFluentValidation(validatorCache);
 
         #endregion
     }

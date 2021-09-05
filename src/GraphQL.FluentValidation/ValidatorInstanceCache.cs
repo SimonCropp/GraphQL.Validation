@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GraphQL.FluentValidation
 {
     /// <summary>
-    /// Cache for all <see cref="IValidator"/>.
+    /// Cache for all <see cref="IValidator"/> instances.
     /// Should only be configured once at startup time.
-    /// Uses <see cref="IServiceProvider"/> for resolving <see cref="IValidator"/>s.
+    /// Uses <see cref="Activator.CreateInstance(Type)"/> to create <see cref="IValidator"/>s.
     /// </summary>
-    public class ValidatorTypeCache : IValidatorCache
+    public class ValidatorInstanceCache : IValidatorCache
     {
-        Dictionary<Type, List<Type>>? cache = new();
+        Dictionary<Type, List<IValidator>>? cache = new();
 
         public bool IsFrozen { get; private set; }
 
@@ -27,7 +27,7 @@ namespace GraphQL.FluentValidation
         {
             if (cache!.TryGetValue(argumentType, out var validatorInfo))
             {
-                validators = validatorInfo.Select(t => (IValidator)provider!.GetRequiredService(t));
+                validators = validatorInfo;
                 return true;
             }
 
@@ -37,13 +37,19 @@ namespace GraphQL.FluentValidation
 
         public void AddResult(AssemblyScanner.AssemblyScanResult result)
         {
+            if (result.ValidatorType.GetConstructor(Array.Empty<Type>()) == null)
+            {
+                Trace.WriteLine($"Ignoring ''{result.ValidatorType.FullName}'' since it does not have a public parameterless constructor.");
+                return;
+            }
+
             var single = result.InterfaceType.GenericTypeArguments.Single();
             if (!cache!.TryGetValue(single, out var list))
             {
                 cache[single] = list = new();
             }
 
-            list.Add(result.ValidatorType);
+            list.Add((IValidator)Activator.CreateInstance(result.ValidatorType, true)!);
         }
     }
 }

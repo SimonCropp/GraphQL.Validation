@@ -2,16 +2,16 @@
 
 public static class ValidatorCacheBuilder
 {
-    public static ValidatorTypeCache Instance;
+    public static ValidatorInstanceCache Instance;
 
     public static ValidatorTypeCache InstanceDI;
 
     static ValidatorCacheBuilder()
     {
-        Instance = new(useDependencyInjection: false);
+        Instance = new();
         Instance.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
-        InstanceDI = new(useDependencyInjection: true);
+        InstanceDI = new();
         InstanceDI.AddValidatorsFromAssembly(typeof(Startup).Assembly);
     }
 }
