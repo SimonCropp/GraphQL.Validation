@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -14,7 +15,13 @@ namespace GraphQL.FluentValidation
     /// </summary>
     public class ValidatorInstanceCache : IValidatorCache
     {
-        Dictionary<Type, List<IValidator>> cache = new();
+        Func<Type, IValidator?>? fallback;
+        ConcurrentDictionary<Type, List<IValidator>> cache = new();
+
+        public ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null)
+        {
+            this.fallback = fallback;
+        }
 
         public bool IsFrozen { get; private set; }
 
@@ -25,14 +32,21 @@ namespace GraphQL.FluentValidation
 
         public bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
         {
-            if (cache.TryGetValue(argumentType, out var validatorInfo))
-            {
-                validators = validatorInfo;
-                return true;
-            }
+            var list = cache.GetOrAdd(
+                argumentType,
+                type =>
+                {
+                    var validator = fallback?.Invoke(type);
+                    if (validator == null)
+                    {
+                        return new();
+                    }
 
-            validators = null;
-            return false;
+                    return new() { validator };
+                });
+
+            validators = list;
+            return list.Any();
         }
 
         public void AddResult(AssemblyScanner.AssemblyScanResult result)

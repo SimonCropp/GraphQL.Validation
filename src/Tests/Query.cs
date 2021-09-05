@@ -8,6 +8,18 @@ public class Query :
     public Query()
     {
         Field<ResultGraph>(
+            "noValidatorQuery",
+            arguments: new(new QueryArgument<NoValidatorInputGraph> { Name = "input"}),
+            resolve: context =>
+            {
+                var input = context.GetValidatedArgument<NoValidatorInput?>("input");
+                return new Result
+                {
+                    Data = input?.Content ?? "it was null"
+                };
+            }
+        );
+        Field<ResultGraph>(
             "inputQuery",
             arguments: new(new QueryArgument<InputGraph> { Name = "input"}),
             resolve: context =>

@@ -1,0 +1,19 @@
+﻿{
+  data: {
+    noValidatorQuery: null
+  },
+  errors: [
+    {
+      extensions: {
+        code: NotEmptyValidator,
+        codes: [
+          NotEmptyValidator
+        ]
+      },
+      message: Content: 'Content' must not be empty.,
+      path: [
+        Content
+      ]
+    }
+  ]
+}
