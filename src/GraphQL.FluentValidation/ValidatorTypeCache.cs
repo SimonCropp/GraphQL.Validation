@@ -52,7 +52,7 @@ namespace GraphQL.FluentValidation
             isFrozen = true;
         }
 
-        void ThrowIfFrozen()
+        public void ThrowIfFrozen()
         {
             if (isFrozen)
             {
@@ -86,28 +86,61 @@ namespace GraphQL.FluentValidation
             }
         }
 
+        public void AddResult(AssemblyScanner.AssemblyScanResult result)
+        {
+            if (UseDI)
+            {
+                var single = result.InterfaceType.GenericTypeArguments.Single();
+                if (!typeCacheDI!.TryGetValue(single, out var list))
+                {
+                    typeCacheDI[single] = list = new();
+                }
+
+                list.Add(result.ValidatorType);
+            }
+            else
+            {
+                if (result.ValidatorType.GetConstructor(Array.Empty<Type>()) == null)
+                {
+                    Trace.WriteLine($"Ignoring ''{result.ValidatorType.FullName}'' since it does not have a public parameterless constructor.");
+                    return;
+                }
+
+                var single = result.InterfaceType.GenericTypeArguments.Single();
+                if (!typeCache!.TryGetValue(single, out var list))
+                {
+                    typeCache[single] = list = new();
+                }
+
+                list.Add((IValidator)Activator.CreateInstance(result.ValidatorType, true)!);
+            }
+        }
+    }
+
+    public static class ValidatorCacheExtensions
+    {
         /// <summary>
         /// Add all <see cref="IValidator"/>s from the assembly that contains <typeparamref name="T"/>.
         /// </summary>
-        public ValidatorTypeCache AddValidatorsFromAssemblyContaining<T>(bool throwIfNoneFound = true)
+        public static ValidatorTypeCache AddValidatorsFromAssemblyContaining<T>(this ValidatorTypeCache cache, bool throwIfNoneFound = true)
         {
-            return AddValidatorsFromAssemblyContaining(typeof(T), throwIfNoneFound);
+            return AddValidatorsFromAssemblyContaining(cache, typeof(T), throwIfNoneFound);
         }
 
         /// <summary>
         /// Add all <see cref="IValidator"/>s from the assembly that contains <paramref name="type"/>.
         /// </summary>
-        public ValidatorTypeCache AddValidatorsFromAssemblyContaining(Type type, bool throwIfNoneFound = true)
+        public static ValidatorTypeCache AddValidatorsFromAssemblyContaining(this ValidatorTypeCache cache, Type type, bool throwIfNoneFound = true)
         {
-            return AddValidatorsFromAssembly(type.Assembly, throwIfNoneFound);
+            return AddValidatorsFromAssembly(cache, type.Assembly, throwIfNoneFound);
         }
 
         /// <summary>
         /// Add all <see cref="IValidator"/>s in <paramref name="assembly"/>.
         /// </summary>
-        public ValidatorTypeCache AddValidatorsFromAssembly(Assembly assembly, bool throwIfNoneFound = true)
+        public static ValidatorTypeCache AddValidatorsFromAssembly(this ValidatorTypeCache cache, Assembly assembly, bool throwIfNoneFound = true)
         {
-            ThrowIfFrozen();
+            cache.ThrowIfFrozen();
 
             var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
             if (!results.Any())
@@ -116,7 +149,8 @@ namespace GraphQL.FluentValidation
                 {
                     throw new($"No validators were found in {assembly.GetName().Name}.");
                 }
-                return this;
+
+                return cache;
             }
 
             foreach (var result in results)
@@ -127,34 +161,10 @@ namespace GraphQL.FluentValidation
                     continue;
                 }
 
-                if (UseDI)
-                {
-                    var single = result.InterfaceType.GenericTypeArguments.Single();
-                    if (!typeCacheDI!.TryGetValue(single, out var list))
-                    {
-                        typeCacheDI[single] = list = new();
-                    }
-
-                    list.Add(validatorType);
-                }
-                else
-                {
-                    if (validatorType.GetConstructor(Array.Empty<Type>()) == null)
-                    {
-                        Trace.WriteLine($"Ignoring ''{validatorType.FullName}'' since it does not have a public parameterless constructor.");
-                        continue;
-                    }
-                    var single = result.InterfaceType.GenericTypeArguments.Single();
-                    if (!typeCache!.TryGetValue(single, out var list))
-                    {
-                        typeCache[single] = list = new();
-                    }
-
-                    list.Add((IValidator)Activator.CreateInstance(validatorType, true)!);
-                }
+                cache.AddResult(result);
             }
 
-            return this;
+            return cache;
         }
     }
 }
