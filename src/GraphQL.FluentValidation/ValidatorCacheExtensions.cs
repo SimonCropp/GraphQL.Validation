@@ -7,18 +7,18 @@ namespace GraphQL.FluentValidation
 {
     public static class ValidatorCacheExtensions
     {
-        static void ThrowIfFrozen(this ValidatorTypeCache cache)
+        static void ThrowIfFrozen(this IValidatorCache cache)
         {
             if (cache.IsFrozen)
             {
-                throw new InvalidOperationException($"{nameof(ValidatorTypeCache)} cannot be changed once it has been used. Use a new instance instead.");
+                throw new InvalidOperationException($"{nameof(IValidatorCache)} cannot be changed once it has been used. Use a new instance instead.");
             }
         }
 
         /// <summary>
         /// Add all <see cref="IValidator"/>s from the assembly that contains <typeparamref name="T"/>.
         /// </summary>
-        public static ValidatorTypeCache AddValidatorsFromAssemblyContaining<T>(this ValidatorTypeCache cache, bool throwIfNoneFound = true)
+        public static IValidatorCache AddValidatorsFromAssemblyContaining<T>(this IValidatorCache cache, bool throwIfNoneFound = true)
         {
             return AddValidatorsFromAssemblyContaining(cache, typeof(T), throwIfNoneFound);
         }
@@ -26,7 +26,7 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Add all <see cref="IValidator"/>s from the assembly that contains <paramref name="type"/>.
         /// </summary>
-        public static ValidatorTypeCache AddValidatorsFromAssemblyContaining(this ValidatorTypeCache cache, Type type, bool throwIfNoneFound = true)
+        public static IValidatorCache AddValidatorsFromAssemblyContaining(this IValidatorCache cache, Type type, bool throwIfNoneFound = true)
         {
             return AddValidatorsFromAssembly(cache, type.Assembly, throwIfNoneFound);
         }
@@ -34,7 +34,7 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Add all <see cref="IValidator"/>s in <paramref name="assembly"/>.
         /// </summary>
-        public static ValidatorTypeCache AddValidatorsFromAssembly(this ValidatorTypeCache cache, Assembly assembly, bool throwIfNoneFound = true)
+        public static IValidatorCache AddValidatorsFromAssembly(this IValidatorCache cache, Assembly assembly, bool throwIfNoneFound = true)
         {
             cache.ThrowIfFrozen();
 

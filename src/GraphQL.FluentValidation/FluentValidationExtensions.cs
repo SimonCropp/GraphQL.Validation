@@ -13,7 +13,7 @@ namespace GraphQL
         /// <summary>
         /// Adds a FieldMiddleware to the GraphQL pipeline that converts a <see cref="ValidationException"/> to <see cref="ExecutionError"/>s./>
         /// </summary>
-        public static ExecutionOptions UseFluentValidation(this ExecutionOptions executionOptions, ValidatorTypeCache validatorTypeCache)
+        public static ExecutionOptions UseFluentValidation(this ExecutionOptions executionOptions, IValidatorCache validatorTypeCache)
         {
             validatorTypeCache.Freeze();
             executionOptions.SetCache(validatorTypeCache);

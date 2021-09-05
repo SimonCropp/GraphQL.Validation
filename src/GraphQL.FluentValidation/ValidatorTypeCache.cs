@@ -8,11 +8,19 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GraphQL.FluentValidation
 {
+    public interface IValidatorCache
+    {
+        bool IsFrozen { get; }
+        void Freeze();
+        bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators);
+        void AddResult(AssemblyScanner.AssemblyScanResult result);
+    }
+
     /// <summary>
     /// Cache for all <see cref="IValidator"/>.
     /// Should only be configured once at startup time.
     /// </summary>
-    public class ValidatorTypeCache
+    public class ValidatorTypeCache : IValidatorCache
     {
         Dictionary<Type, List<IValidator>>? typeCache;
         Dictionary<Type, List<Type>>? typeCacheDI;
@@ -52,7 +60,7 @@ namespace GraphQL.FluentValidation
             IsFrozen = true;
         }
 
-        internal bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
+        public bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
         {
             if (UseDI)
             {

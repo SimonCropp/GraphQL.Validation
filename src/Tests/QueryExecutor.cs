@@ -6,7 +6,7 @@ using GraphQL.NewtonsoftJson;
 
 static class QueryExecutor
 {
-    public static async Task<string> ExecuteQuery(string queryString, Inputs? inputs, ValidatorTypeCache cache)
+    public static async Task<string> ExecuteQuery(string queryString, Inputs? inputs, IValidatorCache cache)
     {
         Thread.CurrentThread.CurrentUICulture = new("en-US");
 
