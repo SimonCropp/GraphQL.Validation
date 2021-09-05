@@ -36,9 +36,13 @@ namespace GraphQL.FluentValidation
         public ValidatorTypeCache(bool useDependencyInjection)
         {
             if (useDependencyInjection)
+            {
                 typeCacheDI = new();
+            }
             else
+            {
                 typeCache = new();
+            }
         }
 
         private bool UseDI => typeCacheDI != null;
