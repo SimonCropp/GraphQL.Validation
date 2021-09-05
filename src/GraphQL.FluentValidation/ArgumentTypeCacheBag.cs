@@ -7,7 +7,7 @@ static class ArgumentTypeCacheBag
 {
     const string key = "GraphQL.FluentValidation.ValidatorTypeCache";
 
-    public static void SetCache(this ExecutionOptions options, ValidatorTypeCache cache)
+    public static void SetCache(this ExecutionOptions options, IValidatorCache cache)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse
         if (options.UserContext == null)
@@ -22,12 +22,12 @@ static class ArgumentTypeCacheBag
         AddValidatorCache(options.UserContext, cache);
     }
 
-    internal static void AddValidatorCache(this IDictionary<string, object?> dictionary, ValidatorTypeCache cache)
+    internal static void AddValidatorCache(this IDictionary<string, object?> dictionary, IValidatorCache cache)
     {
         dictionary.Add(key, cache);
     }
 
-    public static ValidatorTypeCache GetCache(this IResolveFieldContext context)
+    public static IValidatorCache GetCache(this IResolveFieldContext context)
     {
         if (context.UserContext == null)
         {
@@ -36,10 +36,10 @@ static class ArgumentTypeCacheBag
 
         if (context.UserContext.TryGetValue(key, out var result))
         {
-            return (ValidatorTypeCache)result!;
+            return (IValidatorCache)result!;
         }
 
-        throw new($"Could not extract {nameof(ValidatorTypeCache)} from {nameof(IResolveFieldContext)}.{nameof(IResolveFieldContext.UserContext)}. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
+        throw new($"Could not extract {nameof(IValidatorCache)} from {nameof(IResolveFieldContext)}.{nameof(IResolveFieldContext.UserContext)}. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
     }
 
     static Exception NotDictionary()

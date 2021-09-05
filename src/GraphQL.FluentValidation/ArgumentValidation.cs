@@ -16,13 +16,13 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static Task ValidateAsync<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext)
+        public static Task ValidateAsync<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext)
             => ValidateAsync(cache, type, instance, userContext, null);
 
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static async Task ValidateAsync<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider, CancellationToken cancellation = default)
+        public static async Task ValidateAsync<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider, CancellationToken cancellation = default)
         {
             var currentType = (Type?)type;
             var validationContext = default(ValidationContext<TArgument>);
@@ -49,13 +49,13 @@ namespace GraphQL.FluentValidation
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static void Validate<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext)
+        public static void Validate<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext)
             => Validate(cache, type, instance, userContext, null);
 
         /// <summary>
         /// Validate an instance
         /// </summary>
-        public static void Validate<TArgument>(ValidatorTypeCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider)
+        public static void Validate<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider)
         {
             if (instance == null)
             {

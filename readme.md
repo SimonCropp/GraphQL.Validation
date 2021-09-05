@@ -79,8 +79,8 @@ Validators need to be added to the `ValidatorTypeCache`. This should be done onc
 <!-- snippet: StartConfig -->
 <a id='snippet-startconfig'></a>
 ```cs
-ValidatorTypeCache validatorTypeCache = new();
-validatorTypeCache.AddValidatorsFromAssembly(assemblyContainingValidators);
+ValidatorInstanceCache validatorCache = new();
+validatorCache.AddValidatorsFromAssembly(assemblyContainingValidators);
 Schema schema = new();
 schema.UseFluentValidation();
 DocumentExecuter executer = new();
@@ -109,7 +109,7 @@ ExecutionOptions options = new()
     Query = queryString,
     Inputs = inputs
 };
-options.UseFluentValidation(validatorTypeCache);
+options.UseFluentValidation(validatorCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
@@ -158,7 +158,7 @@ ExecutionOptions options = new()
         myProperty: "the value"
     )
 };
-options.UseFluentValidation(validatorTypeCache);
+options.UseFluentValidation(validatorCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L63-L77' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -185,7 +185,7 @@ ExecutionOptions options = new()
         }
     }
 };
-options.UseFluentValidation(validatorTypeCache);
+options.UseFluentValidation(validatorCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L82-L102' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -204,7 +204,7 @@ ExecutionOptions options = new()
     Query = queryString,
     Inputs = inputs
 };
-options.UseFluentValidation(validatorTypeCache);
+options.UseFluentValidation(validatorCache);
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L107-L117' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->

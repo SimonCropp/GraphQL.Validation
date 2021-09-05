@@ -6,7 +6,7 @@ using Xunit;
 [UsesVerify]
 public class IntegrationTests
 {
-    static ValidatorTypeCache typeCache = new ValidatorTypeCache().AddValidatorsFromAssemblyContaining<IntegrationTests>();
+    static IValidatorCache typeCache = new ValidatorInstanceCache().AddValidatorsFromAssemblyContaining<IntegrationTests>();
 
     [Fact]
     public async Task AsyncValid()
