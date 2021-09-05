@@ -4,7 +4,7 @@ public static class ValidatorCacheBuilder
 {
     public static ValidatorInstanceCache Instance;
 
-    public static ValidatorTypeCache InstanceDI;
+    public static ValidatorServiceCache InstanceDI;
 
     static ValidatorCacheBuilder()
     {

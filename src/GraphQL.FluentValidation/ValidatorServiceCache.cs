@@ -12,7 +12,7 @@ namespace GraphQL.FluentValidation
     /// Should only be configured once at startup time.
     /// Uses <see cref="IServiceProvider"/> for resolving <see cref="IValidator"/>s.
     /// </summary>
-    public class ValidatorTypeCache : IValidatorCache
+    public class ValidatorServiceCache : IValidatorCache
     {
         Dictionary<Type, List<Type>>? cache = new();
 
