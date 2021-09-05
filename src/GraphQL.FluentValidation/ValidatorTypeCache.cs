@@ -16,7 +16,6 @@ namespace GraphQL.FluentValidation
     {
         Dictionary<Type, List<IValidator>>? typeCache;
         Dictionary<Type, List<Type>>? typeCacheDI;
-        bool isFrozen;
 
         /// <summary>
         /// Create cache with default DI behavior i.e. cache creates all validators itself.
@@ -46,17 +45,11 @@ namespace GraphQL.FluentValidation
 
         private bool UseDI => typeCacheDI != null;
 
+        public bool IsFrozen { get; private set; }
+
         public void Freeze()
         {
-            isFrozen = true;
-        }
-
-        public void ThrowIfFrozen()
-        {
-            if (isFrozen)
-            {
-                throw new InvalidOperationException($"{nameof(ValidatorTypeCache)} cannot be changed once it has been used. Use a new instance instead.");
-            }
+            IsFrozen = true;
         }
 
         internal bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)

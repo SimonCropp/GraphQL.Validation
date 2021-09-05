@@ -7,6 +7,14 @@ namespace GraphQL.FluentValidation
 {
     public static class ValidatorCacheExtensions
     {
+        static void ThrowIfFrozen(this ValidatorTypeCache cache)
+        {
+            if (cache.IsFrozen)
+            {
+                throw new InvalidOperationException($"{nameof(ValidatorTypeCache)} cannot be changed once it has been used. Use a new instance instead.");
+            }
+        }
+
         /// <summary>
         /// Add all <see cref="IValidator"/>s from the assembly that contains <typeparamref name="T"/>.
         /// </summary>
