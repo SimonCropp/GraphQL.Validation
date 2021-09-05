@@ -128,7 +128,7 @@ namespace GraphQL.FluentValidation
                     var single = result.InterfaceType.GenericTypeArguments.Single();
                     if (!typeCacheDI!.TryGetValue(single, out var list))
                     {
-                        typeCacheDI[single] = list = new List<Type>();
+                        typeCacheDI[single] = list = new();
                     }
 
                     list.Add(validatorType);

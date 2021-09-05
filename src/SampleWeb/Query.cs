@@ -10,7 +10,7 @@ public class Query :
     {
         Field<ResultGraph>(
             "inputQuery",
-            arguments: new QueryArguments(
+            arguments: new(
                 new QueryArgument<MyInputGraph>
                 {
                     Name = "input"
