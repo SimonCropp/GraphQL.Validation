@@ -5,5 +5,6 @@
     <PackageTags>GraphQL, Validation, FluentValidation</PackageTags>
     <Description>Add FluentValidation (https://fluentvalidation.net/) support to GraphQL.net (https://github.com/graphql-dotnet/graphql-dotnet)</Description>
     <SignAssembly>false</SignAssembly>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
 </Project>
