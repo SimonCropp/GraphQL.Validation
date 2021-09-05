@@ -14,7 +14,7 @@ namespace GraphQL.FluentValidation
     /// </summary>
     public class ValidatorServiceCache : IValidatorCache
     {
-        Dictionary<Type, List<Type>>? cache = new();
+        Dictionary<Type, List<Type>> cache = new();
 
         public bool IsFrozen { get; private set; }
 
@@ -25,7 +25,7 @@ namespace GraphQL.FluentValidation
 
         public bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
         {
-            if (cache!.TryGetValue(argumentType, out var validatorInfo))
+            if (cache.TryGetValue(argumentType, out var validatorInfo))
             {
                 validators = validatorInfo.Select(t => (IValidator)provider!.GetRequiredService(t));
                 return true;
@@ -38,7 +38,7 @@ namespace GraphQL.FluentValidation
         public void AddResult(AssemblyScanner.AssemblyScanResult result)
         {
             var single = result.InterfaceType.GenericTypeArguments.Single();
-            if (!cache!.TryGetValue(single, out var list))
+            if (!cache.TryGetValue(single, out var list))
             {
                 cache[single] = list = new();
             }
