@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using FluentValidation;
+﻿using FluentValidation;
 
 static class ModuleInitializer
 {

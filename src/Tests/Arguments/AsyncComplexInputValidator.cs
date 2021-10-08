@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using System.Threading.Tasks;
 
 public class AsyncComplexInputValidator :
     AbstractValidator<AsyncComplexInput>

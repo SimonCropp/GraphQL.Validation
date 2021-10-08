@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using GraphQL.FluentValidation;
+﻿using GraphQL.FluentValidation;
 using VerifyXunit;
 using Xunit;
 

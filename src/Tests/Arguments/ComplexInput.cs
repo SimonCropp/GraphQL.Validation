@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public class ComplexInput
+﻿public class ComplexInput
 {
     public ComplexInputInner? Inner { get; set; }
 

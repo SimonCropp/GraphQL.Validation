@@ -1,6 +1,4 @@
-﻿using System;
-
-public class Schema : GraphQL.Types.Schema
+﻿public class Schema : GraphQL.Types.Schema
 {
     public Schema(IServiceProvider serviceProvider, Query query) :
         base(serviceProvider)
