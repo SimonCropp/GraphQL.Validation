@@ -4,7 +4,6 @@ using GraphQL;
 using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 public class Startup
@@ -21,7 +20,6 @@ public class Startup
         services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
         services.AddSingleton<IDocumentWriter, DocumentWriter>();
         var mvc = services.AddMvc(option => option.EnableEndpointRouting = false);
-        mvc.SetCompatibilityVersion(CompatibilityVersion.Latest);
         mvc.AddNewtonsoftJson();
     }
 
