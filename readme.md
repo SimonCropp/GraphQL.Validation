@@ -308,7 +308,7 @@ public class GraphQLControllerTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L8-L50' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L5-L47' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -378,7 +378,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L7-L68' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L5-L66' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

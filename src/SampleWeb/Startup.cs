@@ -3,8 +3,6 @@ using GraphiQl;
 using GraphQL;
 using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 public class Startup
 {

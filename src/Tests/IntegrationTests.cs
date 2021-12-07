@@ -1,6 +1,4 @@
 ﻿using GraphQL.FluentValidation;
-using VerifyXunit;
-using Xunit;
 
 [UsesVerify]
 public class IntegrationTests

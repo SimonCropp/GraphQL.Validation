@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using GraphQL;
 using GraphQL.Execution;
-using VerifyXunit;
-using Xunit;
 
 #region QueryTests
 
