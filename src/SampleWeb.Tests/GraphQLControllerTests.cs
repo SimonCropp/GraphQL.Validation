@@ -33,7 +33,7 @@ public class GraphQLControllerTests
         };
         using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
-        await Verifier.Verify(await response.Content.ReadAsStringAsync());
+        await Verify(await response.Content.ReadAsStringAsync());
     }
 
     static TestServer GetTestServer()
