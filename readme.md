@@ -297,7 +297,7 @@ public class GraphQLControllerTests
         };
         using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
-        await Verifier.Verify(await response.Content.ReadAsStringAsync());
+        await Verify(await response.Content.ReadAsStringAsync());
     }
 
     static TestServer GetTestServer()
@@ -347,7 +347,7 @@ public class QueryTests
             UserContext = userContext
         };
         var result = (Result) field.Resolver!.Resolve(fieldContext)!;
-        return Verifier.Verify(result);
+        return Verify(result);
     }
 
     [Fact]
@@ -374,7 +374,7 @@ public class QueryTests
         };
         var exception = Assert.Throws<ValidationException>(
             () => field.Resolver!.Resolve(fieldContext));
-        return Verifier.Verify(exception.Message);
+        return Verify(exception.Message);
     }
 }
 ```
