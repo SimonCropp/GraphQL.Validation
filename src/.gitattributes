@@ -1,10 +1,5 @@
-# Auto detect text files and perform LF normalization
 * text
 .editorconfig -text
 *.sln.DotSettings -text
-
-# Denote all files that are truly binary and should not be modified.
 *.snk binary
 *.png binary
-*.approved.txt binary
-
