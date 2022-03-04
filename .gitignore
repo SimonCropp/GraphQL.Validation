@@ -1,11 +1,9 @@
-# Build results
-[Bb]in/
-[Oo]bj/
-
-# Visual Studio 2015/2017/2019 cache/options directory
-.vs/
-
-*.received.txt
-*.received.json
+*.suo
 *.user
+bin/
+obj/
+.vs/
+*.DotSettings.user
+.idea/
+*.received.*
 nugets/
