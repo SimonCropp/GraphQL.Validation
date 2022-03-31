@@ -21,7 +21,7 @@ public class QueryTests
         {
             Content = "TheContent"
         };
-        ResolveFieldContext fieldContext = new()
+        var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, ArgumentValue>
             {
@@ -41,13 +41,13 @@ public class QueryTests
         Thread.CurrentThread.CurrentUICulture = new("en-US");
         var field = new Query().GetField("inputQuery")!;
 
-        GraphQLUserContext userContext = new();
+        var userContext = new GraphQLUserContext();
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
 
         var value = new Dictionary<string, object>();
-        ResolveFieldContext fieldContext = new()
+        var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, ArgumentValue>
             {
