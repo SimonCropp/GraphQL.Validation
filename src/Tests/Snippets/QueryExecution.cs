@@ -14,11 +14,11 @@ class QueryExecution
     {
         #region StartConfig
 
-        ValidatorInstanceCache validatorCache = new();
+        var validatorCache = new ValidatorInstanceCache();
         validatorCache.AddValidatorsFromAssembly(assemblyContainingValidators);
-        Schema schema = new();
+        var schema = new Schema();
         schema.UseFluentValidation();
-        DocumentExecuter executer = new();
+        var executer = new DocumentExecuter();
 
         #endregion
     }
