@@ -75,11 +75,11 @@ Validators need to be added to the `ValidatorTypeCache`. This should be done onc
 <!-- snippet: StartConfig -->
 <a id='snippet-startconfig'></a>
 ```cs
-ValidatorInstanceCache validatorCache = new();
+var validatorCache = new ValidatorInstanceCache();
 validatorCache.AddValidatorsFromAssembly(assemblyContainingValidators);
-Schema schema = new();
+var schema = new Schema();
 schema.UseFluentValidation();
-DocumentExecuter executer = new();
+var executer = new DocumentExecuter();
 ```
 <sup><a href='/src/Tests/Snippets/QueryExecution.cs#L15-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -99,7 +99,7 @@ Validation needs to be added to any instance of `ExecutionOptions`.
 <!-- snippet: UseFluentValidation -->
 <a id='snippet-usefluentvalidation'></a>
 ```cs
-ExecutionOptions options = new()
+var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
@@ -142,7 +142,7 @@ The `ExecutionOptions.UserContext` can then be set as follows:
 <!-- snippet: ExecuteQueryWithContextImplementingDictionary -->
 <a id='snippet-executequerywithcontextimplementingdictionary'></a>
 ```cs
-ExecutionOptions options = new()
+var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
@@ -163,7 +163,7 @@ options.UseFluentValidation(validatorCache);
 <!-- snippet: ExecuteQueryWithContextInsideDictionary -->
 <a id='snippet-executequerywithcontextinsidedictionary'></a>
 ```cs
-ExecutionOptions options = new()
+var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
@@ -192,7 +192,7 @@ If no instance is passed to `ExecutionOptions.UserContext`:
 <!-- snippet: NoContext -->
 <a id='snippet-nocontext'></a>
 ```cs
-ExecutionOptions options = new()
+var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
@@ -328,7 +328,7 @@ public class QueryTests
         {
             Content = "TheContent"
         };
-        ResolveFieldContext fieldContext = new()
+        var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, ArgumentValue>
             {
@@ -348,13 +348,13 @@ public class QueryTests
         Thread.CurrentThread.CurrentUICulture = new("en-US");
         var field = new Query().GetField("inputQuery")!;
 
-        GraphQLUserContext userContext = new();
+        var userContext = new GraphQLUserContext();
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);
 
         var value = new Dictionary<string, object>();
-        ResolveFieldContext fieldContext = new()
+        var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, ArgumentValue>
             {
