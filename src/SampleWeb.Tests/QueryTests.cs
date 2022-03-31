@@ -12,7 +12,7 @@ public class QueryTests
     {
         var field = new Query().GetField("inputQuery")!;
 
-        GraphQLUserContext userContext = new();
+        var userContext = new GraphQLUserContext();
         FluentValidationExtensions.AddCacheToContext(
             userContext,
             ValidatorCacheBuilder.Instance);

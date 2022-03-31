@@ -38,7 +38,7 @@ public class GraphQLControllerTests
 
     static TestServer GetTestServer()
     {
-        WebHostBuilder hostBuilder = new();
+        var hostBuilder = new WebHostBuilder();
         hostBuilder.UseStartup<Startup>();
         return new(hostBuilder);
     }
