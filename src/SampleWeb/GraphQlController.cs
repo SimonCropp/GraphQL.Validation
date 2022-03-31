@@ -44,7 +44,7 @@ public class GraphQLController :
     {
         Thread.CurrentThread.CurrentUICulture = new("en-US");
 
-        ExecutionOptions options = new()
+        var options = new ExecutionOptions
         {
             Schema = schema,
             Query = query,
