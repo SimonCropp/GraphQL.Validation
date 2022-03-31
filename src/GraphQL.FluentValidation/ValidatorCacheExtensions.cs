@@ -7,18 +7,14 @@ public static class ValidatorCacheExtensions
     /// <summary>
     /// Add all <see cref="IValidator"/>s from the assembly that contains <typeparamref name="T"/>.
     /// </summary>
-    public static IValidatorCache AddValidatorsFromAssemblyContaining<T>(this IValidatorCache cache, bool throwIfNoneFound = true)
-    {
-        return AddValidatorsFromAssemblyContaining(cache, typeof(T), throwIfNoneFound);
-    }
+    public static IValidatorCache AddValidatorsFromAssemblyContaining<T>(this IValidatorCache cache, bool throwIfNoneFound = true) =>
+        AddValidatorsFromAssemblyContaining(cache, typeof(T), throwIfNoneFound);
 
     /// <summary>
     /// Add all <see cref="IValidator"/>s from the assembly that contains <paramref name="type"/>.
     /// </summary>
-    public static IValidatorCache AddValidatorsFromAssemblyContaining(this IValidatorCache cache, Type type, bool throwIfNoneFound = true)
-    {
-        return AddValidatorsFromAssembly(cache, type.Assembly, throwIfNoneFound);
-    }
+    public static IValidatorCache AddValidatorsFromAssemblyContaining(this IValidatorCache cache, Type type, bool throwIfNoneFound = true) =>
+        AddValidatorsFromAssembly(cache, type.Assembly, throwIfNoneFound);
 
     /// <summary>
     /// Add all <see cref="IValidator"/>s in <paramref name="assembly"/>.

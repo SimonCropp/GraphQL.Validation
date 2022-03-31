@@ -6,8 +6,7 @@ using GraphQL.Types;
 public class Query :
     ObjectGraphType
 {
-    public Query()
-    {
+    public Query() =>
         Field<ResultGraph>(
             "inputQuery",
             arguments: new(
@@ -25,7 +24,6 @@ public class Query :
                 };
             }
         );
-    }
 }
 
 #endregion

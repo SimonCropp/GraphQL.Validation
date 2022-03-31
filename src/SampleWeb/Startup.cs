@@ -21,14 +21,12 @@ public class Startup
         mvc.AddNewtonsoftJson();
     }
 
-    static IEnumerable<Type> GetGraphQLTypes()
-    {
-        return typeof(Startup).Assembly
+    static IEnumerable<Type> GetGraphQLTypes() =>
+        typeof(Startup).Assembly
             .GetTypes()
             .Where(x => !x.IsAbstract &&
                         (typeof(IObjectGraphType).IsAssignableFrom(x) ||
                          typeof(IInputObjectGraphType).IsAssignableFrom(x)));
-    }
 
     public void Configure(IApplicationBuilder builder)
     {

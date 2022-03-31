@@ -45,10 +45,8 @@ class QueryExecution
     public class MyUserContext :
         Dictionary<string, object?>
     {
-        public MyUserContext(string myProperty)
-        {
+        public MyUserContext(string myProperty) =>
             MyProperty = myProperty;
-        }
 
         public string MyProperty { get; }
     }

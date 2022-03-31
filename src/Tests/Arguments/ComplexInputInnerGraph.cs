@@ -3,10 +3,8 @@
 public class ComplexInputInnerGraph :
     InputObjectGraphType<ComplexInputInner>
 {
-    public ComplexInputInnerGraph()
-    {
+    public ComplexInputInnerGraph() =>
         Field<StringGraphType, string?>()
             .Name("content")
-            .Resolve(ctx => ctx.Source!.Content);
-    }
+            .Resolve(ctx => ctx.Source.Content);
 }

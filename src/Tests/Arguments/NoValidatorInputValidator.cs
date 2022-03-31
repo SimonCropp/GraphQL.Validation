@@ -4,9 +4,7 @@
 public class NoValidatorInputValidator<T> :
     AbstractValidator<NoValidatorInput>
 {
-    public NoValidatorInputValidator()
-    {
+    public NoValidatorInputValidator() =>
         RuleFor(_ => _.Content)
             .NotEmpty();
-    }
 }

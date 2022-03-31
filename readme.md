@@ -44,13 +44,11 @@ And graph:
 public class MyInputGraph :
     InputObjectGraphType
 {
-    public MyInputGraph()
-    {
+    public MyInputGraph() =>
         Field<StringGraphType>("content");
-    }
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInputGraph.cs#L3-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-graph' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInputGraph.cs#L3-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-graph' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 A custom validator can be defined as follows:
@@ -61,14 +59,12 @@ A custom validator can be defined as follows:
 public class MyInputValidator :
     AbstractValidator<MyInput>
 {
-    public MyInputValidator()
-    {
+    public MyInputValidator() =>
         RuleFor(_ => _.Content)
             .NotEmpty();
-    }
 }
 ```
-<sup><a href='/src/SampleWeb/Graphs/MyInputValidator.cs#L3-L13' title='Snippet source file'>snippet source</a> | <a href='#snippet-validator' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Graphs/MyInputValidator.cs#L3-L11' title='Snippet source file'>snippet source</a> | <a href='#snippet-validator' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -132,15 +128,13 @@ Given a user context class of the following form:
 public class MyUserContext :
     Dictionary<string, object?>
 {
-    public MyUserContext(string myProperty)
-    {
+    public MyUserContext(string myProperty) =>
         MyProperty = myProperty;
-    }
 
     public string MyProperty { get; }
 }
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L43-L56' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L43-L54' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The `ExecutionOptions.UserContext` can then be set as follows:
@@ -160,7 +154,7 @@ ExecutionOptions options = new()
 };
 options.UseFluentValidation(validatorCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L60-L74' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L58-L72' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -187,7 +181,7 @@ ExecutionOptions options = new()
 };
 options.UseFluentValidation(validatorCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L79-L99' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L77-L97' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -206,7 +200,7 @@ ExecutionOptions options = new()
 };
 options.UseFluentValidation(validatorCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L104-L114' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L102-L112' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
@@ -222,8 +216,7 @@ To trigger the validation, when reading arguments use `GetValidatedArgument` ins
 public class Query :
     ObjectGraphType
 {
-    public Query()
-    {
+    public Query() =>
         Field<ResultGraph>(
             "inputQuery",
             arguments: new(
@@ -241,10 +234,9 @@ public class Query :
                 };
             }
         );
-    }
 }
 ```
-<sup><a href='/src/SampleWeb/Query.cs#L4-L31' title='Snippet source file'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Query.cs#L4-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

@@ -3,9 +3,7 @@
 public class InputValidator :
     AbstractValidator<Input>
 {
-    public InputValidator()
-    {
+    public InputValidator() =>
         RuleFor(_ => _.Content)
             .NotEmpty();
-    }
 }

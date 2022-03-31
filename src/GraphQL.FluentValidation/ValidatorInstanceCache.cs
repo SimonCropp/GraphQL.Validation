@@ -13,17 +13,13 @@ public class ValidatorInstanceCache : IValidatorCache
     Func<Type, IValidator?>? fallback;
     ConcurrentDictionary<Type, List<IValidator>> cache = new();
 
-    public ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null)
-    {
+    public ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null) =>
         this.fallback = fallback;
-    }
 
     public bool IsFrozen { get; private set; }
 
-    public void Freeze()
-    {
+    public void Freeze() =>
         IsFrozen = true;
-    }
 
     public bool TryGetValidators(Type argumentType, IServiceProvider? provider, [NotNullWhen(true)] out IEnumerable<IValidator>? validators)
     {

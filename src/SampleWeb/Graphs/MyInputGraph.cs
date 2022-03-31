@@ -4,9 +4,7 @@
 public class MyInputGraph :
     InputObjectGraphType
 {
-    public MyInputGraph()
-    {
+    public MyInputGraph() =>
         Field<StringGraphType>("content");
-    }
 }
 #endregion

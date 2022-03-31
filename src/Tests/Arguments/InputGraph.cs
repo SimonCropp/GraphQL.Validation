@@ -3,8 +3,6 @@
 public class InputGraph :
     InputObjectGraphType
 {
-    public InputGraph()
-    {
+    public InputGraph() =>
         Field<StringGraphType>("content");
-    }
 }

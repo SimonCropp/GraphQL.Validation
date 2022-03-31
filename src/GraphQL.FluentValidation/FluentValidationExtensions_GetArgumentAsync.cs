@@ -10,10 +10,8 @@ public static partial class FluentValidationExtensions
     /// Uses <see cref="IValidator.ValidateAsync(IValidationContext,CancellationToken)"/> to perform validation.
     /// If a <see cref="ValidationException"/> occurs it will be converted to <see cref="ExecutionError"/>s by a field middleware.
     /// </summary>
-    public static Task<TArgument> GetValidatedArgumentAsync<TArgument>(this IResolveFieldContext context, string name)
-    {
-        return GetValidatedArgumentAsync<TArgument>(context, name, default!);
-    }
+    public static Task<TArgument> GetValidatedArgumentAsync<TArgument>(this IResolveFieldContext context, string name) =>
+        GetValidatedArgumentAsync<TArgument>(context, name, default!);
 
     /// <summary>
     /// Wraps <see cref="ResolveFieldContextExtensions.GetArgument{TType}"/> to validate the resulting argument instance.
@@ -33,10 +31,8 @@ public static partial class FluentValidationExtensions
     /// Uses <see cref="IValidator.ValidateAsync(IValidationContext,CancellationToken)"/> to perform validation.
     /// If a <see cref="ValidationException"/> occurs it will be converted to <see cref="ExecutionError"/>s by a field middleware.
     /// </summary>
-    public static Task<object> GetValidatedArgumentAsync(this IResolveFieldContext context, Type argumentType, string name)
-    {
-        return GetValidatedArgumentAsync(context, argumentType, name, default!);
-    }
+    public static Task<object> GetValidatedArgumentAsync(this IResolveFieldContext context, Type argumentType, string name) =>
+        GetValidatedArgumentAsync(context, argumentType, name, default!);
 
     /// <summary>
     /// Wraps <see cref="ResolveFieldContextExtensions.GetArgument{TType}"/> to validate the resulting argument instance.

@@ -3,8 +3,6 @@
 public class NoValidatorInputGraph :
     InputObjectGraphType
 {
-    public NoValidatorInputGraph()
-    {
+    public NoValidatorInputGraph() =>
         Field<StringGraphType>("content");
-    }
 }

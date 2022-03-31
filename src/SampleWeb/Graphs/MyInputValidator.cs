@@ -4,10 +4,8 @@
 public class MyInputValidator :
     AbstractValidator<MyInput>
 {
-    public MyInputValidator()
-    {
+    public MyInputValidator() =>
         RuleFor(_ => _.Content)
             .NotEmpty();
-    }
 }
 #endregion

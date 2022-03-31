@@ -3,8 +3,6 @@
 public class AsyncComplexInputGraph :
     InputObjectGraphType
 {
-    public AsyncComplexInputGraph()
-    {
+    public AsyncComplexInputGraph() =>
         Field<ComplexInputInnerGraph>("inner");
-    }
 }
