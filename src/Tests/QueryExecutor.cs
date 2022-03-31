@@ -11,8 +11,8 @@ static class QueryExecutor
         queryString = queryString.Replace("'", "\"");
         using var schema = new Schema();
         schema.UseFluentValidation();
-        DocumentExecuter documentExecuter = new();
-        ExecutionOptions executionOptions = new()
+        var documentExecuter = new DocumentExecuter();
+        var executionOptions = new ExecutionOptions
         {
             Schema = schema,
             Query = queryString,
