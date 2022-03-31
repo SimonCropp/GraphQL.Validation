@@ -27,7 +27,7 @@ class QueryExecution
     {
         #region UseFluentValidation
 
-        ExecutionOptions options = new()
+        var options = new ExecutionOptions
         {
             Schema = schema,
             Query = queryString,
@@ -101,7 +101,7 @@ class QueryExecution
     {
         #region NoContext
 
-        ExecutionOptions options = new()
+        var options = new ExecutionOptions
         {
             Schema = schema,
             Query = queryString,
