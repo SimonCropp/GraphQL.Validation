@@ -57,7 +57,7 @@ class QueryExecution
     {
         #region ExecuteQueryWithContextImplementingDictionary
 
-        ExecutionOptions options = new()
+        var options = new ExecutionOptions
         {
             Schema = schema,
             Query = queryString,
@@ -76,7 +76,7 @@ class QueryExecution
     {
         #region ExecuteQueryWithContextInsideDictionary
 
-        ExecutionOptions options = new()
+        var options = new ExecutionOptions
         {
             Schema = schema,
             Query = queryString,
