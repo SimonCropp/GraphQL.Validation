@@ -31,7 +31,7 @@ class QueryExecution
         {
             Schema = schema,
             Query = queryString,
-            Inputs = inputs
+            Variables = inputs
         };
         options.UseFluentValidation(validatorCache);
 
@@ -61,7 +61,7 @@ class QueryExecution
         {
             Schema = schema,
             Query = queryString,
-            Inputs = inputs,
+            Variables = inputs,
             UserContext = new MyUserContext
             (
                 myProperty: "the value"
@@ -80,7 +80,7 @@ class QueryExecution
         {
             Schema = schema,
             Query = queryString,
-            Inputs = inputs,
+            Variables = inputs,
             UserContext = new Dictionary<string, object?>
             {
                 {
@@ -105,7 +105,7 @@ class QueryExecution
         {
             Schema = schema,
             Query = queryString,
-            Inputs = inputs
+            Variables = inputs
         };
         options.UseFluentValidation(validatorCache);
 

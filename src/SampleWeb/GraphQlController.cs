@@ -1,9 +1,8 @@
 ﻿using GraphQL;
-using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Newtonsoft.Json.Linq;
+using GraphQL.Transport;
 
 [Route("[controller]")]
 [ApiController]
@@ -12,34 +11,27 @@ public class GraphQLController :
 {
     ISchema schema;
     IDocumentExecuter executer;
-    IDocumentWriter writer;
+    IGraphQLSerializer serializer;
 
-    public GraphQLController(ISchema schema, IDocumentExecuter executer, IDocumentWriter writer)
+    public GraphQLController(ISchema schema, IDocumentExecuter executer, IGraphQLSerializer serializer)
     {
         this.schema = schema;
         this.executer = executer;
-        this.writer = writer;
+        this.serializer = serializer;
     }
 
     [HttpPost]
-    public async Task<string> Post(
-        [BindRequired, FromBody] PostBody body,
+    public async Task Post(
+        [BindRequired, FromBody] GraphQLRequest request,
         CancellationToken cancellation)
     {
-        var result = await Execute(body.Query, body.OperationName, body.Variables, cancellation);
-        return await writer.WriteToStringAsync(result);
-    }
-
-    public class PostBody
-    {
-        public string? OperationName;
-        public string Query = null!;
-        public JObject? Variables;
+        var result = await Execute(request.Query, request.OperationName, request.Variables, cancellation);
+        await serializer.WriteAsync(Response.Body, result, cancellation);
     }
 
     Task<ExecutionResult> Execute(string query,
         string? operationName,
-        JObject? variables,
+        Inputs? variables,
         CancellationToken cancellation)
     {
         Thread.CurrentThread.CurrentUICulture = new("en-US");
@@ -49,7 +41,7 @@ public class GraphQLController :
             Schema = schema,
             Query = query,
             OperationName = operationName,
-            Inputs = variables?.ToInputs(),
+            Variables = variables,
             CancellationToken = cancellation,
 #if (DEBUG)
             ThrowOnUnhandledException = true,

@@ -16,11 +16,15 @@ static class QueryExecutor
         {
             Schema = schema,
             Query = queryString,
-            Inputs = inputs
+            Variables = inputs
         };
         executionOptions.UseFluentValidation(cache);
 
         var result = await documentExecuter.ExecuteAsync(executionOptions);
-        return await new DocumentWriter(indent: true).WriteToStringAsync(result);
+        var stream = new MemoryStream();
+        await new GraphQLSerializer(indent: true).WriteAsync(stream, result);
+        stream.Position = 0;
+        var reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using GraphiQl;
 using GraphQL;
-using GraphQL.NewtonsoftJson;
+using GraphQL.SystemTextJson;
 using GraphQL.Types;
 
 public class Startup
@@ -16,7 +16,7 @@ public class Startup
         services.AddValidatorsFromAssemblyContaining<Startup>();
         services.AddSingleton<ISchema, Schema>();
         services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
-        services.AddSingleton<IDocumentWriter, DocumentWriter>();
+        services.AddSingleton<IGraphQLSerializer, GraphQLSerializer>();
         var mvc = services.AddMvc(option => option.EnableEndpointRouting = false);
         mvc.AddNewtonsoftJson();
     }

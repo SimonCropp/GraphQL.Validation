@@ -8,7 +8,7 @@ using GraphQL.Execution;
 public class QueryTests
 {
     [Fact]
-    public Task RunInputQuery()
+    public async Task RunInputQuery()
     {
         var field = new Query().GetField("inputQuery")!;
 
@@ -31,8 +31,8 @@ public class QueryTests
             },
             UserContext = userContext
         };
-        var result = (Result) field.Resolver!.Resolve(fieldContext)!;
-        return Verify(result);
+        var result = await field.Resolver!.ResolveAsync(fieldContext);
+        await Verify(result);
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class QueryTests
             UserContext = userContext
         };
         var exception = Assert.Throws<ValidationException>(
-            () => field.Resolver!.Resolve(fieldContext));
+            () => field.Resolver!.ResolveAsync(fieldContext));
         return Verify(exception.Message);
     }
 }

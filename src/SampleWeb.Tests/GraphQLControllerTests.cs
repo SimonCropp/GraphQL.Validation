@@ -27,7 +27,7 @@ public class GraphQLControllerTests
             serialized,
             Encoding.UTF8,
             "application/json");
-        using HttpRequestMessage request = new(HttpMethod.Post, "graphql")
+        using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
         {
             Content = content
         };

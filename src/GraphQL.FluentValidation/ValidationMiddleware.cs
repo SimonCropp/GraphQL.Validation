@@ -5,7 +5,14 @@ using GraphQL.Instrumentation;
 
 class ValidationMiddleware : IFieldMiddleware
 {
-    public async Task<object?> Resolve(IResolveFieldContext context, FieldMiddlewareDelegate next)
+    static ExecutionError ToExecutionError(ValidationFailure failure) =>
+        new($"{failure.PropertyName}: {failure.ErrorMessage}")
+        {
+            Path = new List<string> {failure.PropertyName},
+            Code = failure.ErrorCode
+        };
+
+    public async ValueTask<object?> ResolveAsync(IResolveFieldContext context, FieldMiddlewareDelegate next)
     {
         try
         {
@@ -18,11 +25,4 @@ class ValidationMiddleware : IFieldMiddleware
             return null;
         }
     }
-
-    static ExecutionError ToExecutionError(ValidationFailure failure) =>
-        new($"{failure.PropertyName}: {failure.ErrorMessage}")
-        {
-            Path = new List<string> {failure.PropertyName},
-            Code = failure.ErrorCode
-        };
 }

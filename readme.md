@@ -103,7 +103,7 @@ var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
-    Inputs = inputs
+    Variables = inputs
 };
 options.UseFluentValidation(validatorCache);
 
@@ -146,7 +146,7 @@ var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
-    Inputs = inputs,
+    Variables = inputs,
     UserContext = new MyUserContext
     (
         myProperty: "the value"
@@ -167,7 +167,7 @@ var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
-    Inputs = inputs,
+    Variables = inputs,
     UserContext = new Dictionary<string, object?>
     {
         {
@@ -196,7 +196,7 @@ var options = new ExecutionOptions
 {
     Schema = schema,
     Query = queryString,
-    Inputs = inputs
+    Variables = inputs
 };
 options.UseFluentValidation(validatorCache);
 ```
@@ -315,7 +315,7 @@ Unit tests can be run a specific field of a query:
 public class QueryTests
 {
     [Fact]
-    public Task RunInputQuery()
+    public async Task RunInputQuery()
     {
         var field = new Query().GetField("inputQuery")!;
 
@@ -338,8 +338,8 @@ public class QueryTests
             },
             UserContext = userContext
         };
-        var result = (Result) field.Resolver!.Resolve(fieldContext)!;
-        return Verify(result);
+        var result = await field.Resolver!.ResolveAsync(fieldContext);
+        await Verify(result);
     }
 
     [Fact]
@@ -365,7 +365,7 @@ public class QueryTests
             UserContext = userContext
         };
         var exception = Assert.Throws<ValidationException>(
-            () => field.Resolver!.Resolve(fieldContext));
+            () => field.Resolver!.ResolveAsync(fieldContext));
         return Verify(exception.Message);
     }
 }
