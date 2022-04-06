@@ -29,7 +29,8 @@ public class GraphQLController :
         await serializer.WriteAsync(Response.Body, result, cancellation);
     }
 
-    Task<ExecutionResult> Execute(string query,
+    Task<ExecutionResult> Execute(
+        string query,
         string? operationName,
         Inputs? variables,
         CancellationToken cancellation)
