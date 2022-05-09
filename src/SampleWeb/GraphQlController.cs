@@ -25,7 +25,7 @@ public class GraphQLController :
         [BindRequired, FromBody] GraphQLRequest request,
         CancellationToken cancellation)
     {
-        var result = await Execute(request.Query, request.OperationName, request.Variables, cancellation);
+        var result = await Execute(request.Query!, request.OperationName, request.Variables, cancellation);
         await serializer.WriteAsync(Response.Body, result, cancellation);
     }
 
