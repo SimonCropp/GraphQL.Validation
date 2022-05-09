@@ -17,8 +17,7 @@ public class Startup
         services.AddSingleton<ISchema, Schema>();
         services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
         services.AddSingleton<IGraphQLSerializer, GraphQLSerializer>();
-        var mvc = services.AddMvc(option => option.EnableEndpointRouting = false);
-        mvc.AddNewtonsoftJson();
+        services.AddMvc(option => option.EnableEndpointRouting = false);
     }
 
     static IEnumerable<Type> GetGraphQLTypes() =>

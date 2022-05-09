@@ -1,9 +1,11 @@
 ﻿using GraphQL;
 using GraphQL.FluentValidation;
-using GraphQL.NewtonsoftJson;
+using GraphQL.SystemTextJson;
 
 static class QueryExecutor
 {
+    static GraphQLSerializer graphQlSerializer = new(indent: true);
+
     public static async Task<string> ExecuteQuery(string queryString, Inputs? inputs, IValidatorCache cache)
     {
         Thread.CurrentThread.CurrentUICulture = new("en-US");
@@ -22,7 +24,7 @@ static class QueryExecutor
 
         var result = await documentExecuter.ExecuteAsync(executionOptions);
         var stream = new MemoryStream();
-        await new GraphQLSerializer(indent: true).WriteAsync(stream, result);
+        await graphQlSerializer.WriteAsync(stream, result);
         stream.Position = 0;
         var reader = new StreamReader(stream);
         return reader.ReadToEnd();
