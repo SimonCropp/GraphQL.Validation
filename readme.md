@@ -281,8 +281,7 @@ public class GraphQLControllerTests
             Content = content
         };
         using var response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-        await Verify(response.Content.ReadAsStringAsync());
+        await Verify(response);
     }
 
     static TestServer GetTestServer()
@@ -293,7 +292,7 @@ public class GraphQLControllerTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L5-L48' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L5-L47' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
