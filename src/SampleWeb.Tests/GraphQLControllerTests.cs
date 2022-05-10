@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 
 #region GraphQLControllerTests
+
 [UsesVerify]
 public class GraphQLControllerTests
 {
@@ -23,24 +24,21 @@ public class GraphQLControllerTests
             query
         };
         var serialized = JsonConvert.SerializeObject(body);
-        using StringContent content = new(
-            serialized,
-            Encoding.UTF8,
-            "application/json");
+        using var content = new StringContent(serialized, Encoding.UTF8, "application/json");
         using var request = new HttpRequestMessage(HttpMethod.Post, "graphql")
         {
             Content = content
         };
         using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
-        await Verify(await response.Content.ReadAsStringAsync());
+        await Verify(response.Content.ReadAsStringAsync());
     }
 
     static TestServer GetTestServer()
     {
-        var hostBuilder = new WebHostBuilder();
-        hostBuilder.UseStartup<Startup>();
-        return new(hostBuilder);
+        var builder = new WebHostBuilder();
+        builder.UseStartup<Startup>();
+        return new(builder);
     }
 }
 
