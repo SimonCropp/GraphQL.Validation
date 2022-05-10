@@ -272,7 +272,7 @@ public class GraphQLControllerTests
             query
         };
         var serialized = JsonConvert.SerializeObject(body);
-        using StringContent content = new(
+        using var content = new StringContent(
             serialized,
             Encoding.UTF8,
             "application/json");
@@ -282,18 +282,18 @@ public class GraphQLControllerTests
         };
         using var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
-        await Verify(await response.Content.ReadAsStringAsync());
+        await Verify(response.Content.ReadAsStringAsync());
     }
 
     static TestServer GetTestServer()
     {
-        var hostBuilder = new WebHostBuilder();
-        hostBuilder.UseStartup<Startup>();
-        return new(hostBuilder);
+        var builder = new WebHostBuilder();
+        builder.UseStartup<Startup>();
+        return new(builder);
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L5-L47' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L5-L48' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
