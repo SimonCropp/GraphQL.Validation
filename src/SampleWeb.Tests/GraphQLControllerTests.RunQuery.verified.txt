@@ -1,1 +1,36 @@
-{"data":{"inputQuery":{"data":"TheContent"}}}
+﻿{
+  Version: 1.1,
+  Status: 200 OK,
+  Content: {
+    Headers: {
+      Content-Type: application/json
+    },
+    Value: {
+      data: {
+        inputQuery: {
+          data: TheContent
+        }
+      }
+    }
+  },
+  Request: {
+    Method: POST,
+    Uri: http://localhost/graphql,
+    Content: {
+      Headers: {
+        Content-Length: 97,
+        Content-Type: application/json; charset=utf-8
+      },
+      Value: {
+        query:
+
+{
+  inputQuery(input: {content: "TheContent"}) {
+    data
+  }
+}
+
+      }
+    }
+  }
+}
