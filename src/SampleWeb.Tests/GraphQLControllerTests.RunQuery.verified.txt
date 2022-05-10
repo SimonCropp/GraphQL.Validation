@@ -18,7 +18,6 @@
     Uri: http://localhost/graphql,
     Content: {
       Headers: {
-        Content-Length: 97,
         Content-Type: application/json; charset=utf-8
       },
       Value: {
