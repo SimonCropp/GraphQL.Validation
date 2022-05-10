@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
-using GraphiQl;
 using GraphQL;
+using GraphQL.MicrosoftDI;
+using GraphQL.Server;
 using GraphQL.SystemTextJson;
 using GraphQL.Types;
 
@@ -14,10 +15,16 @@ public class Startup
         }
 
         services.AddValidatorsFromAssemblyContaining<Startup>();
-        services.AddSingleton<ISchema, Schema>();
-        services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
-        services.AddSingleton<IGraphQLSerializer, GraphQLSerializer>();
-        services.AddMvc(option => option.EnableEndpointRouting = false);
+        services.AddGraphQL(builder => builder
+            .AddHttpMiddleware<Schema>()
+            .AddSchema<Schema>()
+            .ConfigureExecutionOptions(options =>
+            {
+                options.ThrowOnUnhandledException = true;
+                options.UseFluentValidation(ValidatorCacheBuilder.InstanceDI);
+            })
+            .AddSystemTextJson()
+            .AddGraphTypes(typeof(Schema).Assembly));
     }
 
     static IEnumerable<Type> GetGraphQLTypes() =>
@@ -29,7 +36,7 @@ public class Startup
 
     public void Configure(IApplicationBuilder builder)
     {
-        builder.UseGraphiQl("/graphiql", "/graphql");
-        builder.UseMvc();
+        builder.UseGraphQL<Schema>();
+        builder.UseGraphQLGraphiQL();
     }
 }
