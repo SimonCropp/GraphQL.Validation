@@ -4,9 +4,6 @@ public static class ModuleInitializer
     public static void Initialize()
     {
         VerifyHttp.Enable();
-        VerifierSettings.ModifySerialization(settings =>
-        {
-            settings.IgnoreMembers("Content-Length");
-        });
+        VerifierSettings.IgnoreMembers("Content-Length");
     }
 }
