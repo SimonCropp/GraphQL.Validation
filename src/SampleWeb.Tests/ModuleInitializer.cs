@@ -4,6 +4,7 @@ public static class ModuleInitializer
     public static void Initialize()
     {
         VerifyHttp.Enable();
+        VerifyDiffPlex.Initialize();
         VerifierSettings.IgnoreMembers("Content-Length");
     }
 }

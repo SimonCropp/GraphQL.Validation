@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>7.2.0</Version>
+    <Version>7.2.1</Version>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <PackageTags>GraphQL, Validation, FluentValidation</PackageTags>
     <Description>Add FluentValidation (https://fluentvalidation.net/) support to GraphQL.net (https://github.com/graphql-dotnet/graphql-dotnet)</Description>
