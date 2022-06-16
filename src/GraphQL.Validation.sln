@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeb", "SampleWeb\Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeb.Tests", "SampleWeb.Tests\SampleWeb.Tests.csproj", "{B7CE2386-EA76-463B-912B-9C6941A82F3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.FluentValidation.AspNetCore", "GraphQL.FluentValidation.AspNetCore\GraphQL.FluentValidation.AspNetCore.csproj", "{3BE42F75-5CDE-4FAD-82CB-2CB9D62B79FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{B7CE2386-EA76-463B-912B-9C6941A82F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7CE2386-EA76-463B-912B-9C6941A82F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7CE2386-EA76-463B-912B-9C6941A82F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BE42F75-5CDE-4FAD-82CB-2CB9D62B79FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE42F75-5CDE-4FAD-82CB-2CB9D62B79FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE42F75-5CDE-4FAD-82CB-2CB9D62B79FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE42F75-5CDE-4FAD-82CB-2CB9D62B79FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
