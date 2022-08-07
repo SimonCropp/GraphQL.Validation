@@ -22,7 +22,6 @@
       },
       Value: {
         query:
-
 {
   inputQuery(input: {content: "TheContent"}) {
     data
