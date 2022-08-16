@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <PackageReference Include="GraphQL" Version="5.3.3" />
+    <PackageReference Include="GraphQL" Version="7.0.0" />
     <PackageReference Include="GraphQL.MicrosoftDI" Version="5.3.3" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.GraphiQL" Version="6.1.1" />
