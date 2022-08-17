@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
 using GraphQL;
-using GraphQL.MicrosoftDI;
-using GraphQL.Server;
-using GraphQL.SystemTextJson;
 using GraphQL.Types;
 
 public class Startup
@@ -16,7 +13,6 @@ public class Startup
 
         services.AddValidatorsFromAssemblyContaining<Startup>();
         services.AddGraphQL(builder => builder
-            .AddHttpMiddleware<Schema>()
             .AddSchema<Schema>()
             .ConfigureExecutionOptions(options =>
             {

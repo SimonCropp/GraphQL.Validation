@@ -5,12 +5,10 @@ public class ComplexInputListItemGraph :
 {
     public ComplexInputListItemGraph()
     {
-        Field<NonNullGraphType<IntGraphType>>()
-            .Name("id")
+        Field<NonNullGraphType<IntGraphType>>("id")
             .Resolve(ctx => ctx.Source.Id);
 
-        Field<StringGraphType, string?>()
-            .Name("content")
+        Field<StringGraphType, string?>("content")
             .Resolve(ctx => ctx.Source.Content);
     }
 }

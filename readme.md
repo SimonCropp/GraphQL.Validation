@@ -210,26 +210,20 @@ public class Query :
     ObjectGraphType
 {
     public Query() =>
-        Field<ResultGraph>(
-            "inputQuery",
-            arguments: new(
-                new QueryArgument<MyInputGraph>
+        Field<ResultGraph>("inputQuery")
+            .Argument<MyInputGraph>("input")
+            .Resolve(context =>
                 {
-                    Name = "input"
+                    var input = context.GetValidatedArgument<MyInput>("input");
+                    return new Result
+                    {
+                        Data = input.Content
+                    };
                 }
-            ),
-            resolve: context =>
-            {
-                var input = context.GetValidatedArgument<MyInput>("input");
-                return new Result
-                {
-                    Data = input.Content
-                };
-            }
-        );
+            );
 }
 ```
-<sup><a href='/src/SampleWeb/Query.cs#L4-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb/Query.cs#L4-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-getvalidatedargument' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
