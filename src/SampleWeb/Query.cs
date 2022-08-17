@@ -7,23 +7,17 @@ public class Query :
     ObjectGraphType
 {
     public Query() =>
-        Field<ResultGraph>(
-            "inputQuery",
-            arguments: new(
-                new QueryArgument<MyInputGraph>
+        Field<ResultGraph>("inputQuery")
+            .Argument<MyInputGraph>("input")
+            .Resolve(context =>
                 {
-                    Name = "input"
+                    var input = context.GetValidatedArgument<MyInput>("input");
+                    return new Result
+                    {
+                        Data = input.Content
+                    };
                 }
-            ),
-            resolve: context =>
-            {
-                var input = context.GetValidatedArgument<MyInput>("input");
-                return new Result
-                {
-                    Data = input.Content
-                };
-            }
-        );
+            );
 }
 
 #endregion
