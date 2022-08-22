@@ -1,19 +1,19 @@
 ﻿{
-  data: {
-    asyncQuery: null
-  },
   errors: [
     {
+      message: Content: The specified condition was not met for 'Content'.,
+      path: [
+        Content
+      ],
       extensions: {
         code: AsyncPredicateValidator,
         codes: [
           AsyncPredicateValidator
         ]
-      },
-      message: Content: The specified condition was not met for 'Content'.,
-      path: [
-        Content
-      ]
+      }
     }
-  ]
+  ],
+  data: {
+    asyncQuery: null
+  }
 }
