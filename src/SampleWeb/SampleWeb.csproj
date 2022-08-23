@@ -4,11 +4,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <PackageReference Include="GraphQL" Version="7.0.1" />
-    <PackageReference Include="GraphQL.MicrosoftDI" Version="7.0.1" />
+    <PackageReference Include="GraphQL" Version="7.0.2" />
+    <PackageReference Include="GraphQL.MicrosoftDI" Version="7.0.2" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.GraphiQL" Version="7.0.0" />
-    <PackageReference Include="GraphQL.SystemTextJson" Version="7.0.1" />
+    <PackageReference Include="GraphQL.SystemTextJson" Version="7.0.2" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="7.0.0" />
     <ProjectReference Include="..\GraphQL.FluentValidation\GraphQL.FluentValidation.csproj" />
     <PackageReference Include="ProjectDefaults" Version="1.0.80" PrivateAssets="all" />
