@@ -3,7 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.3.0" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
     <PackageReference Include="GraphQL" Version="7.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="ProjectDefaults" Version="1.0.82" PrivateAssets="all" />
