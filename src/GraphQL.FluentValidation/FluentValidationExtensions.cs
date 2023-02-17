@@ -73,59 +73,19 @@ public static partial class FluentValidationExtensions
     /// <param name="builder">
     /// The GraphQL builder.
     /// </param>
-    /// <param name="assemblies">
-    /// The list of assemblies containing validators.  All validators in these assemblies will be loaded.  For full
-    /// control over which validators are loaded, you may build your own <see cref="IValidatorCache"/> and use the
-    /// <see cref="FluentValidationExtensions.UseFluentValidation(IGraphQLBuilder, IValidatorCache)"/> overload.
-    /// </param>
     /// <returns>
     /// The <paramref name="builder"/> instance;
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// <paramref name="builder"/> is null.
-    /// -or-
-    /// <paramref name="assemblies"/> is null.
     /// </exception>
-    public static IGraphQLBuilder UseFluentValidation(this IGraphQLBuilder builder, params Assembly[] assemblies) =>
-        builder.UseFluentValidation((IEnumerable<Assembly>)assemblies);
-
-    /// <summary>
-    /// Configures GraphQL to use FluentValidation, with validators resolved using dependency injection.
-    /// </summary>
-    /// <param name="builder">
-    /// The GraphQL builder.
-    /// </param>
-    /// <param name="assemblies">
-    /// The list of assemblies containing validators.  All validators in these assemblies will be loaded.  For full
-    /// control over which validators are loaded, you may build your own <see cref="IValidatorCache"/> and use the
-    /// <see cref="FluentValidationExtensions.UseFluentValidation(IGraphQLBuilder, IValidatorCache)"/> overload.
-    /// </param>
-    /// <returns>
-    /// The <paramref name="builder"/> instance;
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="builder"/> is null.
-    /// -or-
-    /// <paramref name="assemblies"/> is null.
-    /// </exception>
-    public static IGraphQLBuilder UseFluentValidation(this IGraphQLBuilder builder, IEnumerable<Assembly> assemblies)
+    public static IGraphQLBuilder UseFluentValidation(this IGraphQLBuilder builder)
     {
         if (builder is null)
         {
             throw new ArgumentNullException(nameof(builder));
         }
 
-        if (assemblies is null)
-        {
-            throw new ArgumentNullException(nameof(assemblies));
-        }
-
-        var validatorCache = new ValidatorServiceCache();
-        foreach (var assembly in assemblies)
-        {
-            validatorCache.AddValidatorsFromAssembly(assembly);
-        }
-
-        return builder.UseFluentValidation(validatorCache);
+        return builder.UseFluentValidation(new ValidatorServiceProviderCache());
     }
 }
