@@ -17,7 +17,7 @@ public static class ArgumentValidation
     /// <summary>
     /// Validate an instance
     /// </summary>
-    public static async Task ValidateAsync<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider, CancellationToken cancellation = default)
+    public static async Task ValidateAsync<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider, Cancellation cancellation = default)
     {
         var currentType = (Type?)type;
         var validationContext = default(ValidationContext<TArgument>);
