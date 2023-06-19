@@ -11,6 +11,6 @@
     <PackageReference Include="GraphQL.SystemTextJson" Version="7.5.0" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="7.4.0" />
     <ProjectReference Include="..\GraphQL.FluentValidation\GraphQL.FluentValidation.csproj" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.90" PrivateAssets="all" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.91" PrivateAssets="all" />
   </ItemGroup>
 </Project>
