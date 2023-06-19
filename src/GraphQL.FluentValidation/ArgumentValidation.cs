@@ -17,7 +17,7 @@ public static class ArgumentValidation
     /// <summary>
     /// Validate an instance
     /// </summary>
-    public static async Task ValidateAsync<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider, Cancellation cancellation = default)
+    public static async Task ValidateAsync<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider, Cancel cancel = default)
     {
         var currentType = (Type?)type;
         var validationContext = default(ValidationContext<TArgument>);
@@ -28,7 +28,7 @@ public static class ArgumentValidation
             {
                 validationContext ??= BuildValidationContext(instance, userContext);
 
-                var tasks = buildAll.Select(x => x.ValidateAsync(validationContext, cancellation));
+                var tasks = buildAll.Select(_ => _.ValidateAsync(validationContext, cancel));
                 var validationResults = await Task.WhenAll(tasks);
 
                 var results = validationResults
