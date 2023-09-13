@@ -11,6 +11,6 @@ public class ComplexInputValidator :
 
         RuleFor(_ => _.Items)
             .NotEmpty()
-            .ForEach(i => i.SetValidator(new ComplexInputListItemValidator()));
+            .ForEach(_ => _.SetValidator(new ComplexInputListItemValidator()));
     }
 }
