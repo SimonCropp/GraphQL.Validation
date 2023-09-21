@@ -5,6 +5,8 @@
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
 
+**See [Milestones](../../milestones?state=closed) for release notes.**
+
 
 ## NuGet package
 
