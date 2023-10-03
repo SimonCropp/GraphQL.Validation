@@ -76,7 +76,7 @@ var schema = new Schema();
 schema.UseFluentValidation();
 var executer = new DocumentExecuter();
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L15-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L16-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-startconfig' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
@@ -104,7 +104,7 @@ options.UseFluentValidation(validatorCache);
 
 var executionResult = await executer.ExecuteAsync(options);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L28-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-usefluentvalidation' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L29-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-usefluentvalidation' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -120,16 +120,13 @@ Given a user context class of the following form:
 <!-- snippet: ContextImplementingDictionary -->
 <a id='snippet-contextimplementingdictionary'></a>
 ```cs
-public class MyUserContext :
+public class MyUserContext(string myProperty) :
     Dictionary<string, object?>
 {
-    public MyUserContext(string myProperty) =>
-        MyProperty = myProperty;
-
-    public string MyProperty { get; }
+    public string MyProperty { get; } = myProperty;
 }
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L43-L54' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L44-L52' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 The `ExecutionOptions.UserContext` can then be set as follows:
@@ -149,7 +146,7 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L58-L72' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L56-L70' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextimplementingdictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -176,7 +173,7 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L77-L97' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L75-L95' title='Snippet source file'>snippet source</a> | <a href='#snippet-executequerywithcontextinsidedictionary' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -195,7 +192,7 @@ var options = new ExecutionOptions
 };
 options.UseFluentValidation(validatorCache);
 ```
-<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L102-L112' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/Snippets/QueryExecution.cs#L100-L110' title='Snippet source file'>snippet source</a> | <a href='#snippet-nocontext' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 Then the `UseFluentValidation` method will instantiate it to a new `Dictionary<string, object>`.
@@ -256,13 +253,13 @@ public class GraphQLControllerTests
     {
         using var server = GetTestServer();
         using var client = server.CreateClient();
-        var query = @"
-{
-  inputQuery(input: {content: ""TheContent""}) {
-    data
-  }
-}
-";
+        var query = """
+                    {
+                      inputQuery(input: {content: "TheContent"}) {
+                        data
+                      }
+                    }
+                    """;
         var body = new
         {
             query
