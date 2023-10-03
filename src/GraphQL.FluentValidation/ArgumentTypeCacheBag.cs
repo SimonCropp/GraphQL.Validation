@@ -8,6 +8,7 @@ static class ArgumentTypeCacheBag
     public static void SetCache(this ExecutionOptions options, IValidatorCache cache)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (options.UserContext == null)
         {
             options.UserContext = new Dictionary<string, object?>

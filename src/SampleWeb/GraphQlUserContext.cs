@@ -1,4 +1,2 @@
 ﻿public class GraphQLUserContext :
-    Dictionary<string, object?>
-{
-}
+    Dictionary<string, object?>;

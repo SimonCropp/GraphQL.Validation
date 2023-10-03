@@ -12,13 +12,13 @@ public class GraphQLControllerTests
     {
         using var server = GetTestServer();
         using var client = server.CreateClient();
-        var query = @"
-{
-  inputQuery(input: {content: ""TheContent""}) {
-    data
-  }
-}
-";
+        var query = """
+                    {
+                      inputQuery(input: {content: "TheContent"}) {
+                        data
+                      }
+                    }
+                    """;
         var body = new
         {
             query

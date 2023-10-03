@@ -1,5 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.FluentValidation;
+// ReSharper disable UnusedVariable
 #pragma warning disable 649
 
 class QueryExecution
@@ -42,13 +43,10 @@ class QueryExecution
 
     #region ContextImplementingDictionary
 
-    public class MyUserContext :
+    public class MyUserContext(string myProperty) :
         Dictionary<string, object?>
     {
-        public MyUserContext(string myProperty) =>
-            MyProperty = myProperty;
-
-        public string MyProperty { get; }
+        public string MyProperty { get; } = myProperty;
     }
 
     #endregion
