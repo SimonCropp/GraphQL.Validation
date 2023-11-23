@@ -11,7 +11,7 @@ namespace GraphQL.FluentValidation;
 /// </summary>
 public class ValidatorServiceCache : IValidatorCache
 {
-    Dictionary<Type, List<Type>> cache = new();
+    Dictionary<Type, List<Type>> cache = [];
 
     public bool IsFrozen { get; private set; }
 
