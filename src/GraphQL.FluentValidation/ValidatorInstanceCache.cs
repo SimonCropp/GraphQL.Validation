@@ -11,7 +11,7 @@ namespace GraphQL.FluentValidation;
 public class ValidatorInstanceCache : IValidatorCache
 {
     Func<Type, IValidator?>? fallback;
-    ConcurrentDictionary<Type, List<IValidator>> cache = new();
+    ConcurrentDictionary<Type, List<IValidator>> cache = [];
 
     public ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null) =>
         this.fallback = fallback;
@@ -30,10 +30,10 @@ public class ValidatorInstanceCache : IValidatorCache
                 var validator = fallback?.Invoke(type);
                 if (validator == null)
                 {
-                    return new();
+                    return [];
                 }
 
-                return new() { validator };
+                return [validator];
             });
 
         validators = list;
@@ -51,7 +51,7 @@ public class ValidatorInstanceCache : IValidatorCache
         var single = result.InterfaceType.GenericTypeArguments.Single();
         if (!cache.TryGetValue(single, out var list))
         {
-            cache[single] = list = new();
+            cache[single] = list = [];
         }
 
         list.Add((IValidator)Activator.CreateInstance(result.ValidatorType, true)!);
