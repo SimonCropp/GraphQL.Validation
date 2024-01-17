@@ -1,6 +1,5 @@
 ﻿using GraphQL.FluentValidation;
 
-[UsesVerify]
 public class IntegrationTests
 {
     static IValidatorCache cache;

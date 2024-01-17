@@ -4,7 +4,6 @@ using GraphQL.Execution;
 
 #region QueryTests
 
-[UsesVerify]
 public class QueryTests
 {
     [Fact]

@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 #region GraphQLControllerTests
 
-[UsesVerify]
 public class GraphQLControllerTests
 {
     [Fact]
