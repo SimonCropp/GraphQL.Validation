@@ -245,7 +245,6 @@ A full end-to-en test can be run against the GraphQL controller:
 <!-- snippet: GraphQlControllerTests -->
 <a id='snippet-graphqlcontrollertests'></a>
 ```cs
-[UsesVerify]
 public class GraphQLControllerTests
 {
     [Fact]
@@ -285,7 +284,7 @@ public class GraphQLControllerTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L5-L47' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/GraphQLControllerTests.cs#L5-L46' title='Snippet source file'>snippet source</a> | <a href='#snippet-graphqlcontrollertests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -296,7 +295,6 @@ Unit tests can be run a specific field of a query:
 <!-- snippet: QueryTests -->
 <a id='snippet-querytests'></a>
 ```cs
-[UsesVerify]
 public class QueryTests
 {
     [Fact]
@@ -355,7 +353,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L5-L66' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L5-L65' title='Snippet source file'>snippet source</a> | <a href='#snippet-querytests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
