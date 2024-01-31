@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GraphQL.DI;
 using GraphQL.FluentValidation;
 using GraphQL.Instrumentation;
 using GraphQL.Types;
@@ -27,5 +28,64 @@ public static partial class FluentValidationExtensions
     {
         ValidationMiddleware validationMiddleware = new();
         schema.FieldMiddleware.Use(validationMiddleware);
+    }
+
+    /// <summary>
+    /// Configures GraphQL to use FluentValidation, using a custom <see cref="IValidatorCache"/>.
+    /// </summary>
+    /// <param name="builder">
+    /// The GraphQL builder.
+    /// </param>
+    /// <param name="validatorCache">
+    /// The cache used to resolve validator types.
+    /// </param>
+    /// <returns>
+    /// The <paramref name="builder"/> instance;
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="builder"/> is null.
+    /// -or-
+    /// <paramref name="validatorCache"/> is null.
+    /// </exception>
+    public static IGraphQLBuilder UseFluentValidation(this IGraphQLBuilder builder, IValidatorCache validatorCache)
+    {
+        if (builder is null)
+        {
+            throw new ArgumentNullException(nameof(builder));
+        }
+
+        if (validatorCache is null)
+        {
+            throw new ArgumentNullException(nameof(validatorCache));
+        }
+
+        builder.UseMiddleware<ValidationMiddleware>();
+
+        validatorCache.Freeze();
+        builder.ConfigureExecutionOptions(eo => eo.SetCache(validatorCache));
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Configures GraphQL to use FluentValidation, with validators resolved using dependency injection.
+    /// </summary>
+    /// <param name="builder">
+    /// The GraphQL builder.
+    /// </param>
+    /// <returns>
+    /// The <paramref name="builder"/> instance;
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="builder"/> is null.
+    /// </exception>
+    public static IGraphQLBuilder UseFluentValidation(this IGraphQLBuilder builder)
+    {
+        if (builder is null)
+        {
+            throw new ArgumentNullException(nameof(builder));
+        }
+
+        return builder.UseFluentValidation(new ValidatorServiceProviderCache());
     }
 }

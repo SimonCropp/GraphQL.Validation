@@ -63,7 +63,35 @@ public class MyInputValidator :
 <!-- endSnippet -->
 
 
-### Setup Validators
+### Setup Validation with the GraphQL Builder
+
+If you are using the GraphQL builder to configure your app and you want to use dependency injection, you can use the builder to configure FluentValidation.  You must first call one of the `AddValidatorsFrom*` methods from
+[FluentValidation.DependencyInjectionExtensions](https://www.nuget.org/packages/FluentValidation.DependencyInjectionExtensions/) to register your validators with the service collection.  Then call the `UseFluentValidation()` extension method when configuring GraphQL.
+
+
+```cs
+var builder = WebApplication.CreateBuilder(args);
+
+var validatorAssembly = /* Get assembly containing validators */;
+builder.Services.AddValidatorsFromAssembly(validatorAssembly);
+
+builder.Services.AddGraphQL(
+    b => b.AddSchema<YourSchemaType>()
+        .UseFluentValidation()
+        // Other GraphQL configuration options...
+);
+
+// Other DI and Asp.Net setup...
+
+```
+
+Note: If you are using a `Startup` class instead of top-level statements, the above configuration will go in your `Startup.ConfigureServices()` method.
+
+### Setup Validation Manually
+
+If you aren't using the GraphQL builder extensions to configure your project, you can manually add the pieces needed to support FluentValidation.
+
+#### Build the Validator Cache
 
 Validators need to be added to the `ValidatorTypeCache`. This should be done once at application startup.
 
@@ -81,13 +109,8 @@ var executer = new DocumentExecuter();
 
 Generally `ValidatorTypeCache` is scoped per app and can be collocated with `Schema`, `DocumentExecuter` initialization.
 
-Dependency Injection can be used for validators. Create a `ValidatorTypeCache` with the
-`useDependencyInjection: true` parameter and call one of the `AddValidatorsFrom*` methods from
-[FluentValidation.DependencyInjectionExtensions](https://www.nuget.org/packages/FluentValidation.DependencyInjectionExtensions/)
-package in the `Startup`. By default, validators are added to the DI container with a transient lifetime.
 
-
-### Add to ExecutionOptions
+#### Add to ExecutionOptions
 
 Validation needs to be added to any instance of `ExecutionOptions`.
 
