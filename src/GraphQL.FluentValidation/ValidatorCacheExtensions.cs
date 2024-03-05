@@ -27,7 +27,7 @@ public static class ValidatorCacheExtensions
         }
 
         var results = AssemblyScanner.FindValidatorsInAssembly(assembly).ToList();
-        if (!results.Any())
+        if (results.Count == 0)
         {
             if (throwIfNoneFound)
             {

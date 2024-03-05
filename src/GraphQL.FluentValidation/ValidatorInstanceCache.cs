@@ -37,7 +37,7 @@ public class ValidatorInstanceCache : IValidatorCache
             });
 
         validators = list;
-        return list.Any();
+        return list.Count != 0;
     }
 
     public void AddResult(AssemblyScanner.AssemblyScanResult result)

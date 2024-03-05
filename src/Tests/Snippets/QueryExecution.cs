@@ -11,7 +11,7 @@ class QueryExecution
     ValidatorInstanceCache validatorCache = null!;
     DocumentExecuter executer = null!;
 
-    void ExecuteQuery(Assembly assemblyContainingValidators)
+    static void ExecuteQuery(Assembly assemblyContainingValidators)
     {
         #region StartConfig
 

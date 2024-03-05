@@ -78,7 +78,7 @@ public static class ArgumentValidation
     static void ThrowIfResults(IEnumerable<ValidationFailure> results)
     {
         var list = results.ToList();
-        if (list.Any())
+        if (list.Count != 0)
         {
             throw new ValidationException(list);
         }
