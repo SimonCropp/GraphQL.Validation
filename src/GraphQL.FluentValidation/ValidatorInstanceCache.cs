@@ -8,13 +8,10 @@ namespace GraphQL.FluentValidation;
 /// Should only be configured once at startup time.
 /// Uses <see cref="Activator.CreateInstance(Type)"/> to create <see cref="IValidator"/>s.
 /// </summary>
-public class ValidatorInstanceCache : IValidatorCache
+public class ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null) :
+    IValidatorCache
 {
-    Func<Type, IValidator?>? fallback;
     ConcurrentDictionary<Type, List<IValidator>> cache = [];
-
-    public ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null) =>
-        this.fallback = fallback;
 
     public bool IsFrozen { get; private set; }
 
@@ -42,7 +39,7 @@ public class ValidatorInstanceCache : IValidatorCache
 
     public void AddResult(AssemblyScanner.AssemblyScanResult result)
     {
-        if (result.ValidatorType.GetConstructor(Array.Empty<Type>()) == null)
+        if (result.ValidatorType.GetConstructor([]) == null)
         {
             Trace.WriteLine($"Ignoring ''{result.ValidatorType.FullName}'' since it does not have a public parameterless constructor.");
             return;
