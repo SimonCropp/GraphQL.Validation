@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace GraphQL.FluentValidation;
+﻿namespace GraphQL.FluentValidation;
 
 public static class ValidatorCacheExtensions
 {

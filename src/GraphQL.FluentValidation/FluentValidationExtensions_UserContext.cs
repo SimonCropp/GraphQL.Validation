@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using GraphQL.FluentValidation;
-
-namespace GraphQL;
+﻿namespace GraphQL;
 
 public static partial class FluentValidationExtensions
 {

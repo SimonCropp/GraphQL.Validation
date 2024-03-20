@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using FluentValidation;
-
-namespace GraphQL.FluentValidation;
+﻿namespace GraphQL.FluentValidation;
 
 public interface IValidatorCache
 {

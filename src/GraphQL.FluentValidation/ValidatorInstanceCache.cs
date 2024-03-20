@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using FluentValidation;
-
-namespace GraphQL.FluentValidation;
+﻿namespace GraphQL.FluentValidation;
 
 /// <summary>
 /// Cache for all <see cref="IValidator"/> instances.

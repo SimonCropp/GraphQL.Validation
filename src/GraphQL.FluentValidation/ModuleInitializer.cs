@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-static class ModuleInitializer
+﻿static class ModuleInitializer
 {
     [ModuleInitializer]
     public static void Initialize() =>

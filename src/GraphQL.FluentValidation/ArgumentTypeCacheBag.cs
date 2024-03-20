@@ -1,7 +1,4 @@
-﻿using GraphQL;
-using GraphQL.FluentValidation;
-
-static class ArgumentTypeCacheBag
+﻿static class ArgumentTypeCacheBag
 {
     const string key = "GraphQL.FluentValidation.ValidatorTypeCache";
 

@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using GraphQL.FluentValidation;
-using GraphQL.Instrumentation;
+﻿using GraphQL.Instrumentation;
 using GraphQL.Types;
 
 namespace GraphQL;
