@@ -1,5 +1,4 @@
 ﻿{
-  Version: 1.1,
   Status: 200 OK,
   Content: {
     Headers: {
@@ -10,23 +9,6 @@
         inputQuery: {
           data: TheContent
         }
-      }
-    }
-  },
-  Request: {
-    Method: POST,
-    Uri: http://localhost/graphql,
-    Content: {
-      Headers: {
-        Content-Type: application/json; charset=utf-8
-      },
-      Value: {
-        query:
-{
-  inputQuery(input: {content: "TheContent"}) {
-    data
-  }
-}
       }
     }
   }
