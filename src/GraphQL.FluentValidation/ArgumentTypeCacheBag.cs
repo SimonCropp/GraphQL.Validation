@@ -23,19 +23,17 @@
 
     public static IValidatorCache GetCache(this IResolveFieldContext context)
     {
-        if (context.UserContext == null)
+        var userContext = context.UserContext;
+        if (userContext == null)
         {
-            throw NotDictionary();
+            throw new("Expected UserContext to be of type IDictionary<string, object>.");
         }
 
-        if (context.UserContext.TryGetValue(key, out var result))
+        if (!userContext.TryGetValue(key, out var result))
         {
-            return (IValidatorCache)result!;
+            throw new($"Could not extract {nameof(IValidatorCache)} from {nameof(IResolveFieldContext)}.{nameof(IResolveFieldContext.UserContext)}. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
         }
 
-        throw new($"Could not extract {nameof(IValidatorCache)} from {nameof(IResolveFieldContext)}.{nameof(IResolveFieldContext.UserContext)}. It is possible {nameof(FluentValidationExtensions)}.{nameof(FluentValidationExtensions.UseFluentValidation)} was not used.");
+        return (IValidatorCache)result!;
     }
-
-    static Exception NotDictionary() =>
-        new("Expected UserContext to be of type IDictionary<string, object>.");
 }

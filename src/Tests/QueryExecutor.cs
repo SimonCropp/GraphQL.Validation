@@ -10,7 +10,7 @@ static class QueryExecutor
     {
         Thread.CurrentThread.CurrentUICulture = new("en-US");
 
-        queryString = queryString.Replace("'", "\"");
+        queryString = queryString.Replace('\'', '"');
         using var schema = new Schema();
         schema.UseFluentValidation();
         var documentExecuter = new DocumentExecuter();

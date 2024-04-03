@@ -1,12 +1,13 @@
 ﻿using FluentValidation.Results;
 using GraphQL.Instrumentation;
 
-class ValidationMiddleware : IFieldMiddleware
+class ValidationMiddleware :
+    IFieldMiddleware
 {
     static ExecutionError ToExecutionError(ValidationFailure failure) =>
         new($"{failure.PropertyName}: {failure.ErrorMessage}")
         {
-            Path = new List<string> {failure.PropertyName},
+            Path = [failure.PropertyName],
             Code = failure.ErrorCode
         };
 

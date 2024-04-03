@@ -18,7 +18,7 @@ public class ValidatorServiceCache : IValidatorCache
     {
         if (cache.TryGetValue(argumentType, out var validatorInfo))
         {
-            validators = validatorInfo.Select(t => (IValidator)provider!.GetRequiredService(t));
+            validators = validatorInfo.Select(_ => (IValidator)provider!.GetRequiredService(_));
             return true;
         }
 
