@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="FluentValidation" Version="11.9.1" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
+    <PackageVersion Include="GraphQL" Version="7.8.0" />
+    <PackageVersion Include="GraphQL.MicrosoftDI" Version="7.8.0" />
+    <PackageVersion Include="GraphQL.Server.Transports.AspNetCore" Version="7.7.1" />
+    <PackageVersion Include="GraphQL.Server.Ui.GraphiQL" Version="7.7.1" />
+    <PackageVersion Include="GraphQL.SystemTextJson" Version="7.8.0" />
+    <PackageVersion Include="MarkdownSnippets.MsBuild" Version="27.0.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageVersion Include="Polyfill" Version="5.2.2" />
+    <PackageVersion Include="ProjectDefaults" Version="1.0.127" />
+    <PackageVersion Include="Verify.DiffPlex" Version="3.0.0" />
+    <PackageVersion Include="Verify.Http" Version="6.2.1" />
+    <PackageVersion Include="Verify.Xunit" Version="24.2.0" />
+    <PackageVersion Include="Xunit" Version="2.8.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.1" />
+  </ItemGroup>
+</Project>

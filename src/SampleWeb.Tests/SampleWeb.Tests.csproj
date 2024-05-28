@@ -3,15 +3,15 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Verify.DiffPlex" Version="3.0.0" />
-    <PackageReference Include="GraphQL" Version="7.8.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.5" />
-    <PackageReference Include="Xunit" Version="2.8.1" />
-    <PackageReference Include="Verify.Xunit" Version="24.2.0" />
-    <PackageReference Include="Verify.Http" Version="6.2.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="Verify.DiffPlex" />
+    <PackageReference Include="GraphQL" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Xunit" />
+    <PackageReference Include="Verify.Xunit" />
+    <PackageReference Include="Verify.Http" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <ProjectReference Include="..\SampleWeb\SampleWeb.csproj" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.127" PrivateAssets="all" />
+    <PackageReference Include="ProjectDefaults" PrivateAssets="all" />
   </ItemGroup>
 </Project>
