@@ -31,7 +31,7 @@ public class ValidatorServiceCache : IValidatorCache
         var single = result.InterfaceType.GenericTypeArguments.Single();
         if (!cache.TryGetValue(single, out var list))
         {
-            cache[single] = list = new();
+            cache[single] = list = [];
         }
 
         list.Add(result.ValidatorType);
