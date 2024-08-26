@@ -1,6 +1,4 @@
-﻿using GraphQL.Types;
-
-public class ComplexInputListItemGraph :
+﻿public class ComplexInputListItemGraph :
     InputObjectGraphType<ComplexInputListItem>
 {
     public ComplexInputListItemGraph()

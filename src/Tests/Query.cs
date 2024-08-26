@@ -1,5 +1,4 @@
 using GraphQL;
-using GraphQL.Types;
 using Newtonsoft.Json;
 
 public class Query :
@@ -55,7 +54,7 @@ public class Query :
             );
 
         Field<ResultGraph>("asyncQuery")
-            .Argument<InputGraph>("input")
+            .Argument<AsyncInputGraph>("input")
             .ResolveAsync(async context =>
                 {
                     var input = await context.GetValidatedArgumentAsync<AsyncInput>("input");
@@ -67,7 +66,7 @@ public class Query :
             );
 
         Field<ResultGraph>("asyncComplexInputQuery")
-            .Argument<ComplexInputGraph>("input")
+            .Argument<AsyncComplexInputGraph>("input")
             .ResolveAsync(async context =>
                 {
                     var input = await context.GetValidatedArgumentAsync<AsyncComplexInput>("input");
