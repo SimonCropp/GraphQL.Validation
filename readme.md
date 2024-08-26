@@ -336,16 +336,13 @@ public class QueryTests
             userContext,
             ValidatorCacheBuilder.Instance);
 
-        var input = new MyInput
-        {
-            Content = null!
-        };
+        var value = new Dictionary<string, object>();
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", new ArgumentValue(input, ArgumentSource.Variable)
+                    "input", new ArgumentValue(value, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
@@ -356,7 +353,7 @@ public class QueryTests
     }
 }
 ```
-<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L5-L68' title='Snippet source file'>snippet source</a> | <a href='#snippet-QueryTests' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/SampleWeb.Tests/QueryTests.cs#L5-L65' title='Snippet source file'>snippet source</a> | <a href='#snippet-QueryTests' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
