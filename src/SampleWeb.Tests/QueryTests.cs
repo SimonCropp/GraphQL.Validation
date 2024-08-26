@@ -45,13 +45,16 @@ public class QueryTests
             userContext,
             ValidatorCacheBuilder.Instance);
 
-        var value = new Dictionary<string, object>();
+        var input = new MyInput
+        {
+            Content = null!
+        };
         var fieldContext = new ResolveFieldContext
         {
             Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", new ArgumentValue(value, ArgumentSource.Variable)
+                    "input", new ArgumentValue(input, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
