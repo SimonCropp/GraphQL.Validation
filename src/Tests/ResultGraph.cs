@@ -1,6 +1,4 @@
-﻿using GraphQL.Types;
-
-public class ResultGraph :
+﻿public class ResultGraph :
     ObjectGraphType<Result>
 {
     public ResultGraph() =>

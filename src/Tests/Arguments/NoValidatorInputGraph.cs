@@ -1,6 +1,4 @@
-﻿using GraphQL.Types;
-
-public class NoValidatorInputGraph :
+﻿public class NoValidatorInputGraph :
     InputObjectGraphType
 {
     public NoValidatorInputGraph() =>

@@ -1,6 +1,6 @@
-﻿public class InputGraph :
+﻿public class AsyncInputGraph :
     InputObjectGraphType
 {
-    public InputGraph() =>
+    public AsyncInputGraph() =>
         Field<StringGraphType>("content");
 }
