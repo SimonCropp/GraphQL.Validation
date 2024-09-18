@@ -6,8 +6,8 @@
   <ItemGroup>
     <PackageVersion Include="FluentValidation" Version="11.10.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
-    <PackageVersion Include="GraphQL" Version="8.0.2" />
-    <PackageVersion Include="GraphQL.MicrosoftDI" Version="8.0.2" />
+    <PackageVersion Include="GraphQL" Version="8.1.0" />
+    <PackageVersion Include="GraphQL.MicrosoftDI" Version="8.1.0" />
     <PackageVersion Include="GraphQL.Server.Transports.AspNetCore" Version="8.0.2" />
     <PackageVersion Include="GraphQL.Server.Ui.GraphiQL" Version="8.0.2" />
     <PackageVersion Include="GraphQL.SystemTextJson" Version="8.0.2" />
