@@ -25,7 +25,7 @@ public class QueryTests
             Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", new ArgumentValue(input, ArgumentSource.Variable)
+                    "input", new(input, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext
@@ -54,7 +54,7 @@ public class QueryTests
             Arguments = new Dictionary<string, ArgumentValue>
             {
                 {
-                    "input", new ArgumentValue(input, ArgumentSource.Variable)
+                    "input", new(input, ArgumentSource.Variable)
                 }
             },
             UserContext = userContext

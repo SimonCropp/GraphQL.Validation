@@ -21,9 +21,6 @@ public static partial class FluentValidationExtensions
     /// <summary>
     /// Adds a FieldMiddleware to the GraphQL pipeline that converts a <see cref="ValidationException"/> to <see cref="ExecutionError"/>s./>
     /// </summary>
-    public static void UseFluentValidation(this ISchema schema)
-    {
-        ValidationMiddleware validationMiddleware = new();
-        schema.FieldMiddleware.Use(validationMiddleware);
-    }
+    public static void UseFluentValidation(this ISchema schema) =>
+        schema.FieldMiddleware.Use(new ValidationMiddleware());
 }
