@@ -2,11 +2,11 @@
 
 public class IntegrationTests
 {
-    static IValidatorCache cache;
+    static ValidatorInstanceCache cache;
 
     static IntegrationTests()
     {
-        cache = new ValidatorInstanceCache(
+        cache = new(
             type =>
             {
                 if (type == typeof(NoValidatorInput))
@@ -17,6 +17,13 @@ public class IntegrationTests
                 return null;
             });
         cache.AddValidatorsFromAssemblyContaining<IntegrationTests>();
+    }
+
+    [Fact]
+    public Task GetCurrentValidators()
+    {
+        var items = cache.GetCurrentValidators();
+        return Verify(items.Where(_ => _.Key != typeof(NoValidatorInput) && _.Value.Count > 0));
     }
 
     [Fact]

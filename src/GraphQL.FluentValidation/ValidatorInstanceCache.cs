@@ -1,4 +1,6 @@
-﻿namespace GraphQL.FluentValidation;
+﻿using System.Collections.Immutable;
+
+namespace GraphQL.FluentValidation;
 
 /// <summary>
 /// Cache for all <see cref="IValidator"/> instances.
@@ -9,6 +11,19 @@ public class ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null) :
     IValidatorCache
 {
     ConcurrentDictionary<Type, List<IValidator>> cache = [];
+
+    static TypeComparer typeComparer = new();
+
+    public ImmutableSortedDictionary<Type, IReadOnlyList<IValidator>> GetCurrentValidators()
+    {
+        var dictionary = new SortedDictionary<Type, IReadOnlyList<IValidator>>(typeComparer);
+        foreach (var item in cache)
+        {
+            dictionary.Add(item.Key, item.Value);
+        }
+
+        return dictionary.ToImmutableSortedDictionary(typeComparer);
+    }
 
     public bool IsFrozen { get; private set; }
 
@@ -50,4 +65,5 @@ public class ValidatorInstanceCache(Func<Type, IValidator?>? fallback = null) :
 
         list.Add((IValidator)Activator.CreateInstance(result.ValidatorType, true)!);
     }
+
 }
