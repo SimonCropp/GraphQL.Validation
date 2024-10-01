@@ -2,11 +2,11 @@
 
 public class IntegrationTests
 {
-    static IValidatorCache cache;
+    static ValidatorInstanceCache cache;
 
     static IntegrationTests()
     {
-        cache = new ValidatorInstanceCache(
+        cache = new(
             type =>
             {
                 if (type == typeof(NoValidatorInput))
@@ -18,6 +18,10 @@ public class IntegrationTests
             });
         cache.AddValidatorsFromAssemblyContaining<IntegrationTests>();
     }
+
+    [Fact]
+    public Task GetCurrentValidators() =>
+        Verify(cache.GetCurrentValidators());
 
     [Fact]
     public async Task AsyncValid()
