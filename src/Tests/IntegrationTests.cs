@@ -23,7 +23,7 @@ public class IntegrationTests
     public Task GetCurrentValidators()
     {
         var items = cache.GetCurrentValidators();
-        return Verify(items.Where(_ => _.Key != typeof(NoValidatorInput)));
+        return Verify(items.Where(_ => _.Key != typeof(NoValidatorInput) && _.Value.Count > 0));
     }
 
     [Fact]
