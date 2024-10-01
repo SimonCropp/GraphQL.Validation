@@ -1,292 +1,310 @@
-﻿{
-  AsyncComplexInput: [
-    [
-      {
-        Components: [
-          {
-            HasCondition: false,
-            HasAsyncCondition: false,
-            Validator: {
-              Name: NotEmptyValidator
+﻿[
+  {
+    Key: AsyncComplexInput,
+    Value: [
+      [
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: NotEmptyValidator
+              }
+            },
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: AsyncPredicateValidator
+              }
+            },
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: ChildValidatorAdaptor,
+                ValidatorType: ComplexInputInnerValidator
+              }
             }
+          ],
+          Member: AsyncComplexInput.Inner,
+          PropertyFunc: {
+            Type: Func<AsyncComplexInput, ComplexInputInner>,
+            Target: PropertyRule<AsyncComplexInput, ComplexInputInner>.<>c__DisplayClass1_0,
+            Method: ComplexInputInner Create(AsyncComplexInput)
           },
-          {
-            HasCondition: false,
-            HasAsyncCondition: false,
-            Validator: {
-              Name: AsyncPredicateValidator
-            }
-          },
-          {
+          Expression: _ => _.Inner,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: ChildValidatorAdaptor,
               ValidatorType: ComplexInputInnerValidator
             }
-          }
-        ],
-        Member: AsyncComplexInput.Inner,
-        PropertyFunc: {
-          Type: Func<AsyncComplexInput, ComplexInputInner>,
-          Target: PropertyRule<AsyncComplexInput, ComplexInputInner>.<>c__DisplayClass1_0,
-          Method: ComplexInputInner Create(AsyncComplexInput)
-        },
-        Expression: _ => _.Inner,
-        Current: {
+          },
+          TypeToValidate: ComplexInputInner,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: ChildValidatorAdaptor,
-            ValidatorType: ComplexInputInnerValidator
-          }
-        },
-        TypeToValidate: ComplexInputInner,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Inner
-      }
+          PropertyName: Inner
+        }
+      ]
     ]
-  ],
-  AsyncInput: [
-    [
-      {
-        Components: [
-          {
+  },
+  {
+    Key: AsyncInput,
+    Value: [
+      [
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: AsyncPredicateValidator
+              }
+            }
+          ],
+          Member: AsyncInput.Content,
+          PropertyFunc: {
+            Type: Func<AsyncInput, string>,
+            Target: PropertyRule<AsyncInput, string>.<>c__DisplayClass1_0,
+            Method: System.String Create(AsyncInput)
+          },
+          Expression: _ => _.Content,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: AsyncPredicateValidator
             }
-          }
-        ],
-        Member: AsyncInput.Content,
-        PropertyFunc: {
-          Type: Func<AsyncInput, string>,
-          Target: PropertyRule<AsyncInput, string>.<>c__DisplayClass1_0,
-          Method: System.String Create(AsyncInput)
-        },
-        Expression: _ => _.Content,
-        Current: {
+          },
+          TypeToValidate: string,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: AsyncPredicateValidator
-          }
-        },
-        TypeToValidate: string,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Content
-      }
+          PropertyName: Content
+        }
+      ]
     ]
-  ],
-  ComplexInput: [
-    [
-      {
-        Components: [
-          {
-            HasCondition: false,
-            HasAsyncCondition: false,
-            Validator: {
-              Name: NotEmptyValidator
+  },
+  {
+    Key: ComplexInput,
+    Value: [
+      [
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: NotEmptyValidator
+              }
+            },
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: ChildValidatorAdaptor,
+                ValidatorType: ComplexInputInnerValidator
+              }
             }
+          ],
+          Member: ComplexInput.Inner,
+          PropertyFunc: {
+            Type: Func<ComplexInput, ComplexInputInner>,
+            Target: PropertyRule<ComplexInput, ComplexInputInner>.<>c__DisplayClass1_0,
+            Method: ComplexInputInner Create(ComplexInput)
           },
-          {
+          Expression: _ => _.Inner,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: ChildValidatorAdaptor,
               ValidatorType: ComplexInputInnerValidator
             }
-          }
-        ],
-        Member: ComplexInput.Inner,
-        PropertyFunc: {
-          Type: Func<ComplexInput, ComplexInputInner>,
-          Target: PropertyRule<ComplexInput, ComplexInputInner>.<>c__DisplayClass1_0,
-          Method: ComplexInputInner Create(ComplexInput)
-        },
-        Expression: _ => _.Inner,
-        Current: {
+          },
+          TypeToValidate: ComplexInputInner,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: ChildValidatorAdaptor,
-            ValidatorType: ComplexInputInnerValidator
-          }
+          PropertyName: Inner
         },
-        TypeToValidate: ComplexInputInner,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Inner
-      },
-      {
-        Components: [
-          {
-            HasCondition: false,
-            HasAsyncCondition: false,
-            Validator: {
-              Name: NotEmptyValidator
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: NotEmptyValidator
+              }
+            },
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: ChildValidatorAdaptor,
+                ValidatorType: InlineValidator<IEnumerable<ComplexInputListItem>>
+              }
             }
+          ],
+          Member: ComplexInput.Items,
+          PropertyFunc: {
+            Type: Func<ComplexInput, List<ComplexInputListItem>>,
+            Target: PropertyRule<ComplexInput, List<ComplexInputListItem>>.<>c__DisplayClass1_0,
+            Method: System.Collections.Generic.List`1[ComplexInputListItem] Create(ComplexInput)
           },
-          {
+          Expression: _ => _.Items,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: ChildValidatorAdaptor,
               ValidatorType: InlineValidator<IEnumerable<ComplexInputListItem>>
             }
-          }
-        ],
-        Member: ComplexInput.Items,
-        PropertyFunc: {
-          Type: Func<ComplexInput, List<ComplexInputListItem>>,
-          Target: PropertyRule<ComplexInput, List<ComplexInputListItem>>.<>c__DisplayClass1_0,
-          Method: System.Collections.Generic.List`1[ComplexInputListItem] Create(ComplexInput)
-        },
-        Expression: _ => _.Items,
-        Current: {
+          },
+          TypeToValidate: List<ComplexInputListItem>,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: ChildValidatorAdaptor,
-            ValidatorType: InlineValidator<IEnumerable<ComplexInputListItem>>
-          }
-        },
-        TypeToValidate: List<ComplexInputListItem>,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Items
-      }
+          PropertyName: Items
+        }
+      ]
     ]
-  ],
-  ComplexInputInner: [
-    [
-      {
-        Components: [
-          {
+  },
+  {
+    Key: ComplexInputInner,
+    Value: [
+      [
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: NotEmptyValidator
+              }
+            }
+          ],
+          Member: ComplexInputInner.Content,
+          PropertyFunc: {
+            Type: Func<ComplexInputInner, string>,
+            Target: PropertyRule<ComplexInputInner, string>.<>c__DisplayClass1_0,
+            Method: System.String Create(ComplexInputInner)
+          },
+          Expression: _ => _.Content,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: NotEmptyValidator
             }
-          }
-        ],
-        Member: ComplexInputInner.Content,
-        PropertyFunc: {
-          Type: Func<ComplexInputInner, string>,
-          Target: PropertyRule<ComplexInputInner, string>.<>c__DisplayClass1_0,
-          Method: System.String Create(ComplexInputInner)
-        },
-        Expression: _ => _.Content,
-        Current: {
+          },
+          TypeToValidate: string,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: NotEmptyValidator
-          }
-        },
-        TypeToValidate: string,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Content
-      }
+          PropertyName: Content
+        }
+      ]
     ]
-  ],
-  ComplexInputListItem: [
-    [
-      {
-        Components: [
-          {
+  },
+  {
+    Key: ComplexInputListItem,
+    Value: [
+      [
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: NotEmptyValidator
+              }
+            }
+          ],
+          Member: ComplexInputListItem.Id,
+          PropertyFunc: {
+            Type: Func<ComplexInputListItem, int>,
+            Target: PropertyRule<ComplexInputListItem, int>.<>c__DisplayClass1_0,
+            Method: Int32 Create(ComplexInputListItem)
+          },
+          Expression: _ => _.Id,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: NotEmptyValidator
             }
-          }
-        ],
-        Member: ComplexInputListItem.Id,
-        PropertyFunc: {
-          Type: Func<ComplexInputListItem, int>,
-          Target: PropertyRule<ComplexInputListItem, int>.<>c__DisplayClass1_0,
-          Method: Int32 Create(ComplexInputListItem)
-        },
-        Expression: _ => _.Id,
-        Current: {
+          },
+          TypeToValidate: int,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: NotEmptyValidator
-          }
+          PropertyName: Id
         },
-        TypeToValidate: int,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Id
-      },
-      {
-        Components: [
-          {
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: NotEmptyValidator
+              }
+            }
+          ],
+          Member: ComplexInputListItem.Content,
+          PropertyFunc: {
+            Type: Func<ComplexInputListItem, string>,
+            Target: PropertyRule<ComplexInputListItem, string>.<>c__DisplayClass1_0,
+            Method: System.String Create(ComplexInputListItem)
+          },
+          Expression: _ => _.Content,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: NotEmptyValidator
             }
-          }
-        ],
-        Member: ComplexInputListItem.Content,
-        PropertyFunc: {
-          Type: Func<ComplexInputListItem, string>,
-          Target: PropertyRule<ComplexInputListItem, string>.<>c__DisplayClass1_0,
-          Method: System.String Create(ComplexInputListItem)
-        },
-        Expression: _ => _.Content,
-        Current: {
+          },
+          TypeToValidate: string,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: NotEmptyValidator
-          }
-        },
-        TypeToValidate: string,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Content
-      }
+          PropertyName: Content
+        }
+      ]
     ]
-  ],
-  Input: [
-    [
-      {
-        Components: [
-          {
+  },
+  {
+    Key: Input,
+    Value: [
+      [
+        {
+          Components: [
+            {
+              HasCondition: false,
+              HasAsyncCondition: false,
+              Validator: {
+                Name: NotEmptyValidator
+              }
+            }
+          ],
+          Member: Input.Content,
+          PropertyFunc: {
+            Type: Func<Input, string>,
+            Target: PropertyRule<Input, string>.<>c__DisplayClass1_0,
+            Method: System.String Create(Input)
+          },
+          Expression: _ => _.Content,
+          Current: {
             HasCondition: false,
             HasAsyncCondition: false,
             Validator: {
               Name: NotEmptyValidator
             }
-          }
-        ],
-        Member: Input.Content,
-        PropertyFunc: {
-          Type: Func<Input, string>,
-          Target: PropertyRule<Input, string>.<>c__DisplayClass1_0,
-          Method: System.String Create(Input)
-        },
-        Expression: _ => _.Content,
-        Current: {
+          },
+          TypeToValidate: string,
           HasCondition: false,
           HasAsyncCondition: false,
-          Validator: {
-            Name: NotEmptyValidator
-          }
-        },
-        TypeToValidate: string,
-        HasCondition: false,
-        HasAsyncCondition: false,
-        PropertyName: Content
-      }
+          PropertyName: Content
+        }
+      ]
     ]
-  ]
-}
+  }
+]

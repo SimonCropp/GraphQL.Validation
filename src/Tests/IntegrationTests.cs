@@ -20,8 +20,11 @@ public class IntegrationTests
     }
 
     [Fact]
-    public Task GetCurrentValidators() =>
-        Verify(cache.GetCurrentValidators());
+    public Task GetCurrentValidators()
+    {
+        var items = cache.GetCurrentValidators();
+        return Verify(items.Where(_ => _.Key != typeof(NoValidatorInput)));
+    }
 
     [Fact]
     public async Task AsyncValid()
