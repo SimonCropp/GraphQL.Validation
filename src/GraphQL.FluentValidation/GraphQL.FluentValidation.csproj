@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="GraphQL" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="ProjectDefaults" PrivateAssets="all" />
-    <PackageReference Include="Polyfill" PrivateAssets="all" />
   </ItemGroup>
 </Project>
