@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../.gitignore" />
+    <File Path="../license.txt" />
+    <File Path="../readme.md" />
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path="appveyor.yml" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="icon.png" />
+    <File Path="mdsnippets.json" />
+  </Folder>
+  <Project Path="GraphQL.FluentValidation/GraphQL.FluentValidation.csproj" />
+  <Project Path="SampleWeb.Tests/SampleWeb.Tests.csproj" />
+  <Project Path="SampleWeb/SampleWeb.csproj" />
+  <Project Path="Tests/Tests.csproj" />
+</Solution>
