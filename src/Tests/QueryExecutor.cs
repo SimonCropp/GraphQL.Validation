@@ -26,7 +26,7 @@ static class QueryExecutor
         var stream = new MemoryStream();
         await graphQlSerializer.WriteAsync(stream, result);
         stream.Position = 0;
-        var reader = new StreamReader(stream);
-        return reader.ReadToEnd();
+        using var reader = new StreamReader(stream);
+        return await reader.ReadToEndAsync();
     }
 }
