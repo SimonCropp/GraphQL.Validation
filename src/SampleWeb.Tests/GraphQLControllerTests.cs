@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Newtonsoft.Json;
+﻿#pragma warning disable ASPDEPR008
+#pragma warning disable ASPDEPR004
 
 #region GraphQLControllerTests
 
