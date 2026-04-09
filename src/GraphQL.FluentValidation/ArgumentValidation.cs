@@ -56,6 +56,11 @@ public static class ArgumentValidation
             return;
         }
 
+        ValidateCore(cache, type, instance, userContext, provider);
+    }
+
+    static void ValidateCore<TArgument>(IValidatorCache cache, Type type, TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider)
+    {
         var currentType = (Type?)type;
         var validationContext = default(ValidationContext<TArgument>);
 
