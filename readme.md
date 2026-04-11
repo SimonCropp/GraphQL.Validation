@@ -10,7 +10,7 @@ Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](h
 
 ### Powered by
 
-[![JetBrains logo.](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)](https://jb.gg/OpenSourceSupport)
+[![JetBrains logo.](https://raw.githubusercontent.com/SimonCropp/GraphQL.Validation/main/docs/jetbrains.png)](https://jb.gg/OpenSourceSupport)
 
 
 ## NuGet package
