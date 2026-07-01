@@ -25,7 +25,7 @@ public static class ArgumentValidation
         {
             if (cache.TryGetValidators(currentType, provider, out var buildAll))
             {
-                validationContext ??= BuildValidationContext(instance, userContext);
+                validationContext ??= BuildValidationContext(instance, userContext, provider);
 
                 var tasks = buildAll.Select(_ => _.ValidateAsync(validationContext, cancel));
                 var validationResults = await Task.WhenAll(tasks);
@@ -68,7 +68,7 @@ public static class ArgumentValidation
         {
             if (cache.TryGetValidators(currentType, provider, out var buildAll))
             {
-                validationContext ??= BuildValidationContext(instance, userContext);
+                validationContext ??= BuildValidationContext(instance, userContext, provider);
                 var results = buildAll
                     .SelectMany(validator => validator.Validate(validationContext).Errors);
 
@@ -88,10 +88,15 @@ public static class ArgumentValidation
         }
     }
 
-    static ValidationContext<TArgument> BuildValidationContext<TArgument>(TArgument instance, IDictionary<string, object?> userContext)
+    static ValidationContext<TArgument> BuildValidationContext<TArgument>(TArgument instance, IDictionary<string, object?> userContext, IServiceProvider? provider)
     {
         ValidationContext<TArgument> validationContext = new(instance);
         validationContext.RootContextData.Add("UserContext", userContext);
+        if (provider != null)
+        {
+            validationContext.RootContextData.Add("ServiceProvider", provider);
+        }
+
         return validationContext;
     }
 }

@@ -231,6 +231,32 @@ public class Query :
 <!-- endSnippet -->
 
 
+### Accessing services in validators
+
+When validation is triggered via `GetValidatedArgument`, the `IResolveFieldContext.RequestServices` for the current request is exposed to validators through the validation context. A rule can therefore resolve services — for example the current time, configuration, or a repository — from the request scope, which keeps the rule unit-testable:
+
+<!-- snippet: ServiceProviderInValidator -->
+<a id='snippet-ServiceProviderInValidator'></a>
+```cs
+public class BookingInputValidator :
+    AbstractValidator<BookingInput>
+{
+    public BookingInputValidator() =>
+        RuleFor(_ => _.Start)
+            .Must((_, start, context) =>
+            {
+                var clock = context.GetRequiredService<TimeProvider>();
+                return start >= clock.GetUtcNow();
+            })
+            .WithMessage("Start cannot be in the past");
+}
+```
+<sup><a href='/src/SampleWeb/Graphs/ServiceInValidator.cs#L9-L22' title='Snippet source file'>snippet source</a> | <a href='#snippet-ServiceProviderInValidator' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+Use `context.GetRequiredService<T>()` to resolve a required service. To access the underlying `IServiceProvider` directly, use `context.GetServiceProvider()`, or `context.TryGetServiceProvider(out var provider)` when validation may run without one.
+
+
 ### Difference from IValidationRule
 
 The validation implemented in this project has nothing to do with the validation of the incoming GraphQL
