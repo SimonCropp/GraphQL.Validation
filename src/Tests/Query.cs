@@ -1,5 +1,5 @@
+using Argon;
 using GraphQL;
-using Newtonsoft.Json;
 
 public class Query :
     ObjectGraphType
