@@ -1,6 +1,6 @@
 # <img src="/src/icon.png" height="30px"> GraphQL.Validation
 
-[![Build status](https://img.shields.io/appveyor/build/SimonCropp/graphql-validation)](https://ci.appveyor.com/project/SimonCropp/graphql-validation)
+[![Build status](https://github.com/SimonCropp/GraphQL.Validation/actions/workflows/build.yml/badge.svg)](https://github.com/SimonCropp/GraphQL.Validation/actions/workflows/build.yml)
 [![NuGet Status](https://img.shields.io/nuget/v/GraphQL.FluentValidation.svg)](https://www.nuget.org/packages/GraphQL.FluentValidation/)
 
 Add [FluentValidation](https://fluentvalidation.net/) support to [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet)
