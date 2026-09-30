@@ -5,7 +5,6 @@
     <NoWarn>$(NoWarn);xUnit1051</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Verify.DiffPlex" />
     <PackageReference Include="GraphQL" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <PackageReference Include="xunit.v3" />
